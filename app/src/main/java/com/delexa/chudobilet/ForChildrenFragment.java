@@ -1,7 +1,6 @@
 package com.delexa.chudobilet;
 
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,10 +11,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CinemaFragment extends Fragment {
+public class ForChildrenFragment extends Fragment {
 
 
-    public CinemaFragment() {
+    public ForChildrenFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +23,7 @@ public class CinemaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cinema, container, false);
+        return inflater.inflate(R.layout.fragment_for_children, container, false);
     }
 
 }

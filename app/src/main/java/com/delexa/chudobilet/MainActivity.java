@@ -1,10 +1,9 @@
 package com.delexa.chudobilet;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,8 +41,14 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        ImageView img = (ImageView) findViewById(R.id.imageViewPhotoOptions);
+
+
     }
 
+    // обработка нажатия на кнопку назад
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -59,6 +66,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    // выбор из action bar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -74,26 +82,75 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+    // выбор из бокового меню
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.cinema) {
+        Fragment fragment = null;
+        String title = getString(R.string.app_name);
 
-        } else if (id == R.id.concerts) {
 
-        } else if (id == R.id.theaters) {
+        switch (id) {
+            case R.id.cinema:
+                fragment = new CinemaFragment();
+                title = "Cinema";
+                break;
 
-        } else if (id == R.id.for_children) {
+            case R.id.concerts:
+                fragment = new ConcertsFragment();
+                title = "Concerts";
+                break;
 
-        } else if (id == R.id.other) {
+            case R.id.theaters:
+                fragment = new TheatersFragment();
+                title = "Theaters";
+                break;
+
+            case R.id.for_children:
+                fragment = new ForChildrenFragment();
+                title = "For Children";
+                break;
+
+            case R.id.other:
+                fragment = new OtherFragment();
+                title = "Other";
+                break;
+
+            case R.id.my_orders:
+                fragment = new MyOrdersFragment();
+                title = "My Orders";
+                break;
+
+            case R.id.other_apps:
+                fragment = new OtherAppsFragment();
+                title = "Other apps";
+                break;
+
+            case R.id.about:
+                fragment = new AboutFragment();
+                title = "About";
+                break;
         }
 
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
+        }
+
+        // set the toolbar title
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(title);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }
