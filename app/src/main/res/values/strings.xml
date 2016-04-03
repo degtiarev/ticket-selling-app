@@ -11,6 +11,7 @@
     <string name="theaters">Театры</string>
     <string name="for_children">Детям</string>
     <string name="other">Другое</string>
+    <string name="masterclass">Мастер-класс</string>
 
     <string name="my_orders">Мои заказы</string>
     <string name="options">Настройки</string>
@@ -18,7 +19,10 @@
     <string name="other_apps">Другие приложения</string>
     <string name="about">О приложении</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
 
 </resources>

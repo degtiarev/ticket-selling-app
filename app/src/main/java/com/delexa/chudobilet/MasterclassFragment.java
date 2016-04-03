@@ -1,6 +1,7 @@
 package com.delexa.chudobilet;
 
 
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,11 +11,12 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
+ *
  */
-public class OtherAppsFragment extends Fragment {
+public class MasterclassFragment extends Fragment {
 
 
-    public OtherAppsFragment() {
+    public MasterclassFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +25,7 @@ public class OtherAppsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_other_apps, container, false);
+        return inflater.inflate(R.layout.fragment_masterclass, container, false);
     }
 
 }

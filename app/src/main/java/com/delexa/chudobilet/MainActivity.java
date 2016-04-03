@@ -1,5 +1,8 @@
 package com.delexa.chudobilet;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,7 +47,41 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        ImageView img = (ImageView) findViewById(R.id.imageViewPhotoOptions);
+        // клик по картинки настроек
+        View hView = navigationView.getHeaderView(0);
+        ImageView imgSettings = (ImageView) hView.findViewById(R.id.imageViewOptions);
+        imgSettings.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Fragment fragment = new SettingsFragment();
+
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, fragment);
+                ft.commit();
+
+                getSupportActionBar().setTitle("Settings");
+
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+
+            }
+        });
+
+        ImageView imgProfile = (ImageView) hView.findViewById(R.id.imageViewPhoto);
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Fragment fragment = new AuthorizationFragment();
+
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, fragment);
+                ft.commit();
+
+                getSupportActionBar().setTitle("Authorization");
+
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+
+            }
+        });
 
 
     }
@@ -97,42 +135,52 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
             case R.id.cinema:
                 fragment = new CinemaFragment();
-                title = "Cinema";
+                title = getString(R.string.cinema);
                 break;
 
             case R.id.concerts:
                 fragment = new ConcertsFragment();
-                title = "Concerts";
+                title = getString(R.string.concerts);
                 break;
 
             case R.id.theaters:
                 fragment = new TheatersFragment();
-                title = "Theaters";
+                title = getString(R.string.theaters);
                 break;
 
             case R.id.for_children:
                 fragment = new ForChildrenFragment();
-                title = "For Children";
+                title = getString(R.string.for_children);
                 break;
 
             case R.id.other:
                 fragment = new OtherFragment();
-                title = "Other";
+                title = getString(R.string.other);
+                break;
+
+            case R.id.masterclass:
+                fragment = new MasterclassFragment();
+                title = getString(R.string.masterclass);
                 break;
 
             case R.id.my_orders:
                 fragment = new MyOrdersFragment();
-                title = "My Orders";
+                title = getString(R.string.my_orders);
                 break;
 
             case R.id.other_apps:
-                fragment = new OtherAppsFragment();
-                title = "Other apps";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("market://search?q=pub:CHUDOBILET"));
+                try {
+                    startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(this, "Не найдено приложение GooglePlay", Toast.LENGTH_LONG).show();
+                }
                 break;
 
             case R.id.about:
                 fragment = new AboutFragment();
-                title = "About";
+                title = getString(R.string.about);
                 break;
         }
 
