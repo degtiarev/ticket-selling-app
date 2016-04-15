@@ -1,4 +1,4 @@
-package com.delexa.chudobilet;
+package com.delexa.chudobilet.ForChildren;
 
 
 import android.os.Bundle;
@@ -7,14 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.delexa.chudobilet.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OtherFragment extends Fragment {
+public class ForChildrenFragment extends Fragment {
 
 
-    public OtherFragment() {
+    public ForChildrenFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +25,7 @@ public class OtherFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_other, container, false);
+        return inflater.inflate(R.layout.fragment_for_children, container, false);
     }
 
 }

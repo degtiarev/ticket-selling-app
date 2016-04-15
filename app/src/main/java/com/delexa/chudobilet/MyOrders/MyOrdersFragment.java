@@ -1,4 +1,4 @@
-package com.delexa.chudobilet;
+package com.delexa.chudobilet.MyOrders;
 
 
 import android.os.Bundle;
@@ -9,13 +9,14 @@ import android.view.ViewGroup;
 
 import com.delexa.chudobilet.R;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TheatersFragment extends Fragment {
+public class MyOrdersFragment extends Fragment {
 
 
-    public TheatersFragment() {
+    public MyOrdersFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +25,7 @@ public class TheatersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_theaters, container, false);
+        return inflater.inflate(R.layout.fragment_my_orders, container, false);
     }
 
 }

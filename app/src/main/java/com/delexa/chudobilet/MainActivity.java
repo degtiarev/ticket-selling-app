@@ -2,6 +2,8 @@ package com.delexa.chudobilet;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -17,6 +19,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.delexa.chudobilet.About.AboutFragment;
+import com.delexa.chudobilet.Authorization.AuthorizationFragment;
+import com.delexa.chudobilet.Cinema.CinemaFragment;
+import com.delexa.chudobilet.Concert.ConcertsFragment;
+import com.delexa.chudobilet.ForChildren.ForChildrenFragment;
+import com.delexa.chudobilet.MasterClass.MasterclassFragment;
+import com.delexa.chudobilet.MyOrders.MyOrdersFragment;
+import com.delexa.chudobilet.Other.OtherFragment;
+import com.delexa.chudobilet.Settings.SettingsFragment;
+import com.delexa.chudobilet.Theater.TheatersFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

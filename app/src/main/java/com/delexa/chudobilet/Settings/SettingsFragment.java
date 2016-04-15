@@ -1,4 +1,4 @@
-package com.delexa.chudobilet;
+package com.delexa.chudobilet.Settings;
 
 
 import android.app.DatePickerDialog;
@@ -15,6 +15,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import com.delexa.chudobilet.R;
 
 
 /**

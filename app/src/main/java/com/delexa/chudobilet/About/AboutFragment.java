@@ -1,4 +1,4 @@
-package com.delexa.chudobilet;
+package com.delexa.chudobilet.About;
 
 
 import android.content.ActivityNotFoundException;
@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import com.delexa.chudobilet.R;
 
 
 /**
