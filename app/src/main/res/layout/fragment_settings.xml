@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/editTextFamily"
                 android:layout_alignParentLeft="true"
+                android:paddingLeft="5dp"
                 android:layout_alignParentTop="true"
                 android:layout_gravity="center"
                 android:gravity="center"
@@ -55,6 +56,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="Имя:   "
+                android:paddingLeft="5dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -79,6 +81,7 @@
                 android:layout_below="@+id/editTextName"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:paddingLeft="5dp"
                 android:text="Отчество:   "
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -104,6 +107,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="Email:   "
+                android:paddingLeft="5dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -129,6 +133,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="Дата рождения: "
+                android:paddingLeft="5dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -152,6 +157,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="Пол: "
+                android:paddingLeft="5dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
@@ -184,7 +190,7 @@
                 android:layout_height="1dip"
                 android:layout_below="@id/textViewSex"
                 android:layout_centerVertical="true"
-                android:background="@android:color/black" />
+                android:background="@android:color/darker_gray" />
 
             <TextView
                 android:id="@+id/textViewNotificationForPay"
@@ -197,6 +203,7 @@
                 android:gravity="left"
                 android:maxLines="3"
                 android:minLines="3"
+                android:paddingLeft="5dp"
                 android:singleLine="false"
                 android:text="Напоминать о необходимости оплатить заказ:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -225,7 +232,7 @@
                 android:layout_height="1dip"
                 android:layout_below="@id/checkBoxNotificationForPaySMS"
                 android:layout_centerVertical="true"
-                android:background="@android:color/black" />
+                android:background="@android:color/darker_gray" />
 
             <TextView
                 android:id="@+id/textViewNotificationAboutStatus"
@@ -239,6 +246,7 @@
                 android:maxLines="2"
                 android:minLines="2"
                 android:paddingTop="8dp"
+                android:paddingLeft="5dp"
                 android:singleLine="false"
                 android:text="Уведомлять о статусе заказа:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -258,7 +266,7 @@
                 android:layout_height="1dip"
                 android:layout_below="@id/textViewNotificationAboutStatus"
                 android:layout_centerVertical="true"
-                android:background="@android:color/black" />
+                android:background="@android:color/darker_gray" />
 
             <TextView
                 android:id="@+id/textViewNotificationAboutNewEvents"
@@ -273,6 +281,7 @@
                 android:minLines="2"
                 android:paddingTop="8dp"
                 android:singleLine="false"
+                android:paddingLeft="5dp"
                 android:text="Узнавать о новых интересных мероприятиях:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -294,6 +303,12 @@
                 android:layout_toRightOf="@+id/textViewNotificationForPay"
                 android:text="По SMS" />
 
+            <ListView
+                android:id="@+id/listView_options"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:entries="@array/list"
+                android:layout_below="@+id/checkBoxNotificationAboutNewEventsSMS"/>
 
 
         </RelativeLayout>

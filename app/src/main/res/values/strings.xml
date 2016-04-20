@@ -19,10 +19,13 @@
     <string name="other_apps">Другие приложения</string>
     <string name="about">О приложении</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-
+    <string-array name="list">
+        <item>Изменить фото</item>
+        <item>Настроить подписки</item>
+    </string-array>
 
 
 </resources>

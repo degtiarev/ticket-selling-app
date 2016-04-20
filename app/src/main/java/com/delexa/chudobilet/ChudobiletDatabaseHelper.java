@@ -54,10 +54,8 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             createAllTables(db);
             byte[] image = getBlobFromURL("http://new.chudobilet.ru/media/images/events/856a1b1073d9133a33a35ff006de816a.jpg");
 
-            insertUser(db, new User(0, "Алексей", "Дегтярев", "Сергеевич", "delexa0@gmail.com", getDateTime("1993-04-02"),
-                    "M", "0", "0", "0", "89608519623", "123456789", image, new Date()));
-
-
+            insertUser(db, new User(0, "Алексей", "Дегтярев", "Сергеевич", "delexa0@gmail.com", getDateTime("1993-02-04"),
+                    "M", "11", "0", "11", "89608519623", "123456789", image, new Date()));
         }
         if (oldVersion < 2) {
 
@@ -160,7 +158,8 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     private static String getDateTime(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                //"yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                "yyyy-MM-dd", Locale.getDefault());
         return dateFormat.format(date);
     }
 

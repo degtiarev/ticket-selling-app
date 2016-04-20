@@ -120,14 +120,20 @@ public class SettingsFragment extends Fragment {
                 CheckBox checkBoxNotificationAboutNewEventsEmail = (CheckBox) view.findViewById(R.id.checkBoxNotificationAboutNewEventsEmail);
                 CheckBox checkBoxNotificationAboutNewEventsSMS = (CheckBox) view.findViewById(R.id.checkBoxNotificationAboutNewEventsSMS);
 
-
                 editTextName.setText(name);
                 editTextFamily.setText(family);
                 editTextPatronimic.setText(patronymic);
                 editTextEmail.setText(email);
                 editTextBirthday.setText(getDateTime(date));
 
+                if (sex.equals("M")) radio_groupSex.check(R.id.radio_M);
+                else radio_groupSex.check(R.id.radio_F);
 
+                if (notificationToPay.charAt(0)=='1') checkBoxNotificationForPayEmail.setChecked(true);
+                if (notificationToPay.charAt(1)=='1') checkBoxNotificationForPaySMS.setChecked(true);
+                if (emailNotificationChangeStatus.charAt(0)=='1') checkBoxNotificationAboutStatusEmail.setChecked(true);
+                if (newsSubscriber.charAt(0)=='1') checkBoxNotificationAboutNewEventsEmail.setChecked(true);
+                if (newsSubscriber.charAt(1)=='1') checkBoxNotificationAboutNewEventsSMS.setChecked(true);
             }
 
 
@@ -140,7 +146,7 @@ public class SettingsFragment extends Fragment {
     private static Date getDateTime(String myDate) {
 
         Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             date = format.parse(myDate);
         } catch (ParseException e) {

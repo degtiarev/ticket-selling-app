@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.delexa.chudobilet.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
 import java.util.List;
@@ -40,11 +39,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
         Movie current = data.get(position);
 
-        Picasso.with(inflater.getContext())
-                .load(current.coverURL)
-                .placeholder(R.drawable.no_photo)
-                .error(R.drawable.no_photo)
-                .into(holder.cover);
+//        Picasso.with(inflater.getContext())
+//                .load(current.coverURL)
+//                .placeholder(R.drawable.no_photo)
+//                .error(R.drawable.no_photo)
+//                .into(holder.cover);
 
         holder.filmName.setText(current.filmName);
         holder.genre.setText(current.genre);
