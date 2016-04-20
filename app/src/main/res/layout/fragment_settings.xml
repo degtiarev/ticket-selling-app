@@ -165,14 +165,14 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/radio_cash"
+                    android:id="@+id/radio_M"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="мужской" />
 
                 <RadioButton
-                    android:id="@+id/radio_card"
+                    android:id="@+id/radio_F"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="женский" />

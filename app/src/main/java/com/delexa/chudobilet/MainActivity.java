@@ -4,6 +4,11 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,10 +19,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.delexa.chudobilet.About.AboutFragment;
@@ -31,8 +39,14 @@ import com.delexa.chudobilet.Other.OtherFragment;
 import com.delexa.chudobilet.Settings.SettingsFragment;
 import com.delexa.chudobilet.Theater.TheatersFragment;
 
+import java.io.ByteArrayOutputStream;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private SQLiteDatabase db;
+    private Cursor userCursor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +110,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        gettingUserData();
 
     }
 
@@ -211,6 +226,69 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        gettingUserData();
+    }
+
+
+    // закрытие курсора и бд
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        userCursor.close();
+        db.close();
+    }
+
+    private void gettingUserData() {
+        try {
+
+            ChudobiletDatabaseHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(this);
+            db = chudobiletDatabaseHelper.getReadableDatabase();
+            Cursor newCursor = db.query("USER",
+                    new String[]{"NAME", "EMAIL", "IMAGE"},
+                    null,
+                    null, null, null, null);
+
+            userCursor = newCursor;
+
+        } catch (SQLiteException e) {
+            Toast toast = Toast.makeText(this, "Ошибка достура к БД", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+        if (userCursor.getCount() == 1) {
+            if (userCursor.moveToFirst()) {
+
+
+                String name = userCursor.getString(0);
+                String email = userCursor.getString(1);
+              //  byte[] photo = userCursor.getBlob(2);
+
+
+                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                navigationView.setNavigationItemSelectedListener(this);
+                View header = navigationView.getHeaderView(0);
+/*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
+                TextView myName = (TextView) header.findViewById(R.id.textViewName);
+                TextView myEmail = (TextView) header.findViewById(R.id.textViewEmail);
+                ImageView nyPhoto = (ImageView) header.findViewById(R.id.imageViewPhoto);
+
+                myName.setText(name);
+                myEmail.setText(email);
+
+//                nyPhoto.setImageBitmap(BitmapFactory.decodeByteArray(photo, 0, logoImage.length));
+
+
+            }
+
+
+        }
+
+
     }
 
 
