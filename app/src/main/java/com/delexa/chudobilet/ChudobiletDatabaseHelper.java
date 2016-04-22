@@ -2,9 +2,23 @@ package com.delexa.chudobilet;
 
 import android.content.Context;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.design.widget.NavigationView;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,11 +66,36 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
     private void updateMyDatabase(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 1) {
             createAllTables(db);
-            byte[] image = getBlobFromURL("http://new.chudobilet.ru/media/images/events/856a1b1073d9133a33a35ff006de816a.jpg");
+            byte[] myPhoto = getBlobFromURL("http://new.chudobilet.ru/media/images/events/856a1b1073d9133a33a35ff006de816a.jpg");
+            byte[] cover1 = getBlobFromURL("http://new.chudobilet.ru/media/images/events/c05f81e44660d05b3c20bcf76cc76973.jpg");
+            byte[] cover2 = getBlobFromURL("http://new.chudobilet.ru/media/images/events/dd0d82740c770242d151223691a2b2df.jpg");
 
-            insertUser(db, new User(0, "Алексей", "Дегтярев", "Сергеевич", "delexa0@gmail.com", getDateTime("1993-02-04"),
-                    "M", "11", "0", "11", "89608519623", "123456789", image, new Date()));
+
+            insertUser(db, new User("Алексей", "Дегтярев", "Сергеевич", "delexa0@gmail.com", getDateTime("1993-02-04"),
+                    "M", "11", "0", "11", "89608519623", "123456789", myPhoto, "фэнтези", null, null, new Date()));
+
+            insertEstablishment(db, new Establishment("Кино", "Большое Кино", "3, ТРК Alimpic, ул. Боевая, 25, Астрахань, Астраханская обл., 414024",
+                    new Date()));
+
+            insertEvent(db, new Event(new Establishment("Кино", "Большое Кино", "3, ТРК Alimpic, ул. Боевая, 25, Астрахань, Астраханская обл., 414024",
+                    new Date()), "Книга джунглей", "США", "фэнтези, драма, приключения, семейный, ...", " 1 час 50 минут", 6,
+                    "Скарлетт Йоханссон, Идрис Эльба, Билл Мюррей, Лупита Нионго, Кристофер Уокен, Джанкарло Эспозито, Нил Сетхи, Бен Кингсли, Ралф Айнесон, " +
+                            "Ханна Тойнтон, ...", "Непримиримая борьба с опасным и внушающим страх тигром Шерханом вынуждает Маугли покинуть волчью стаю и отправиться в " +
+                    "захватывающее путешествие. На пути мальчика ждут удивительные открытия и запоминающиеся встречи с пантерой Багирой, медведем Балу, питоном Каа и " +
+                    "другими обитателями дремучих джунглей.", cover1, "https://www.youtube.com/watch?v=TwNXOE2yxPU",
+                    "http://new.chudobilet.ru/event/992/", new Date()));
+
+            insertEvent(db, new Event(new Establishment("Кино", "Большое Кино", "3, ТРК Alimpic, ул. Боевая, 25, Астрахань, Астраханская обл., 414024",
+                    new Date()), "Белоснежка и Охотник 2", "США", "фэнтези, драма, приключения, семейный, ...", " 1 час 50 минут", 6,
+                    "Скарлетт Йоханссон, Идрис Эльба, Билл Мюррей, Лупита Нионго, Кристофер Уокен, Джанкарло Эспозито, Нил Сетхи, Бен Кингсли, Ралф Айнесон, " +
+                            "Ханна Тойнтон, ...", "Непримиримая борьба с опасным и внушающим страх тигром Шерханом вынуждает Маугли покинуть волчью стаю и отправиться в " +
+                    "захватывающее путешествие. На пути мальчика ждут удивительные открытия и запоминающиеся встречи с пантерой Багирой, медведем Балу, питоном Каа и " +
+                    "другими обитателями дремучих джунглей.", cover2, "https://www.youtube.com/watch?v=TwNXOE2yxPU",
+                    "http://new.chudobilet.ru/event/1008/", new Date()));
+
+
         }
+
         if (oldVersion < 2) {
 
 
@@ -80,7 +119,10 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 "NEWSSUBSCRIBER TEXT, " +
                 "PHONE TEXT, " +
                 "PASSWORD TEXT, " +
-                "IMAGE BLOB ," +
+                "PHOTO BLOB, " +
+                "INTERESTGENRE TEXT, " +
+                "INTERESTROLES TEXT, " +
+                "INTERESTESTABLISHMENT TEXT, " +
                 "TIMESTAMP NUMERIC);");
 
         // таблица ORDER
@@ -107,13 +149,14 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE EVENT (" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "_ESTABLISHMENTID INTEGER, " +
+                "NAME TEXT" +
                 "COUNTRY TEXT, " +
                 "GENRE TEXT, " +
                 "AMOUNTTIME TEXT, " +
                 "FORAGE TEXT, " +
                 "ROLES TEXT, " +
                 "ABOUT TEXT, " +
-                "COVER TEXT, " +
+                "COVER BLOB, " +
                 "VIDEOLINK TEXT," +
                 "TIMESTAMP NUMERIC);");
 
@@ -138,7 +181,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
     private static void insertUser(SQLiteDatabase db, User user) {
         ContentValues userValues = new ContentValues();
 
-
         userValues.put("NAME", user.getName());
         userValues.put("FAMILY", user.getFamily());
         userValues.put("PATRONYMIC", user.getPatronymic());
@@ -150,11 +192,66 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         userValues.put("NEWSSUBSCRIBER", user.getNewsSubscriber());
         userValues.put("PHONE", user.getPhone());
         userValues.put("PASSWORD", user.getPassword());
-        userValues.put("IMAGE", user.getImage());
+        userValues.put("PHOTO", user.getImage());
+        userValues.put("INTERESTGENRE", user.getInterestGenre());
+        userValues.put("INTERESTROLES", user.getInterestRoles());
+        userValues.put("INTERESTESTABLISHMENT", user.getInterestEstablishment());
         userValues.put("TIMESTAMP", getDateTime(user.getTimeStamp()));
 
         db.insert("USER", null, userValues);
     }
+
+    private static void insertEstablishment(SQLiteDatabase db, Establishment establishment) {
+        ContentValues establishmentValues = new ContentValues();
+
+        establishmentValues.put("TYPE", establishment.getType());
+        establishmentValues.put("NAME", establishment.getName());
+        establishmentValues.put("ADDRESS", establishment.getAddress());
+        establishmentValues.put("TIMESTAMP", getDateTime(establishment.getTimeStamp()));
+
+        db.insert("ESTABLISHMENT", null, establishmentValues);
+    }
+
+    private static void insertEvent(SQLiteDatabase db, Event event) {
+        ContentValues userValues = new ContentValues();
+        int establishmentId = 9999999;
+
+        try {
+
+            Cursor newCursor = db.query("ESTABLISHMENT",
+                    new String[]{"_id"},
+                    "TYPE = ? AND NAME = ?",
+                    new String[]{event.getEstablishment().getType(), event.getEstablishment().getName()},
+                    null, null, null);
+
+            if (newCursor.getCount() == 1) {
+                if (newCursor.moveToFirst()) {
+                    establishmentId = newCursor.getInt(0);
+                }
+
+                ContentValues eventValues = new ContentValues();
+
+                userValues.put("_ESTABLISHMENTID", establishmentId);
+                userValues.put("COUNTRY", event.getCountry());
+                userValues.put("GENRE", event.getGenre());
+                userValues.put("AMOUNTTIME", event.getAmountTime());
+                userValues.put("FORAGE", event.getForAge());
+                userValues.put("ROLES", event.getRoles());
+                userValues.put("ABOUT", event.getAbout());
+                userValues.put("COVER", event.getCover());
+                userValues.put("VIDEOLINK", event.getVideoLink());
+                userValues.put("TIMESTAMP", getDateTime(event.getTimeStamp()));
+
+                db.insert("ESTABLISHMENT", null, eventValues);
+            }
+
+        } catch (SQLiteException e) {
+            Log.d("My Logs", "Ошибка доступа к БД!");
+        }
+
+
+    }
+
 
     private static String getDateTime(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
@@ -175,7 +272,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         return date;
     }
 
-
     public byte[] getBlobFromURL(String src) {
 //        try {
 //            java.net.URL url = new java.net.URL(src);
@@ -193,9 +289,9 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 //            return byteArray;
 //        } catch (IOException e) {
 //            e.printStackTrace();
-//            return null;
-//        }
         return null;
+//        }
+
     }
 
 }

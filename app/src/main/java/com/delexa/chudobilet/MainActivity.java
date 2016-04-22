@@ -249,44 +249,46 @@ public class MainActivity extends AppCompatActivity
             ChudobiletDatabaseHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(this);
             db = chudobiletDatabaseHelper.getReadableDatabase();
             Cursor newCursor = db.query("USER",
-                    new String[]{"NAME", "EMAIL", "IMAGE"},
+                    new String[]{"NAME", "EMAIL", "PHOTO"},
                     null,
                     null, null, null, null);
 
             userCursor = newCursor;
+
+            if (userCursor.getCount() == 1) {
+                if (userCursor.moveToFirst()) {
+
+
+                    String name = userCursor.getString(0);
+                    String email = userCursor.getString(1);
+                    //        byte[] photo = userCursor.getBlob(2);
+
+
+                    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                    navigationView.setNavigationItemSelectedListener(this);
+                    View header = navigationView.getHeaderView(0);
+/*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
+                    TextView myName = (TextView) header.findViewById(R.id.textViewName);
+                    TextView myEmail = (TextView) header.findViewById(R.id.textViewEmail);
+                    ImageView nyPhoto = (ImageView) header.findViewById(R.id.imageViewPhoto);
+
+                    myName.setText(name);
+                    myEmail.setText(email);
+
+                    //     nyPhoto.setImageBitmap(BitmapFactory.decodeByteArray(photo, 0, photo.length));
+
+
+                }
+
+
+            }
 
         } catch (SQLiteException e) {
             Toast toast = Toast.makeText(this, "Ошибка достура к БД", Toast.LENGTH_SHORT);
             toast.show();
         }
 
-        if (userCursor.getCount() == 1) {
-            if (userCursor.moveToFirst()) {
 
-
-                String name = userCursor.getString(0);
-                String email = userCursor.getString(1);
-              //  byte[] photo = userCursor.getBlob(2);
-
-
-                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-                navigationView.setNavigationItemSelectedListener(this);
-                View header = navigationView.getHeaderView(0);
-/*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
-                TextView myName = (TextView) header.findViewById(R.id.textViewName);
-                TextView myEmail = (TextView) header.findViewById(R.id.textViewEmail);
-                ImageView nyPhoto = (ImageView) header.findViewById(R.id.imageViewPhoto);
-
-                myName.setText(name);
-                myEmail.setText(email);
-
-//                nyPhoto.setImageBitmap(BitmapFactory.decodeByteArray(photo, 0, logoImage.length));
-
-
-            }
-
-
-        }
 
 
     }

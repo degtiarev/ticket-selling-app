@@ -5,14 +5,15 @@ import java.util.Date;
 
 public class User {
 
-    public User(int id, String name, String family, String patronymic, String email, Date date,
+    public User(String name, String family, String patronymic, String email, Date date,
                 String sex, String notificationToPay, String emailNotificationChangeStatus,
-                String newsSubscriber, String phone, String password, byte[]  image, Date timeStamp) {
+                String newsSubscriber, String phone, String password, byte[] image, String interestGenre,
+                String interestRoles, String interestEstablishment, Date timeStamp) {
         this.date = date;
         this.email = email;
         this.emailNotificationChangeStatus = emailNotificationChangeStatus;
         this.family = family;
-        this.id = id;
+        this.id = 0;
         this.name = name;
         this.newsSubscriber = newsSubscriber;
         this.notificationToPay = notificationToPay;
@@ -21,6 +22,9 @@ public class User {
         this.phone = phone;
         this.sex = sex;
         this.timeStamp = timeStamp;
+        this.interestGenre = interestGenre;
+        this.interestRoles = interestRoles;
+        this.interestEstablishment = interestEstablishment;
         this.image = image;
     }
 
@@ -33,11 +37,11 @@ public class User {
         this.name = name;
     }
 
-    public byte[]  getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(byte[]  image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
@@ -137,6 +141,30 @@ public class User {
         this.timeStamp = timeStamp;
     }
 
+    public String getInterestRoles() {
+        return interestRoles;
+    }
+
+    public void setInterestRoles(String interestRoles) {
+        this.interestRoles = interestRoles;
+    }
+
+    public String getInterestEstablishment() {
+        return interestEstablishment;
+    }
+
+    public void setInterestEstablishment(String interestEstablishment) {
+        this.interestEstablishment = interestEstablishment;
+    }
+
+    public String getInterestGenre() {
+        return interestGenre;
+    }
+
+    public void setInterestGenre(String interestGenre) {
+        this.interestGenre = interestGenre;
+    }
+
     private int id;
     private String name;
     private String family;
@@ -149,7 +177,10 @@ public class User {
     private String newsSubscriber;
     private String phone;
     private String password;
-    private byte[]  image;
+    private byte[] image;
+    private String interestGenre;
+    private String interestRoles;
+    private String interestEstablishment;
     private Date timeStamp;
 
 
