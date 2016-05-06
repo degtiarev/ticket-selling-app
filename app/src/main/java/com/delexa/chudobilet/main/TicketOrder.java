@@ -26,6 +26,10 @@ public class TicketOrder {
         this.timeStamp = timeStamp;
     }
 
+
+    public TicketOrder() {
+    }
+
     public int getId() {
         return id;
     }

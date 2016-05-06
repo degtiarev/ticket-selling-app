@@ -11,6 +11,7 @@ import android.util.Log;
 import com.delexa.chudobilet.main.Establishment;
 import com.delexa.chudobilet.main.Event;
 import com.delexa.chudobilet.main.Seat;
+import com.delexa.chudobilet.main.Subscription;
 import com.delexa.chudobilet.main.TicketOrder;
 import com.delexa.chudobilet.main.User;
 
@@ -39,7 +40,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             sInstance = new ChudobiletDatabaseHelper(context.getApplicationContext());
         }
         return sInstance;
-
     }
 
     /**
@@ -73,33 +73,49 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     "M", "11", "0", "11", "89608519623", "123456789", myPhoto, "фэнтези", null, null, new Date());
             Establishment establishment = new Establishment("Кино", "Большое Кино", "3, ТРК Alimpic, ул. Боевая, 25, " +
                     "Астрахань, Астраханская обл., 414024", new Date());
-            Event event1 = new Event("Книга джунглей", establishment, "США", "фэнтези, драма, приключения, семейный, ...", " 1 час 50 минут", "6+",
+            Event event1 = new Event("Книга джунглей", establishment, "США", "фэнтези, драма, приключения, семейный, ...", 2016, " 1 час 50 минут", "6+",
                     "Скарлетт Йоханссон, Идрис Эльба, Билл Мюррей, Лупита Нионго, Кристофер Уокен, Джанкарло Эспозито, Нил Сетхи, Бен Кингсли, Ралф Айнесон, " +
                             "Ханна Тойнтон, ...", "Непримиримая борьба с опасным и внушающим страх тигром Шерханом вынуждает Маугли покинуть волчью стаю и отправиться в " +
                     "захватывающее путешествие. На пути мальчика ждут удивительные открытия и запоминающиеся встречи с пантерой Багирой, медведем Балу, питоном Каа и " +
                     "другими обитателями дремучих джунглей.", cover1, "https://www.youtube.com/watch?v=TwNXOE2yxPU",
                     "http://new.chudobilet.ru/event/992/", new Date());
-            Event event2 = new Event("Белоснежка и Охотник 2", establishment, "США", "ффэнтези, боевик, драма, приключения, ...", "1 час 55 минут", "6+",
+            Event event2 = new Event("Белоснежка и Охотник 2", establishment, "США", "ффэнтези, боевик, драма, приключения, ...", 2016, "1 час 55 минут", "6+",
                     "Крис Хемсворт, Сэм Клафлин, Эмили Блант, Джессика Честейн, Шарлиз Терон, Софи Куксон, Ник Фрост, Колин Морган, Ралф Айнесон, Шеридан Смит, ...",
                     "Когда любовь уходит, сердце прекрасной девы обращается в лед. И даже сотни королевств не смогут сдержать поступь ее несметного воинства. Лишь Охотник не ведает страха. Сквозь проклятый лес он идет навстречу своей судьбе.", cover2, "https://www.youtube.com/watch?v=TwNXOE2yxPU",
                     "http://new.chudobilet.ru/event/1008/", new Date());
-
-
-            for (int i = 1; i < 20; i++) {
-                Seat seat = new Seat(event1, "А" + i, getDateTime("2016-07-01 12:00:00", LONG_DATE), 400, 20, new Date());
-                insertSeat(db, seat);
-            }
-
-            for (int i = 1; i < 20; i++) {
-                Seat seat = new Seat(event2, "А" + i, getDateTime("2016-07-01 12:00:00", LONG_DATE), 400, 20, new Date());
-                insertSeat(db, seat);
-            }
 
             insertUser(db, user);
             insertEstablishment(db, establishment);
             insertEvent(db, event1);
             insertEvent(db, event2);
 
+            // дальше не работает
+            TicketOrder ticketOrder1 = new TicketOrder();
+            TicketOrder ticketOrder2 = new TicketOrder();
+
+
+            for (int i = 1; i < 21; i++) {
+                Seat seat = new Seat(event1, "А" + i, getDateTime("2016-07-01 12:00:00", LONG_DATE), 400, 20, new Date());
+                insertSeat(db, seat);
+
+                if (i == 1) {
+                    ticketOrder1 = new TicketOrder(user, seat, getDateTime("2016-06-01 13:00:00", LONG_DATE), "неоплачено", "RS", "001468", "123456789012", new Date());
+                    insertTicketOrder(db, ticketOrder1);
+                }
+            }
+
+            for (int i = 1; i < 21; i++) {
+                Seat seat = new Seat(event2, "А" + i, getDateTime("2016-07-02 12:00:00", LONG_DATE), 400, 20, new Date());
+                insertSeat(db, seat);
+
+                if (i == 1) {
+                    ticketOrder2 = new TicketOrder(user, seat, getDateTime("2016-06-01 13:48:00", LONG_DATE), "оплачено", "RS", "001468", "123456789012", new Date());
+                    insertTicketOrder(db, ticketOrder2);
+                }
+            }
+
+            Subscription subscription1 = new Subscription(event1, 0, new Date());
+            insertSubscription(db, subscription1);
 
         }
 
@@ -147,6 +163,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 "NAME TEXT, " +
                 "COUNTRY TEXT, " +
                 "GENRE TEXT, " +
+                "YEAR INTEGER, " +
                 "AMOUNTTIME TEXT, " +
                 "FORAGE TEXT, " +
                 "ROLES TEXT, " +
@@ -154,6 +171,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 "COVER BLOB, " +
                 "VIDEOLINK TEXT," +
                 "LINK TEXT, " +
+                "ISNOTIFIED INTEGER, " +
                 "TIMESTAMP NUMERIC);");
 
         // таблица SEAT
@@ -163,7 +181,8 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 "NAME TEXT, " +
                 "TIMEDATE NUMERIC, " +
                 "PRICE REAL, " +
-                "SERVICEPRICE REAL, " +
+                "SERVICEPRICE REAL," +
+                "ISFREE INTEGER, " +
                 "TIMESTAMP NUMERIC);");
 
         // таблица TICKETORDER
@@ -183,6 +202,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "_EVENTID INTEGER, " +
                 "AMOUNTSEATS INTEGER, " +
+                "ISNOTIFIED INTEGER, " +
                 "TIMESTAMP NUMERIC);");
     }
 
@@ -245,12 +265,15 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 eventValues.put("NAME", event.getName());
                 eventValues.put("COUNTRY", event.getCountry());
                 eventValues.put("GENRE", event.getGenre());
+                eventValues.put("YEAR", event.getYear());
                 eventValues.put("AMOUNTTIME", event.getAmountTime());
                 eventValues.put("FORAGE", event.getForAge());
                 eventValues.put("ROLES", event.getRoles());
                 eventValues.put("ABOUT", event.getAbout());
                 eventValues.put("COVER", event.getCover());
                 eventValues.put("VIDEOLINK", event.getVideoLink());
+                eventValues.put("LINK", event.getLink());
+                eventValues.put("ISNOTIFIED", event.getIsNotified());
                 eventValues.put("TIMESTAMP", getDateTime(event.getTimeStamp(), LONG_DATE));
 
                 db.insert("EVENT", null, eventValues);
@@ -260,7 +283,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             Log.d("My Logs", "Ошибка доступа к БД!");
         }
 
-
     }
 
     private static void insertSeat(SQLiteDatabase db, Seat seat) {
@@ -269,12 +291,13 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
         try {
 
+
             Cursor newCursor = db.query("EVENT",
                     new String[]{"_id"},
-                    "NAME = ? AND COUNTRY = ? AND GENRE = ? AND AMOUNTTIME = ? AND FORAGE = ? AND ROLES = ?" +
-                            "AND ABOUT = ? AND VIDEOLINK = ?",
-                    new String[]{seat.getEvent().getName(), seat.getEvent().getGenre(), seat.getEvent().getAmountTime(),
-                            seat.getEvent().getForAge(), seat.getEvent().getRoles(), seat.getEvent().getAbout(), seat.getEvent().getVideoLink()},
+                    "NAME = ? AND COUNTRY = ? AND GENRE = ? AND AMOUNTTIME = ? AND YEAR = ?",
+                    new String[]{seat.getEvent().getName(), seat.getEvent().getCountry(),
+                            seat.getEvent().getGenre(), seat.getEvent().getAmountTime(),
+                            Integer.toString(seat.getEvent().getYear())},
                     null, null, null);
 
             if (newCursor.getCount() == 1) {
@@ -286,9 +309,10 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
                 seatValues.put("_EVENTID", eventId);
                 seatValues.put("NAME", seat.getName());
-                seatValues.put("TIMEDATE", getDateTime(seat.getDateTime(), LONG_DATE));
+                seatValues.put("TIMEDATE", getDateTime(seat.getTimeDate(), LONG_DATE));
                 seatValues.put("PRICE", seat.getPrice());
                 seatValues.put("SERVICEPRICE", seat.getServicePrice());
+                seatValues.put("ISFREE", seat.getIsFree());
                 seatValues.put("TIMESTAMP", getDateTime(seat.getTimeStamp(), LONG_DATE));
 
                 db.insert("SEAT", null, seatValues);
@@ -310,6 +334,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     new String[]{"_id"},
                     "NAME = ? AND TIMEDATE = ? AND PRICE = ? AND SERVICEPRICE = ?",
                     new String[]{ticketOrder.getSeat().getName(), getDateTime(ticketOrder.getSeat().getTimeDate(), LONG_DATE),
+                            Double.toString(ticketOrder.getSeat().getPrice()),
                             Double.toString(ticketOrder.getSeat().getServicePrice())},
                     null, null, null);
 
@@ -324,12 +349,48 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 ticketOrderValues.put("_SEATID", seatId);
                 ticketOrderValues.put("PURCHASEDATE", getDateTime(ticketOrder.getPurchaseDate(), LONG_DATE));
                 ticketOrderValues.put("STATUS", ticketOrder.getStatus());
-                ticketOrderValues.put("SERIES", ticketOrder.setSeries());
-                ticketOrderValues.put("NUMBER", ticketOrder.getStatus());
+                ticketOrderValues.put("SERIES", ticketOrder.getSeries());
+                ticketOrderValues.put("NUMBER", ticketOrder.getNumber());
+                ticketOrderValues.put("CODE", ticketOrder.getCode());
+                ticketOrderValues.put("TIMESTAMP", getDateTime(ticketOrder.getTimeStamp(), LONG_DATE));
 
-                ticketOrderValues.put("TIMESTAMP", getDateTime(seat.getTimeStamp(), LONG_DATE));
+                db.insert("TICKETORDER", null, ticketOrderValues);
+            }
 
-                db.insert("SEAT", null, seatValues);
+        } catch (SQLiteException e) {
+            Log.d("My Logs", "Ошибка доступа к БД!");
+        }
+
+    }
+
+    private static void insertSubscription(SQLiteDatabase db, Subscription subscription) {
+
+        int eventId = Integer.MAX_VALUE;
+
+        try {
+
+            Cursor newCursor = db.query("EVENT",
+                    new String[]{"_id"},
+                    "NAME = ? AND COUNTRY = ? AND GENRE = ? AND AMOUNTTIME = ? AND YEAR = ?",
+                    new String[]{subscription.getEvent().getName(), subscription.getEvent().getCountry(),
+                            subscription.getEvent().getGenre(), subscription.getEvent().getAmountTime(),
+                            Integer.toString(subscription.getEvent().getYear())},
+                    null, null, null);
+
+
+            if (newCursor.getCount() == 1) {
+                if (newCursor.moveToFirst()) {
+                    eventId = newCursor.getInt(0);
+                }
+
+                ContentValues subscriptionValues = new ContentValues();
+
+                subscriptionValues.put("_EVENTID", eventId);
+                subscriptionValues.put("AMOUNTSEATS", subscription.getAmountSeats());
+                subscriptionValues.put("ISNOTIFIED", subscription.getIsNotified());
+                subscriptionValues.put("TIMESTAMP", getDateTime(subscription.getTimeStamp(), LONG_DATE));
+
+                db.insert("SUBSCRIPTION", null, subscriptionValues);
             }
 
         } catch (SQLiteException e) {

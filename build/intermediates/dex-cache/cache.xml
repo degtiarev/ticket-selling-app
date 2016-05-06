@@ -40,7 +40,7 @@
         jar="/Users/delexa/Desktop/chudobilet/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         revision="23.0.2"
-        sha1="5b12bb62ccacd0ed5bac398df447b5dd59636f1e">
+        sha1="a1e5616088a4949068604e11aae7debc793258db">
         <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_06974b3c60ee01529f432971ecafff8d2b06325a/classes.dex" />
     </item>
     <item
@@ -54,7 +54,7 @@
         jar="/Users/delexa/Desktop/chudobilet/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         revision="23.0.2"
-        sha1="79837343b140852c21e529b88a55cf54d3b1b264">
+        sha1="0cc9a8f07e53d1b49cdb36951b3845760cae03d5">
         <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_5522f9fac35a118a6abc9568f8c99380088143ab/classes.dex" />
     </item>
     <item

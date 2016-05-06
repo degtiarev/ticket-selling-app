@@ -12,6 +12,7 @@ public class Seat {
     private Date timeDate;
     private double price;
     private double servicePrice;
+    private int isFree;
     private Date timeStamp;
 
     public Seat(Event event, String name, Date timeDate, double price, double servicePrice, Date timeStamp) {
@@ -21,6 +22,7 @@ public class Seat {
         this.timeDate = timeDate;
         this.price = price;
         this.servicePrice = servicePrice;
+        this.isFree=0;
         this.timeStamp = timeStamp;
     }
 
@@ -70,6 +72,14 @@ public class Seat {
 
     public void setServicePrice(double servicePrice) {
         this.servicePrice = servicePrice;
+    }
+
+    public int getIsFree() {
+        return isFree;
+    }
+
+    public void setIsFree(int isFree) {
+        this.isFree = isFree;
     }
 
     public Date getTimeStamp() {
