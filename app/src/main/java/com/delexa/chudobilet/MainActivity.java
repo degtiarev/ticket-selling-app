@@ -2,13 +2,9 @@ package com.delexa.chudobilet;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -19,27 +15,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.delexa.chudobilet.About.AboutFragment;
-import com.delexa.chudobilet.Authorization.AuthorizationFragment;
-import com.delexa.chudobilet.Cinema.CinemaFragment;
-import com.delexa.chudobilet.Concert.ConcertsFragment;
-import com.delexa.chudobilet.ForChildren.ForChildrenFragment;
-import com.delexa.chudobilet.MasterClass.MasterclassFragment;
-import com.delexa.chudobilet.MyOrders.MyOrdersFragment;
-import com.delexa.chudobilet.Other.OtherFragment;
-import com.delexa.chudobilet.Settings.SettingsFragment;
-import com.delexa.chudobilet.Theater.TheatersFragment;
-
-import java.io.ByteArrayOutputStream;
+import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.MainMenu.About.AboutFragment;
+import com.delexa.chudobilet.MainMenu.Authorization.AuthorizationFragment;
+import com.delexa.chudobilet.MainMenu.Cinema.CinemaTabFragment;
+import com.delexa.chudobilet.MainMenu.Concert.ConcertFragment;
+import com.delexa.chudobilet.MainMenu.ForChildren.ForChildrenFragment;
+import com.delexa.chudobilet.MainMenu.MasterClass.MasterclassFragment;
+import com.delexa.chudobilet.MainMenu.MyOrders.MyOrdersFragment;
+import com.delexa.chudobilet.MainMenu.Other.OtherFragment;
+import com.delexa.chudobilet.MainMenu.Settings.SettingsFragment;
+import com.delexa.chudobilet.MainMenu.Theater.TheatersFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -162,12 +155,12 @@ public class MainActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.cinema:
-                fragment = new CinemaFragment();
+                fragment = new CinemaTabFragment();
                 title = getString(R.string.cinema);
                 break;
 
             case R.id.concerts:
-                fragment = new ConcertsFragment();
+                fragment = new ConcertFragment();
                 title = getString(R.string.concerts);
                 break;
 
