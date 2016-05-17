@@ -21,7 +21,8 @@ public class Event {
     private String link;
     private Date timeStamp;
 
-    public Event(String name, Establishment establishment, String country, String genre, int year, String amountTime, String forAge, String roles, String about, String cover, String videoLink, String link, Date timeStamp) {
+    public Event(String name, Establishment establishment, String country, String genre, int year, String amountTime,
+                 String forAge, String roles, String about, String cover, String videoLink, String link, Date timeStamp) {
         this.id = 0;
         this.name = name;
         this.establishment = establishment;

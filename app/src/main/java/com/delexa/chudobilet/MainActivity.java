@@ -23,17 +23,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
-import com.delexa.chudobilet.MainMenu.About.AboutFragment;
-import com.delexa.chudobilet.MainMenu.Authorization.AuthorizationFragment;
-import com.delexa.chudobilet.MainMenu.Cinema.CinemaTabFragment;
-import com.delexa.chudobilet.MainMenu.Concert.ConcertFragment;
-import com.delexa.chudobilet.MainMenu.Concert.ConcertTabFragment;
-import com.delexa.chudobilet.MainMenu.ForChildren.ForChildrenFragment;
-import com.delexa.chudobilet.MainMenu.MasterClass.MasterclassFragment;
-import com.delexa.chudobilet.MainMenu.MyOrders.MyOrdersFragment;
-import com.delexa.chudobilet.MainMenu.Other.OtherFragment;
-import com.delexa.chudobilet.MainMenu.Settings.SettingsFragment;
-import com.delexa.chudobilet.MainMenu.Theater.TheatersFragment;
+import com.delexa.chudobilet.MainMenu.AboutFragment;
+import com.delexa.chudobilet.MainMenu.AuthorizationFragment;
+import com.delexa.chudobilet.MainMenu.CinemaTabFragment;
+import com.delexa.chudobilet.MainMenu.ConcertTabFragment;
+import com.delexa.chudobilet.MainMenu.ForChildrenFragment;
+import com.delexa.chudobilet.MainMenu.MasterclassFragment;
+import com.delexa.chudobilet.MainMenu.MyOrdersFragment;
+import com.delexa.chudobilet.MainMenu.OtherFragment;
+import com.delexa.chudobilet.MainMenu.SetingsFragment;
+import com.delexa.chudobilet.MainMenu.TheaterTabFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity
         ImageView imgSettings = (ImageView) hView.findViewById(R.id.imageViewOptions);
         imgSettings.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Fragment fragment = new SettingsFragment();
+                Fragment fragment = new SetingsFragment();
 
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_frame, fragment);
@@ -166,7 +165,7 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.theaters:
-                fragment = new TheatersFragment();
+                fragment = new TheaterTabFragment();
                 title = getString(R.string.theaters);
                 break;
 

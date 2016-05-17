@@ -20,12 +20,13 @@
 
         <TextView
             android:id="@+id/textViewEstablishmentAddress"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewEstablishmentName"
+            android:maxLines="2"
             android:paddingLeft="15dp"
             android:text="ТРК Alimpic, ул. Боевая, 25, Астрахань, Астраханская обл., 414024"
-            android:textColor="@android:color/holo_red_dark"/>
+            android:textColor="@android:color/holo_red_dark" />
 
     </RelativeLayout>
 

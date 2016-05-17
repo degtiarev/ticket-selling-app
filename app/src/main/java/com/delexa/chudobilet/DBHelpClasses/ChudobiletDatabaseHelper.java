@@ -72,12 +72,15 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     "Астрахань, Астраханская обл., 414024", new Date());
             Establishment concertEstablishment = new Establishment("Концерты", "Театр Оперы и Балета", "ул. Максаковой, 2, " +
                     "Астрахань, Астраханская обл., 414024", new Date());
+            Establishment theaterEstablishment = new Establishment("Театры", "Астраханский ТЮЗ", "414000 г. Астрахань, ул. Мусы Джалиля, 4",
+                    new Date());
+
 
             Event cinemaEvent1 = new Event("Книга джунглей", cinemaEstablishment, "США", "фэнтези, драма, приключения, семейный, ...", 2016, " 1 час 50 минут", "6+",
                     "Скарлетт Йоханссон, Идрис Эльба, Билл Мюррей, Лупита Нионго, Кристофер Уокен, Джанкарло Эспозито, Нил Сетхи, Бен Кингсли, Ралф Айнесон, " +
                             "Ханна Тойнтон, ...", "Непримиримая борьба с опасным и внушающим страх тигром Шерханом вынуждает Маугли покинуть волчью стаю и отправиться в " +
                     "захватывающее путешествие. На пути мальчика ждут удивительные открытия и запоминающиеся встречи с пантерой Багирой, медведем Балу, питоном Каа и " +
-                    "другими обитателями дремучих джунглей.", "http://www.film.ru/sites/default/files/movies/posters/jungle_book_xlg.jpg", "https://www.youtube.com/watch?v=TwNXOE2yxPU",
+                    "другими обитателями дремучих джунглей.", "http://new.chudobilet.ru/media/images/events/c05f81e44660d05b3c20bcf76cc76973.jpg", "https://www.youtube.com/watch?v=TwNXOE2yxPU",
                     "http://new.chudobilet.ru/event/992/", new Date());
             Event cinemaEvent2 = new Event("Белоснежка и Охотник 2", cinemaEstablishment, "США", "фэнтези, боевик, драма, приключения, ...", 2016, "1 час 55 минут", "6+",
                     "Крис Хемсворт, Сэм Клафлин, Эмили Блант, Джессика Честейн, Шарлиз Терон, Софи Куксон, Ник Фрост, Колин Морган, Ралф Айнесон, Шеридан Смит, ...",
@@ -95,16 +98,36 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                             " причём не просто преодолеть технические трудности, а подчинить каждый элемент танца художественным целям. Скоро нежный " +
                             "романтичный принц Зигфрид, готовый жертвовать собой ради любимой, вновь появится в свете театральных софитов на Большой " +
                             "сцене. А исполняемое солистами астраханского балета па-де-труа из «Лебединого озера» вызовет бурю оваций.",
-                    "http://teatr-sats.ru/wp-content/uploads/2012/04/LEBEDINOE-OZERO-Foto-Elena-Lapina-prev-yu-6.jpg",
-                    "https://www.youtube.com/watch?v=TwNXOE2yxPU", "http://new.chudobilet.ru/event/404", new Date());
+                    "http://new.chudobilet.ru/media/images/events/503fb582ae571c8fd8c359330e0eb79c.jpg",
+                    null, "http://new.chudobilet.ru/event/404", new Date());
+
+            Event theaterEvent1 = new Event("Жил-был Геракл", theaterEstablishment, null, null, 0, "1 час 40 минут", "6+", "С. Мартемьянов, Е. Ревкова, С. Журавлёв, " +
+                    "К. Хахлев, Д. Юницкий, В. Яхтина, ...", "Жил-был Геракл… Тот самый? Тот самый. И хоть родился он героем – и рост, и сила при нём – вынужден был " +
+                    "служить рабом у царя Эврисфея. Так случается - бог Зевс повелел, что уж тут поделаешь? Но, что-то делать надо... Чтобы стать свободным, " +
+                    "Гераклу необходимо совершить двенадцать великих поступков, каждый из которых - ПОДВИГ. Он справляется с самыми непредсказуемыми испытаниями, " +
+                    "ведь впереди его ожидает заветная награда - СВОБОДА!",
+                    "http://new.chudobilet.ru/media/images/events/d8ed4896e6507faca33a5199ab59003c.jpg",
+                    null, "http://new.chudobilet.ru/event/669/", new Date());
+            Event theaterEvent2 = new Event("Приключения в стране непослушания", theaterEstablishment, null, null, 0, "40 минут", "6+", "Е. Ревкова, Е. Перова, Л. Альмяшева, О." +
+                    " Перова, А. Казакова, Е. Егорова, А. Еремицкая, В. Сельнинова", "Невероятная история, придуманная студентами театрального отделения Астраханской консерватории. " +
+                    " Эта добрая, весёлая, очень музыкально-танцевальная история учит правильно оценивать добро и зло, различать плохое и хорошее, учит любви и ответственности.  Её" +
+                    " понимание легко и доступно всем возрастам - от самых маленьких до самых взрослых.  Ещё более привлекательной эту историю делает то, что большинство исполнителей " +
+                    "очень молоды. Их юношеский задор заражает зрителей неподдельной искренностью.",
+                    "http://new.chudobilet.ru/media/images/events/6029be218a6c189b4cd6bf6f64243760.jpg",
+                    null, "http://new.chudobilet.ru/event/1067/", new Date());
 
 
             insertUser(db, user);
+
             insertEstablishment(db, cinemaEstablishment);
             insertEstablishment(db, concertEstablishment);
+            insertEstablishment(db, theaterEstablishment);
+
             insertEvent(db, cinemaEvent1);
             insertEvent(db, cinemaEvent2);
             insertEvent(db, concertEvent1);
+            insertEvent(db, theaterEvent1);
+            insertEvent(db, theaterEvent2);
 
 
             TicketOrder ticketOrder1 = new TicketOrder();
