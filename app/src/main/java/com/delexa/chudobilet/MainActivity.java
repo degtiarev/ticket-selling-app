@@ -162,11 +162,9 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.concerts:
-                fragment = new TabFragment();
                 title = getString(R.string.concerts);
                 fragment = new TabFragment();
                 fr = (TabFragment) fragment;
-                title = getString(R.string.cinema);
                 fr.setType1("События");
                 fr.setType2("Места");
                 fr.setItem("Концерты");
@@ -175,11 +173,9 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.theaters:
-                fragment = new TabFragment();
                 title = getString(R.string.theaters);
                 fragment = new TabFragment();
                 fr = (TabFragment) fragment;
-                title = getString(R.string.cinema);
                 fr.setType1("Репертуар");
                 fr.setType2("Места");
                 fr.setItem("Театры");
@@ -190,16 +186,36 @@ public class MainActivity extends AppCompatActivity
             case R.id.for_children:
                 fragment = new TabFragment();
                 title = getString(R.string.for_children);
+                fr = (TabFragment) fragment;
+                fr.setType1("События");
+                fr.setType2("Места");
+                fr.setItem("Детям");
+                fragment = fr;
+
                 break;
 
             case R.id.other:
                 fragment = new TabFragment();
                 title = getString(R.string.other);
+
+                fr = (TabFragment) fragment;
+                fr.setType1("События");
+                fr.setType2("Места");
+                fr.setItem("Другое");
+                fragment = fr;
+
                 break;
 
             case R.id.masterclass:
                 fragment = new TabFragment();
                 title = getString(R.string.masterclass);
+
+                fr = (TabFragment) fragment;
+                fr.setType1("События");
+                fr.setType2("Места");
+                fr.setItem("Мастерклассы");
+                fragment = fr;
+
                 break;
 
             case R.id.my_orders:

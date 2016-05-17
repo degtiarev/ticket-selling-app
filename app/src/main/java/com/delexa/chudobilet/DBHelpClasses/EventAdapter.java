@@ -1,6 +1,9 @@
 package com.delexa.chudobilet.DBHelpClasses;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.delexa.chudobilet.EventFragment;
 import com.squareup.picasso.Picasso;
 
 import com.delexa.chudobilet.R;
@@ -105,6 +109,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         @Override
         public void onClick(View v) {
 
+//            FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+//            Eve stopwatchFragment = new StopwatchFragment();
+//            ft.replace(R.id.stopwatch_container, stopwatchFragment);
+//            ft.addToBackStack(null);
+//            ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+//            ft.commit();
         }
 
         public int getPos() {
