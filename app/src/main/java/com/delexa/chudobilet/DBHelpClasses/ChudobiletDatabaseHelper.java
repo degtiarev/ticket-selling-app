@@ -65,13 +65,9 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         if (oldVersion < 1) {
             createAllTables(db);
 
-            byte[] myPhoto = getBlobFromURL("http://new.chudobilet.ru/media/images/events/856a1b1073d9133a33a35ff006de816a.jpg");
-            byte[] cover1 = getBlobFromURL("http://new.chudobilet.ru/media/images/events/c05f81e44660d05b3c20bcf76cc76973.jpg");
-            byte[] cover2 = getBlobFromURL("http://new.chudobilet.ru/media/images/events/dd0d82740c770242d151223691a2b2df.jpg");
-            byte[] cover3 = getBlobFromURL("http://new.chudobilet.ru/media/images/events/dd0d82740c770242d151223691a2b2df.jpg");
-
             User user = new User("Алексей", "Дегтярев", "Сергеевич", "delexa0@gmail.com", getDateTime("1993-02-04", SHORT_DATE),
-                    "M", "11", "0", "11", "89608519623", "123456789", myPhoto, "фэнтези", null, null, new Date());
+                    "M", "11", "0", "11", "89608519623", "123456789", "http://cdn01.ru/files/users/images/62/26/6226a248e23a10fccedf0c81e001285d.jpg",
+                    "фэнтези", null, null, new Date());
             Establishment cinemaEstablishment = new Establishment("Кино", "Большое Кино", "ТРК Alimpic, ул. Боевая, 25, " +
                     "Астрахань, Астраханская обл., 414024", new Date());
             Establishment concertEstablishment = new Establishment("Концерты", "Театр Оперы и Балета", "ул. Максаковой, 2, " +
@@ -81,11 +77,13 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     "Скарлетт Йоханссон, Идрис Эльба, Билл Мюррей, Лупита Нионго, Кристофер Уокен, Джанкарло Эспозито, Нил Сетхи, Бен Кингсли, Ралф Айнесон, " +
                             "Ханна Тойнтон, ...", "Непримиримая борьба с опасным и внушающим страх тигром Шерханом вынуждает Маугли покинуть волчью стаю и отправиться в " +
                     "захватывающее путешествие. На пути мальчика ждут удивительные открытия и запоминающиеся встречи с пантерой Багирой, медведем Балу, питоном Каа и " +
-                    "другими обитателями дремучих джунглей.", cover1, "https://www.youtube.com/watch?v=TwNXOE2yxPU",
+                    "другими обитателями дремучих джунглей.", "http://www.film.ru/sites/default/files/movies/posters/jungle_book_xlg.jpg", "https://www.youtube.com/watch?v=TwNXOE2yxPU",
                     "http://new.chudobilet.ru/event/992/", new Date());
             Event cinemaEvent2 = new Event("Белоснежка и Охотник 2", cinemaEstablishment, "США", "фэнтези, боевик, драма, приключения, ...", 2016, "1 час 55 минут", "6+",
                     "Крис Хемсворт, Сэм Клафлин, Эмили Блант, Джессика Честейн, Шарлиз Терон, Софи Куксон, Ник Фрост, Колин Морган, Ралф Айнесон, Шеридан Смит, ...",
-                    "Когда любовь уходит, сердце прекрасной девы обращается в лед. И даже сотни королевств не смогут сдержать поступь ее несметного воинства. Лишь Охотник не ведает страха. Сквозь проклятый лес он идет навстречу своей судьбе.", cover2, "https://www.youtube.com/watch?v=TwNXOE2yxPU",
+                    "Когда любовь уходит, сердце прекрасной девы обращается в лед. И даже сотни королевств не смогут сдержать поступь ее несметного воинства. Лишь Охотник не ведает страха." +
+                            " Сквозь проклятый лес он идет навстречу своей судьбе.", "http://new.chudobilet.ru/media/images/events/dd0d82740c770242d151223691a2b2df.jpg",
+                    "https://www.youtube.com/watch?v=TwNXOE2yxPU",
                     "http://new.chudobilet.ru/event/1008/", new Date());
             Event concertEvent1 = new Event("Балет Лебединое озерo", concertEstablishment, null, null, 0, "2 часа", "6+", null,
                     "«Лебединое озеро» - шедевр мирового балетного искусства. Спектакль Астраханского театра оперы и балета, бессмертное произведение " +
@@ -97,7 +95,8 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                             " причём не просто преодолеть технические трудности, а подчинить каждый элемент танца художественным целям. Скоро нежный " +
                             "романтичный принц Зигфрид, готовый жертвовать собой ради любимой, вновь появится в свете театральных софитов на Большой " +
                             "сцене. А исполняемое солистами астраханского балета па-де-труа из «Лебединого озера» вызовет бурю оваций.",
-                    cover3, "https://www.youtube.com/watch?v=TwNXOE2yxPU", "http://new.chudobilet.ru/event/404", new Date());
+                    "http://teatr-sats.ru/wp-content/uploads/2012/04/LEBEDINOE-OZERO-Foto-Elena-Lapina-prev-yu-6.jpg",
+                    "https://www.youtube.com/watch?v=TwNXOE2yxPU", "http://new.chudobilet.ru/event/404", new Date());
 
 
             insertUser(db, user);
@@ -160,7 +159,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 "NEWSSUBSCRIBER TEXT, " +
                 "PHONE TEXT, " +
                 "PASSWORD TEXT, " +
-                "PHOTO BLOB, " +
+                "PHOTO TEXT, " +
                 "INTERESTGENRE TEXT, " +
                 "INTERESTROLES TEXT, " +
                 "INTERESTESTABLISHMENT TEXT, " +
@@ -186,7 +185,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 "FORAGE TEXT, " +
                 "ROLES TEXT, " +
                 "ABOUT TEXT, " +
-                "COVER BLOB, " +
+                "COVER TEXT, " +
                 "VIDEOLINK TEXT," +
                 "LINK TEXT, " +
                 "ISNOTIFIED INTEGER, " +
@@ -421,7 +420,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
     public static Cursor getEvents(SQLiteDatabase db, String event) {
 
         Cursor newCursor = db.rawQuery("SELECT EVENT._id, EVENT.NAME, EVENT.COUNTRY, EVENT.GENRE, EVENT.YEAR, EVENT.AMOUNTTIME, " +
-                "EVENT.FORAGE, EVENT.ROLES, EVENT.ABOUT, EVENT.COVER, EVENT.VIDEOLINK, EVENT.LINK, EVENT.ISNOTIFIED, EVENT.TIMESTAMP"+
+                "EVENT.FORAGE, EVENT.ROLES, EVENT.ABOUT, EVENT.COVER, EVENT.VIDEOLINK, EVENT.LINK, EVENT.ISNOTIFIED, EVENT.TIMESTAMP" +
                 " FROM EVENT, ESTABLISHMENT " +
                 "WHERE ESTABLISHMENT._id = EVENT._ESTABLISHMENTID  AND ESTABLISHMENT.TYPE = '" + event + "' " +
                 "GROUP BY EVENT._id", null);
@@ -457,26 +456,5 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         return date;
     }
 
-    public byte[] getBlobFromURL(String src) {
-//        try {
-//            java.net.URL url = new java.net.URL(src);
-//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//            connection.setDoInput(true);
-//            connection.connect();
-//            InputStream input = connection.getInputStream();
-//            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-//
-//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//            myBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-//            byte[] byteArray = stream.toByteArray();
-//
-//
-//            return byteArray;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-        return null;
-//        }
-
-    }
 
 }

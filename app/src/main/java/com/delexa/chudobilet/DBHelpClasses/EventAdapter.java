@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import com.delexa.chudobilet.R;
 
 import java.util.Collections;
@@ -39,14 +41,18 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
         Event current = data.get(position);
 
-//        Picasso.with(inflater.getContext())
-//                .load(current.coverURL)
-//                .placeholder(R.drawable.no_photo)
-//                .error(R.drawable.no_photo)
-//                .into(holder.cover);
+
+
+        Picasso.with(inflater.getContext()) //передаем контекст приложения
+                .load(current.getCover())
+                .placeholder(R.drawable.no_photo)
+                .error( R.drawable.ic_menu_camera)
+                .into(holder.cover); //ссылка на ImageView
+
+
 
         holder.name.setText(current.getName());
-        //  holder.cover.setImageBitmap(current.cover);
+
         holder.genre.setText(current.getGenre());
         holder.time.setText(current.getTime());
         holder.country.setText(current.getCountry());

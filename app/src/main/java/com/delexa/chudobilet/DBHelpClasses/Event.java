@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 public class Event {
 
     private int _id;
-    private Bitmap cover;
+    private String cover;
     private String name;
     private String genre;
     private String time;
@@ -22,11 +22,11 @@ public class Event {
         this._id = _id;
     }
 
-    public Bitmap getCover() {
+    public String getCover() {
         return cover;
     }
 
-    public void setCover(Bitmap cover) {
+    public void setCover(String cover) {
         this.cover = cover;
     }
 

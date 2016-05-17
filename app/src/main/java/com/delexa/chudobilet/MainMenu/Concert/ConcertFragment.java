@@ -49,8 +49,8 @@ public class ConcertFragment extends Fragment implements Callback<List<Event>> {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.fragment_concert_tab, container, false);
-        recyclerView = (RecyclerView) v.findViewById(R.id.ConcertEventList);
+        View v = inflater.inflate(R.layout.fragment_event_tab, container, false);
+        recyclerView = (RecyclerView) v.findViewById(R.id.EventList);
 
 //        retrofit = new Retrofit.Builder()
 //                .addConverterFactory(GsonConverterFactory.create())

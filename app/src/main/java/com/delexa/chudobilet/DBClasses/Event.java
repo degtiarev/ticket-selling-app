@@ -15,19 +15,19 @@ public class Event {
     private String forAge;
     private String roles;
     private String about;
-    private byte[] cover;
+    private String cover;
     private String videoLink;
     private int isNotified;
-    private  String link;
+    private String link;
     private Date timeStamp;
 
-    public Event(String name, Establishment establishment, String country, String genre, int year, String amountTime, String forAge, String roles, String about, byte[] cover, String videoLink, String link, Date timeStamp) {
+    public Event(String name, Establishment establishment, String country, String genre, int year, String amountTime, String forAge, String roles, String about, String cover, String videoLink, String link, Date timeStamp) {
         this.id = 0;
         this.name = name;
         this.establishment = establishment;
         this.country = country;
         this.genre = genre;
-        this.year=year;
+        this.year = year;
         this.amountTime = amountTime;
         this.forAge = forAge;
         this.roles = roles;
@@ -35,7 +35,7 @@ public class Event {
         this.cover = cover;
         this.videoLink = videoLink;
         this.link = link;
-        isNotified=0;
+        isNotified = 0;
         this.timeStamp = timeStamp;
     }
 
@@ -119,11 +119,11 @@ public class Event {
         this.about = about;
     }
 
-    public byte[] getCover() {
+    public String getCover() {
         return cover;
     }
 
-    public void setCover(byte[] cover) {
+    public void setCover(String cover) {
         this.cover = cover;
     }
 

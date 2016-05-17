@@ -44,9 +44,9 @@ public class ConcertTabFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View v = inflater.inflate(R.layout.fragment_concert, container, false);
-        viewPager = (ViewPager) v.findViewById(R.id.concertViewpager);
-        tabLayout = (TabLayout) v.findViewById(R.id.concertTabs);
+        View v = inflater.inflate(R.layout.fragment_event, container, false);
+        viewPager = (ViewPager) v.findViewById(R.id.eventViewpager);
+        tabLayout = (TabLayout) v.findViewById(R.id.eventTabs);
 
         buildFragments();
 

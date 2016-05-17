@@ -16,13 +16,13 @@ public class User {
     private String newsSubscriber;
     private String phone;
     private String password;
-    private byte[] image;
+    private String image;
     private String interestGenre;
     private String interestRoles;
     private String interestEstablishment;
     private Date timeStamp;
 
-    public User(String name, String family, String patronymic, String email, Date date, String sex, String notificationToPay, String emailNotificationChangeStatus, String newsSubscriber, String phone, String password, byte[] image, String interestGenre, String interestRoles, String interestEstablishment, Date timeStamp) {
+    public User(String name, String family, String patronymic, String email, Date date, String sex, String notificationToPay, String emailNotificationChangeStatus, String newsSubscriber, String phone, String password, String image, String interestGenre, String interestRoles, String interestEstablishment, Date timeStamp) {
         this.id = 0;
         this.name = name;
         this.family = family;
@@ -139,11 +139,11 @@ public class User {
         this.password = password;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

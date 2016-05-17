@@ -49,8 +49,8 @@ public class CinemaFragment extends Fragment implements Callback<List<Event>> {
 
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.fragment_cinema_tab, container, false);
-        recyclerView = (RecyclerView) v.findViewById(R.id.CinemaEventList);
+        View v = inflater.inflate(R.layout.fragment_event_tab, container, false);
+        recyclerView = (RecyclerView) v.findViewById(R.id.EventList);
 
 //        retrofit = new Retrofit.Builder()
 //                .addConverterFactory(GsonConverterFactory.create())
@@ -104,16 +104,13 @@ public class CinemaFragment extends Fragment implements Callback<List<Event>> {
 
                 movie.set_id(cursor.getInt(cursor.getColumnIndex("_id")));
 
-//                byte[] byteArray = cursor.getBlob(cursor.getColumnIndex("COVER"));
-//                Bitmap bm = BitmapFactory.decodeByteArray(byteArray, 0 ,byteArray.length);
-//                movie.setCover(bm);
-
                 movie.setName(cursor.getString(cursor.getColumnIndex("NAME")));
                 movie.setGenre(cursor.getString(cursor.getColumnIndex("GENRE")));
                 movie.setTime(cursor.getString(cursor.getColumnIndex("AMOUNTTIME")));
                 movie.setCountry(cursor.getString(cursor.getColumnIndex("COUNTRY")));
                 movie.setForAge(cursor.getString(cursor.getColumnIndex("FORAGE")));
                 movie.setYear(cursor.getInt(cursor.getColumnIndex("YEAR")));
+                movie.setCover(cursor.getString(cursor.getColumnIndex("COVER")));
 
                 data.add(movie);
             }
