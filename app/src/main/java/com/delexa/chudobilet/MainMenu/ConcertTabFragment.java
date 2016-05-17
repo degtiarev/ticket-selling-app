@@ -29,6 +29,22 @@ public class ConcertTabFragment extends Fragment {
     ConcertTabAdapter adapter;
 
 
+    private String type;
+    private String item;
+
+//    public String getType() {
+//        return type;
+//    }
+//    public void setType(String type) {
+//        this.type = type;
+//    }
+//    public String getItem() {
+//        return item;
+//    }
+//    public void setItem(String item) {
+//        this.item = item;
+//    }
+
     //   public static int int_items = 3;
 
     public ConcertTabFragment() {
