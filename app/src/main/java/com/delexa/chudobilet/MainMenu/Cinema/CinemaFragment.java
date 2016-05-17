@@ -49,8 +49,8 @@ public class CinemaFragment extends Fragment implements Callback<List<Event>> {
 
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.fragment_tab, container, false);
-        recyclerView = (RecyclerView) v.findViewById(R.id.EventList);
+        View v = inflater.inflate(R.layout.fragment_cinema_tab, container, false);
+        recyclerView = (RecyclerView) v.findViewById(R.id.CinemaEventList);
 
 //        retrofit = new Retrofit.Builder()
 //                .addConverterFactory(GsonConverterFactory.create())
@@ -108,7 +108,7 @@ public class CinemaFragment extends Fragment implements Callback<List<Event>> {
 //                Bitmap bm = BitmapFactory.decodeByteArray(byteArray, 0 ,byteArray.length);
 //                movie.setCover(bm);
 
-                movie.setFilmName(cursor.getString(cursor.getColumnIndex("NAME")));
+                movie.setName(cursor.getString(cursor.getColumnIndex("NAME")));
                 movie.setGenre(cursor.getString(cursor.getColumnIndex("GENRE")));
                 movie.setTime(cursor.getString(cursor.getColumnIndex("AMOUNTTIME")));
                 movie.setCountry(cursor.getString(cursor.getColumnIndex("COUNTRY")));

@@ -46,7 +46,7 @@ public class CinemaTabFragment extends Fragment {
 
 
         View v = inflater.inflate(R.layout.fragment_cinema, container, false);
-        viewPager = (ViewPager) v.findViewById(R.id.CinemaViewpager);
+        viewPager = (ViewPager) v.findViewById(R.id.cinemaViewpager);
         tabLayout = (TabLayout) v.findViewById(R.id.cinemaTabs);
 
         buildFragments();

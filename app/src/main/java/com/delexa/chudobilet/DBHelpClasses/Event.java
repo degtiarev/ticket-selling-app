@@ -7,7 +7,7 @@ public class Event {
 
     private int _id;
     private Bitmap cover;
-    private String filmName;
+    private String name;
     private String genre;
     private String time;
     private String country;
@@ -30,12 +30,12 @@ public class Event {
         this.cover = cover;
     }
 
-    public String getFilmName() {
-        return filmName;
+    public String getName() {
+        return name;
     }
 
-    public void setFilmName(String filmName) {
-        this.filmName = filmName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getGenre() {

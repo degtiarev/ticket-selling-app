@@ -27,6 +27,7 @@ import com.delexa.chudobilet.MainMenu.About.AboutFragment;
 import com.delexa.chudobilet.MainMenu.Authorization.AuthorizationFragment;
 import com.delexa.chudobilet.MainMenu.Cinema.CinemaTabFragment;
 import com.delexa.chudobilet.MainMenu.Concert.ConcertFragment;
+import com.delexa.chudobilet.MainMenu.Concert.ConcertTabFragment;
 import com.delexa.chudobilet.MainMenu.ForChildren.ForChildrenFragment;
 import com.delexa.chudobilet.MainMenu.MasterClass.MasterclassFragment;
 import com.delexa.chudobilet.MainMenu.MyOrders.MyOrdersFragment;
@@ -160,7 +161,7 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.concerts:
-                fragment = new ConcertFragment();
+                fragment = new ConcertTabFragment();
                 title = getString(R.string.concerts);
                 break;
 

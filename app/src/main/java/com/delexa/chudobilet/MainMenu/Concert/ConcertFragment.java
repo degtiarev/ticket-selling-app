@@ -30,7 +30,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ConcertFragment extends Fragment  implements Callback<List<Event>> {
+public class ConcertFragment extends Fragment implements Callback<List<Event>> {
 
     private String type;
 
@@ -49,8 +49,8 @@ public class ConcertFragment extends Fragment  implements Callback<List<Event>> 
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.fragment_tab, container, false);
-        recyclerView = (RecyclerView) v.findViewById(R.id.EventList);
+        View v = inflater.inflate(R.layout.fragment_concert_tab, container, false);
+        recyclerView = (RecyclerView) v.findViewById(R.id.ConcertEventList);
 
 //        retrofit = new Retrofit.Builder()
 //                .addConverterFactory(GsonConverterFactory.create())
@@ -62,15 +62,14 @@ public class ConcertFragment extends Fragment  implements Callback<List<Event>> 
         //   magenta.enqueue(this);
 
 
-
         if (getType() == "Места") {
-            placeAdapter = new EstablishmentAdapter(getActivity(), getCinemas());
+            placeAdapter = new EstablishmentAdapter(getActivity(), getPlaces());
             recyclerView.setAdapter(placeAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        } else if (getType() == "События" )
+        } else if (getType() == "События")
 
         {
-            concertAdapter = new EventAdapter(getActivity(), getMovies());
+            concertAdapter = new EventAdapter(getActivity(), getConcerts());
             recyclerView.setAdapter(concertAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
@@ -86,7 +85,7 @@ public class ConcertFragment extends Fragment  implements Callback<List<Event>> 
         this.type = type;
     }
 
-    public List<Event> getMovies() {
+    public List<Event> getConcerts() {
 
 
         List<Event> data = new ArrayList<>();
@@ -95,26 +94,26 @@ public class ConcertFragment extends Fragment  implements Callback<List<Event>> 
         try {
             SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(getActivity());
             SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
-            Cursor cursor = ChudobiletDatabaseHelper.getEvents(db,"Концерт");
+            Cursor cursor = ChudobiletDatabaseHelper.getEvents(db, "Концерты");
 
             while (cursor.moveToNext()) {
-                Event movie = new Event();
+                Event concert = new Event();
 
 
-                movie.set_id(cursor.getInt(cursor.getColumnIndex("_id")));
+                concert.set_id(cursor.getInt(cursor.getColumnIndex("_id")));
 
 //                byte[] byteArray = cursor.getBlob(cursor.getColumnIndex("COVER"));
 //                Bitmap bm = BitmapFactory.decodeByteArray(byteArray, 0 ,byteArray.length);
 //                movie.setCover(bm);
 
-                movie.setFilmName(cursor.getString(cursor.getColumnIndex("NAME")));
-                movie.setGenre(cursor.getString(cursor.getColumnIndex("GENRE")));
-                movie.setTime(cursor.getString(cursor.getColumnIndex("AMOUNTTIME")));
-                movie.setCountry(cursor.getString(cursor.getColumnIndex("COUNTRY")));
-                movie.setForAge(cursor.getString(cursor.getColumnIndex("FORAGE")));
-                movie.setYear(cursor.getInt(cursor.getColumnIndex("YEAR")));
+                concert.setName(cursor.getString(cursor.getColumnIndex("NAME")));
+                concert.setGenre(cursor.getString(cursor.getColumnIndex("GENRE")));
+                concert.setTime(cursor.getString(cursor.getColumnIndex("AMOUNTTIME")));
+                concert.setCountry(cursor.getString(cursor.getColumnIndex("COUNTRY")));
+                concert.setForAge(cursor.getString(cursor.getColumnIndex("FORAGE")));
+                concert.setYear(cursor.getInt(cursor.getColumnIndex("YEAR")));
 
-                data.add(movie);
+                data.add(concert);
             }
             cursor.close();
             db.close();
@@ -128,7 +127,7 @@ public class ConcertFragment extends Fragment  implements Callback<List<Event>> 
     }
 
 
-    public List<Establishment> getCinemas() {
+    public List<Establishment> getPlaces() {
 
 
         List<Establishment> data = new ArrayList<>();
@@ -137,16 +136,16 @@ public class ConcertFragment extends Fragment  implements Callback<List<Event>> 
         try {
             SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(getActivity());
             SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
-            Cursor cursor = ChudobiletDatabaseHelper.getEstablishment(db,"Концерт");
+            Cursor cursor = ChudobiletDatabaseHelper.getEstablishment(db, "Концерты");
 
             while (cursor.moveToNext()) {
-                Establishment cinema = new Establishment();
+                Establishment concertPlace = new Establishment();
 
-                cinema.set_id(cursor.getInt(cursor.getColumnIndex("_id")));
-                cinema.setName(cursor.getString(cursor.getColumnIndex("NAME")));
-                cinema.setAddress(cursor.getString(cursor.getColumnIndex("ADDRESS")));
+                concertPlace.set_id(cursor.getInt(cursor.getColumnIndex("_id")));
+                concertPlace.setName(cursor.getString(cursor.getColumnIndex("NAME")));
+                concertPlace.setAddress(cursor.getString(cursor.getColumnIndex("ADDRESS")));
 
-                data.add(cinema);
+                data.add(concertPlace);
             }
             cursor.close();
             db.close();
@@ -183,7 +182,7 @@ public class ConcertFragment extends Fragment  implements Callback<List<Event>> 
 
     @Override
     public void onFailure(Call<List<Event>> call, Throwable t) {
-        System.out.println("CallListMovie " + t.getLocalizedMessage());
+        System.out.println("CallListConcert " + t.getLocalizedMessage());
     }
 
 }

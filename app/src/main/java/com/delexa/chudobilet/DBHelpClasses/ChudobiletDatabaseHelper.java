@@ -68,34 +68,52 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             byte[] myPhoto = getBlobFromURL("http://new.chudobilet.ru/media/images/events/856a1b1073d9133a33a35ff006de816a.jpg");
             byte[] cover1 = getBlobFromURL("http://new.chudobilet.ru/media/images/events/c05f81e44660d05b3c20bcf76cc76973.jpg");
             byte[] cover2 = getBlobFromURL("http://new.chudobilet.ru/media/images/events/dd0d82740c770242d151223691a2b2df.jpg");
+            byte[] cover3 = getBlobFromURL("http://new.chudobilet.ru/media/images/events/dd0d82740c770242d151223691a2b2df.jpg");
 
             User user = new User("Алексей", "Дегтярев", "Сергеевич", "delexa0@gmail.com", getDateTime("1993-02-04", SHORT_DATE),
                     "M", "11", "0", "11", "89608519623", "123456789", myPhoto, "фэнтези", null, null, new Date());
-            Establishment establishment = new Establishment("Кино", "Большое Кино", "3, ТРК Alimpic, ул. Боевая, 25, " +
+            Establishment cinemaEstablishment = new Establishment("Кино", "Большое Кино", "ТРК Alimpic, ул. Боевая, 25, " +
                     "Астрахань, Астраханская обл., 414024", new Date());
-            Event event1 = new Event("Книга джунглей", establishment, "США", "фэнтези, драма, приключения, семейный, ...", 2016, " 1 час 50 минут", "6+",
+            Establishment concertEstablishment = new Establishment("Концерты", "Театр Оперы и Балета", "ул. Максаковой, 2, " +
+                    "Астрахань, Астраханская обл., 414024", new Date());
+
+            Event cinemaEvent1 = new Event("Книга джунглей", cinemaEstablishment, "США", "фэнтези, драма, приключения, семейный, ...", 2016, " 1 час 50 минут", "6+",
                     "Скарлетт Йоханссон, Идрис Эльба, Билл Мюррей, Лупита Нионго, Кристофер Уокен, Джанкарло Эспозито, Нил Сетхи, Бен Кингсли, Ралф Айнесон, " +
                             "Ханна Тойнтон, ...", "Непримиримая борьба с опасным и внушающим страх тигром Шерханом вынуждает Маугли покинуть волчью стаю и отправиться в " +
                     "захватывающее путешествие. На пути мальчика ждут удивительные открытия и запоминающиеся встречи с пантерой Багирой, медведем Балу, питоном Каа и " +
                     "другими обитателями дремучих джунглей.", cover1, "https://www.youtube.com/watch?v=TwNXOE2yxPU",
                     "http://new.chudobilet.ru/event/992/", new Date());
-            Event event2 = new Event("Белоснежка и Охотник 2", establishment, "США", "фэнтези, боевик, драма, приключения, ...", 2016, "1 час 55 минут", "6+",
+            Event cinemaEvent2 = new Event("Белоснежка и Охотник 2", cinemaEstablishment, "США", "фэнтези, боевик, драма, приключения, ...", 2016, "1 час 55 минут", "6+",
                     "Крис Хемсворт, Сэм Клафлин, Эмили Блант, Джессика Честейн, Шарлиз Терон, Софи Куксон, Ник Фрост, Колин Морган, Ралф Айнесон, Шеридан Смит, ...",
                     "Когда любовь уходит, сердце прекрасной девы обращается в лед. И даже сотни королевств не смогут сдержать поступь ее несметного воинства. Лишь Охотник не ведает страха. Сквозь проклятый лес он идет навстречу своей судьбе.", cover2, "https://www.youtube.com/watch?v=TwNXOE2yxPU",
                     "http://new.chudobilet.ru/event/1008/", new Date());
+            Event concertEvent1 = new Event("Балет Лебединое озерo", concertEstablishment, null, null, 0, "2 часа", "6+", null,
+                    "«Лебединое озеро» - шедевр мирового балетного искусства. Спектакль Астраханского театра оперы и балета, бессмертное произведение " +
+                            "бессмертного композитора Петра Ильича Чайковского с аншлагами проходил во многих городах Европы. Не обошла его своим вниманием" +
+                            " и астраханская публика.  С первых дней жизни в репертуаре Астраханского государственного театра Оперы и Балета спектакль " +
+                            "«Лебединое Озеро» сопровождают аншлаги. Это символ нашего балета и очень серьезный экзамен для молодой труппы, который она " +
+                            "сдаёт на «отлично». Этот балет Чайковского - один из самых сложных спектаклей классического репертуара. Тем отрадней, что в" +
+                            " нынешнем составе балетной труппы астраханского театра есть исполнители, способные пройти серьёзное «испытание классикой»," +
+                            " причём не просто преодолеть технические трудности, а подчинить каждый элемент танца художественным целям. Скоро нежный " +
+                            "романтичный принц Зигфрид, готовый жертвовать собой ради любимой, вновь появится в свете театральных софитов на Большой " +
+                            "сцене. А исполняемое солистами астраханского балета па-де-труа из «Лебединого озера» вызовет бурю оваций.",
+                    cover3, "https://www.youtube.com/watch?v=TwNXOE2yxPU", "http://new.chudobilet.ru/event/404", new Date());
+
 
             insertUser(db, user);
-            insertEstablishment(db, establishment);
-            insertEvent(db, event1);
-            insertEvent(db, event2);
+            insertEstablishment(db, cinemaEstablishment);
+            insertEstablishment(db, concertEstablishment);
+            insertEvent(db, cinemaEvent1);
+            insertEvent(db, cinemaEvent2);
+            insertEvent(db, concertEvent1);
 
-            // дальше не работает
+
             TicketOrder ticketOrder1 = new TicketOrder();
             TicketOrder ticketOrder2 = new TicketOrder();
 
 
             for (int i = 1; i < 21; i++) {
-                Seat seat = new Seat(event1, "А" + i, getDateTime("2016-07-01 12:00:00", LONG_DATE), 400, 20, new Date());
+                Seat seat = new Seat(cinemaEvent1, "А" + i, getDateTime("2016-07-01 12:00:00", LONG_DATE), 400, 20, new Date());
                 insertSeat(db, seat);
 
                 if (i == 1) {
@@ -105,7 +123,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             }
 
             for (int i = 1; i < 21; i++) {
-                Seat seat = new Seat(event2, "А" + i, getDateTime("2016-07-02 12:00:00", LONG_DATE), 400, 20, new Date());
+                Seat seat = new Seat(cinemaEvent2, "А" + i, getDateTime("2016-07-02 12:00:00", LONG_DATE), 400, 20, new Date());
                 insertSeat(db, seat);
 
                 if (i == 1) {
@@ -114,7 +132,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 }
             }
 
-            Subscription subscription1 = new Subscription(event1, 0, new Date());
+            Subscription subscription1 = new Subscription(cinemaEvent1, 0, new Date());
             insertSubscription(db, subscription1);
 
         }
@@ -402,7 +420,9 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     public static Cursor getEvents(SQLiteDatabase db, String event) {
 
-        Cursor newCursor = db.rawQuery("SELECT * FROM EVENT, ESTABLISHMENT " +
+        Cursor newCursor = db.rawQuery("SELECT EVENT._id, EVENT.NAME, EVENT.COUNTRY, EVENT.GENRE, EVENT.YEAR, EVENT.AMOUNTTIME, " +
+                "EVENT.FORAGE, EVENT.ROLES, EVENT.ABOUT, EVENT.COVER, EVENT.VIDEOLINK, EVENT.LINK, EVENT.ISNOTIFIED, EVENT.TIMESTAMP"+
+                " FROM EVENT, ESTABLISHMENT " +
                 "WHERE ESTABLISHMENT._id = EVENT._ESTABLISHMENTID  AND ESTABLISHMENT.TYPE = '" + event + "' " +
                 "GROUP BY EVENT._id", null);
 

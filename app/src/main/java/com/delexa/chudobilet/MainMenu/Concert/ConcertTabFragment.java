@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.delexa.chudobilet.MainMenu.Cinema.CinemaFragment;
 import com.delexa.chudobilet.R;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class ConcertTabFragment extends Fragment {
 
     TabLayout tabLayout;
     ViewPager viewPager;
-    CinemaTabAdapter adapter;
+    ConcertTabAdapter adapter;
 
 
     public static int int_items = 3;
@@ -45,9 +44,9 @@ public class ConcertTabFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View v = inflater.inflate(R.layout.fragment_cinema, container, false);
-        viewPager = (ViewPager) v.findViewById(R.id.CinemaViewpager);
-        tabLayout = (TabLayout) v.findViewById(R.id.cinemaTabs);
+        View v = inflater.inflate(R.layout.fragment_concert, container, false);
+        viewPager = (ViewPager) v.findViewById(R.id.concertViewpager);
+        tabLayout = (TabLayout) v.findViewById(R.id.concertTabs);
 
         buildFragments();
 
@@ -59,25 +58,24 @@ public class ConcertTabFragment extends Fragment {
 
 
     private void buildFragments() {
-        CinemaFragment concertFragment = new CinemaFragment();
+        ConcertFragment concertFragment = new ConcertFragment();
         concertFragment.setType("События");
 
-        CinemaFragment cinemaFragment = new CinemaFragment();
-        cinemaFragment.setType("Места");
+        ConcertFragment concertPlaceFragment = new ConcertFragment();
+        concertPlaceFragment.setType("Места");
 
-
-        adapter = new CinemaTabAdapter(getChildFragmentManager());
-        adapter.addFragment(cinemaFragment);
+        adapter = new ConcertTabAdapter(getChildFragmentManager());
+        adapter.addFragment(concertPlaceFragment);
         adapter.addFragment(concertFragment);
 
     }
 
 
-    class CinemaTabAdapter extends FragmentPagerAdapter {
+    class ConcertTabAdapter extends FragmentPagerAdapter {
 
-        private List<CinemaFragment> fragments = new ArrayList<>();
+        private List<ConcertFragment> fragments = new ArrayList<>();
 
-        public CinemaTabAdapter(FragmentManager fm) {
+        public ConcertTabAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -95,7 +93,7 @@ public class ConcertTabFragment extends Fragment {
             return fragments.get(position).getType();
         }
 
-        public void addFragment(CinemaFragment fragment) {
+        public void addFragment(ConcertFragment fragment) {
             fragments.add(fragment);
         }
     }

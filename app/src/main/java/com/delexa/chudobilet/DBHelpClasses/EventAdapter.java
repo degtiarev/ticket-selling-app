@@ -45,14 +45,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 //                .error(R.drawable.no_photo)
 //                .into(holder.cover);
 
-        holder.filmName.setText(current.getFilmName());
-      //  holder.cover.setImageBitmap(current.cover);
+        holder.name.setText(current.getName());
+        //  holder.cover.setImageBitmap(current.cover);
         holder.genre.setText(current.getGenre());
         holder.time.setText(current.getTime());
         holder.country.setText(current.getCountry());
         holder.forAge.setText(current.getForAge());
-        holder.year.setText(Integer.toString(current.getYear()));
 
+        if (current.getYear() != 0)
+            holder.year.setText(Integer.toString(current.getYear()));
+
+        if (current.getCountry() == null) holder.comma.setText(null);
 
 
     }
@@ -66,12 +69,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView cover;
-        TextView filmName;
+        TextView name;
         TextView genre;
         TextView time;
         TextView country;
         TextView forAge;
         TextView year;
+        TextView comma;
 
 
         public EventViewHolder(View itemView) {
@@ -82,12 +86,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             itemView.setOnClickListener(this);
 
             cover = (ImageView) itemView.findViewById(R.id.imageViewEventCover);
-            filmName = (TextView) itemView.findViewById(R.id.textViewEventName);
+            name = (TextView) itemView.findViewById(R.id.textViewEventName);
             genre = (TextView) itemView.findViewById(R.id.textViewEventGenre);
             time = (TextView) itemView.findViewById(R.id.textViewEventAmountTime);
             country = (TextView) itemView.findViewById(R.id.textViewEventCountry);
             forAge = (TextView) itemView.findViewById(R.id.textViewEventForAge);
             year = (TextView) itemView.findViewById(R.id.textViewEventYear);
+            comma = (TextView) itemView.findViewById(R.id.textViewEventComma);
         }
 
 
