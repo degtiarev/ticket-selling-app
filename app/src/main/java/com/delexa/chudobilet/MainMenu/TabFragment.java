@@ -18,20 +18,49 @@ import com.delexa.chudobilet.R;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class TheaterTabFragment  extends Fragment {
+public class TabFragment extends Fragment {
 
     final static String place = "place";
     final static String event = "event";
 
+
     TabLayout tabLayout;
     ViewPager viewPager;
-    TheaterTabAdapter adapter;
+    TabAdapter adapter;
 
 
-    //  public static int int_items = 3;
+    public String type1;
+    public String type2;
+    private String item;
 
-    public TheaterTabFragment() {
+    public String getType1() {
+        return type1;
+    }
+
+    public void setType1(String type1) {
+        this.type1 = type1;
+    }
+
+    public String getType2() {
+        return type2;
+    }
+
+    public void setType2(String type2) {
+        this.type2 = type2;
+    }
+
+    public String getItem() {
+        return item;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
+
+    //   public static int int_items = 3;
+
+    public TabFragment() {
         // Required empty public constructor
     }
 
@@ -42,7 +71,7 @@ public class TheaterTabFragment  extends Fragment {
     }
 
 
-    private FragmentTabHost tabHost;
+    // private FragmentTabHost tabHost;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,30 +92,29 @@ public class TheaterTabFragment  extends Fragment {
 
 
     private void buildFragments() {
-        EstablishmentFragment movieFragment = new EstablishmentFragment();
-        movieFragment.setType("Репертуар");
-        movieFragment.setItem("Театры");
-        movieFragment.setTypeInfo(event);
+        EstablishmentFragment concertFragment = new EstablishmentFragment();
+        concertFragment.setType(type1);
+        concertFragment.setItem(item);
+        concertFragment.setTypeInfo(event);
 
 
-        EstablishmentFragment establishmentFragment = new EstablishmentFragment();
-        establishmentFragment.setType("Места");
-        establishmentFragment.setItem("Театры");
-        establishmentFragment.setTypeInfo(place);
+        EstablishmentFragment concertPlaceFragment = new EstablishmentFragment();
+        concertPlaceFragment.setType(type2);
+        concertPlaceFragment.setItem(item);
+        concertPlaceFragment.setTypeInfo(place);
 
-
-        adapter = new TheaterTabAdapter(getChildFragmentManager());
-        adapter.addFragment(establishmentFragment);
-        adapter.addFragment(movieFragment);
+        adapter = new TabAdapter(getChildFragmentManager());
+        adapter.addFragment(concertPlaceFragment);
+        adapter.addFragment(concertFragment);
 
     }
 
 
-    class TheaterTabAdapter extends FragmentPagerAdapter {
+    class TabAdapter extends FragmentPagerAdapter {
 
         private List<EstablishmentFragment> fragments = new ArrayList<>();
 
-        public TheaterTabAdapter(FragmentManager fm) {
+        public TabAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -108,6 +136,5 @@ public class TheaterTabFragment  extends Fragment {
             fragments.add(fragment);
         }
     }
-
 
 }

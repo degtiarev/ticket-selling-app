@@ -25,14 +25,9 @@ import android.widget.Toast;
 import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.MainMenu.AboutFragment;
 import com.delexa.chudobilet.MainMenu.AuthorizationFragment;
-import com.delexa.chudobilet.MainMenu.CinemaTabFragment;
-import com.delexa.chudobilet.MainMenu.ConcertTabFragment;
-import com.delexa.chudobilet.MainMenu.ForChildrenFragment;
-import com.delexa.chudobilet.MainMenu.MasterclassFragment;
 import com.delexa.chudobilet.MainMenu.MyOrdersFragment;
-import com.delexa.chudobilet.MainMenu.OtherFragment;
 import com.delexa.chudobilet.MainMenu.SetingsFragment;
-import com.delexa.chudobilet.MainMenu.TheaterTabFragment;
+import com.delexa.chudobilet.MainMenu.TabFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -150,37 +145,60 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         Fragment fragment = null;
+        TabFragment fr = null;
         String title = getString(R.string.app_name);
 
 
         switch (id) {
             case R.id.cinema:
-                fragment = new CinemaTabFragment();
+                fragment = new TabFragment();
+                fr = (TabFragment) fragment;
                 title = getString(R.string.cinema);
+                fr.setType1("Фильмы");
+                fr.setType2("Кинотеатры");
+                fr.setItem("Кино");
+                fragment = fr;
+
                 break;
 
             case R.id.concerts:
-                fragment = new ConcertTabFragment();
+                fragment = new TabFragment();
                 title = getString(R.string.concerts);
+                fragment = new TabFragment();
+                fr = (TabFragment) fragment;
+                title = getString(R.string.cinema);
+                fr.setType1("События");
+                fr.setType2("Места");
+                fr.setItem("Концерты");
+                fragment = fr;
+
                 break;
 
             case R.id.theaters:
-                fragment = new TheaterTabFragment();
+                fragment = new TabFragment();
                 title = getString(R.string.theaters);
+                fragment = new TabFragment();
+                fr = (TabFragment) fragment;
+                title = getString(R.string.cinema);
+                fr.setType1("Репертуар");
+                fr.setType2("Места");
+                fr.setItem("Театры");
+                fragment = fr;
+
                 break;
 
             case R.id.for_children:
-                fragment = new ForChildrenFragment();
+                fragment = new TabFragment();
                 title = getString(R.string.for_children);
                 break;
 
             case R.id.other:
-                fragment = new OtherFragment();
+                fragment = new TabFragment();
                 title = getString(R.string.other);
                 break;
 
             case R.id.masterclass:
-                fragment = new MasterclassFragment();
+                fragment = new TabFragment();
                 title = getString(R.string.masterclass);
                 break;
 
@@ -280,8 +298,6 @@ public class MainActivity extends AppCompatActivity
             Toast toast = Toast.makeText(this, "Ошибка достура к БД", Toast.LENGTH_SHORT);
             toast.show();
         }
-
-
 
 
     }
