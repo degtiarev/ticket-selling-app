@@ -28,6 +28,7 @@ import com.delexa.chudobilet.MainMenu.AuthorizationFragment;
 import com.delexa.chudobilet.MainMenu.MyOrdersFragment;
 import com.delexa.chudobilet.MainMenu.SetingsFragment;
 import com.delexa.chudobilet.MainMenu.TabFragment;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,14 +44,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -288,21 +281,25 @@ public class MainActivity extends AppCompatActivity
 
                     String name = userCursor.getString(0);
                     String email = userCursor.getString(1);
-                    //        byte[] photo = userCursor.getBlob(2);
+                    String cover = userCursor.getString(2);
 
 
                     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                     navigationView.setNavigationItemSelectedListener(this);
                     View header = navigationView.getHeaderView(0);
-/*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
                     TextView myName = (TextView) header.findViewById(R.id.textViewName);
                     TextView myEmail = (TextView) header.findViewById(R.id.textViewEmail);
-                    ImageView nyPhoto = (ImageView) header.findViewById(R.id.imageViewPhoto);
+                    ImageView myPhoto = (ImageView) header.findViewById(R.id.imageViewPhoto);
+
+
+                    Picasso.with(this) //передаем контекст приложения
+                            .load(cover)
+                            .placeholder(R.drawable.no_photo)
+                            .error(R.drawable.ic_menu_camera)
+                            .into(myPhoto); //ссылка на ImageView
 
                     myName.setText(name);
                     myEmail.setText(email);
-
-                    //     nyPhoto.setImageBitmap(BitmapFactory.decodeByteArray(photo, 0, photo.length));
 
 
                 }

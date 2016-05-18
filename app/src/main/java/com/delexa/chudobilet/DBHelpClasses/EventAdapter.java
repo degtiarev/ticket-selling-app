@@ -1,9 +1,6 @@
 package com.delexa.chudobilet.DBHelpClasses;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.delexa.chudobilet.EventFragment;
+import com.delexa.chudobilet.DBClasses.Event;
 import com.squareup.picasso.Picasso;
 
 import com.delexa.chudobilet.R;
@@ -46,19 +43,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         Event current = data.get(position);
 
 
-
         Picasso.with(inflater.getContext()) //передаем контекст приложения
                 .load(current.getCover())
                 .placeholder(R.drawable.no_photo)
-                .error( R.drawable.ic_menu_camera)
+                .error(R.drawable.ic_menu_camera)
                 .into(holder.cover); //ссылка на ImageView
-
 
 
         holder.name.setText(current.getName());
 
         holder.genre.setText(current.getGenre());
-        holder.time.setText(current.getTime());
+        holder.time.setText(current.getAmountTime());
         holder.country.setText(current.getCountry());
         holder.forAge.setText(current.getForAge());
 

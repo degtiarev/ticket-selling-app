@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.delexa.chudobilet.DBClasses.Establishment;
+import com.delexa.chudobilet.DBClasses.Event;
 import com.delexa.chudobilet.R;
 
 import java.util.ArrayList;
@@ -29,7 +31,6 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
     final static String event = "event";
 
 
-
     private RecyclerView recyclerView;
     private EventAdapter movieAdapter;
     private EstablishmentAdapter cinemaAdapter;
@@ -42,18 +43,23 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
     public String getType() {
         return type;
     }
+
     public void setType(String type) {
         this.type = type;
     }
+
     public String getItem() {
         return item;
     }
+
     public void setItem(String item) {
         this.item = item;
     }
+
     public String getTypeInfo() {
         return typeInfo;
     }
+
     public void setTypeInfo(String typeInfo) {
         this.typeInfo = typeInfo;
     }
@@ -91,10 +97,7 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
             cinemaAdapter = new EstablishmentAdapter(getActivity(), getCinemas());
             recyclerView.setAdapter(cinemaAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        }
-
-
-        else if (typeInfo == event)
+        } else if (typeInfo == event)
 
         {
             movieAdapter = new EventAdapter(getActivity(), getMovies());
@@ -121,11 +124,11 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
                 Event movie = new Event();
 
 
-                movie.set_id(cursor.getInt(cursor.getColumnIndex("_id")));
+                movie.setId(cursor.getInt(cursor.getColumnIndex("_id")));
 
                 movie.setName(cursor.getString(cursor.getColumnIndex("NAME")));
                 movie.setGenre(cursor.getString(cursor.getColumnIndex("GENRE")));
-                movie.setTime(cursor.getString(cursor.getColumnIndex("AMOUNTTIME")));
+                movie.setAmountTime(cursor.getString(cursor.getColumnIndex("AMOUNTTIME")));
                 movie.setCountry(cursor.getString(cursor.getColumnIndex("COUNTRY")));
                 movie.setForAge(cursor.getString(cursor.getColumnIndex("FORAGE")));
                 movie.setYear(cursor.getInt(cursor.getColumnIndex("YEAR")));
@@ -159,7 +162,7 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
             while (cursor.moveToNext()) {
                 Establishment cinema = new Establishment();
 
-                cinema.set_id(cursor.getInt(cursor.getColumnIndex("_id")));
+                cinema.setId(cursor.getInt(cursor.getColumnIndex("_id")));
                 cinema.setName(cursor.getString(cursor.getColumnIndex("NAME")));
                 cinema.setAddress(cursor.getString(cursor.getColumnIndex("ADDRESS")));
 

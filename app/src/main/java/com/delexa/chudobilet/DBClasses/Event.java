@@ -40,6 +40,11 @@ public class Event {
         this.timeStamp = timeStamp;
     }
 
+    public Event ()
+    {
+
+    }
+
     public int getId() {
         return id;
     }
