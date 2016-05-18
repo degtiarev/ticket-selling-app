@@ -76,6 +76,7 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
         View v = inflater.inflate(R.layout.fragment_event_tab, container, false);
         recyclerView = (RecyclerView) v.findViewById(R.id.EventList);
 
+
 //        retrofit = new Retrofit.Builder()
 //                .addConverterFactory(GsonConverterFactory.create())
 //                .baseUrl("http://pastebin.com/raw/")

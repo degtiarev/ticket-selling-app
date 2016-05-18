@@ -1,7 +1,5 @@
 package com.delexa.chudobilet.DBHelpClasses;
 
-import android.graphics.Bitmap;
-
 
 public class Event {
 

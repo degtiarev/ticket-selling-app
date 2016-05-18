@@ -77,6 +77,9 @@ public class EstablishmentAdapter extends RecyclerView.Adapter<EstablishmentAdap
 
         @Override
         public void onClick(View v) {
+            int id = data.get(num).get_id();
+
+
 
         }
 

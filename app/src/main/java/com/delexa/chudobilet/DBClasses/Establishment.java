@@ -18,6 +18,11 @@ public class Establishment {
         this.timeStamp = timeStamp;
     }
 
+    public Establishment ()
+    {
+
+    }
+
     public int getId() {
         return id;
     }
