@@ -29,8 +29,8 @@ public class TabFragment extends Fragment {
     TabAdapter adapter;
 
 
-    public String type1;
-    public String type2;
+    private String type1;
+    private String type2;
     private String item;
 
     public String getType1() {

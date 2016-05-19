@@ -1,6 +1,7 @@
 package com.delexa.chudobilet;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,6 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.delexa.chudobilet.DBClasses.Event;
 import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.MainMenu.AboutFragment;
 import com.delexa.chudobilet.MainMenu.AuthorizationFragment;
@@ -29,6 +32,8 @@ import com.delexa.chudobilet.MainMenu.MyOrdersFragment;
 import com.delexa.chudobilet.MainMenu.SetingsFragment;
 import com.delexa.chudobilet.MainMenu.TabFragment;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

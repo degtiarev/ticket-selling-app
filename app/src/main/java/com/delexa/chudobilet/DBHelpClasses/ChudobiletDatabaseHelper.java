@@ -17,7 +17,9 @@ import com.delexa.chudobilet.DBClasses.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
@@ -440,23 +442,70 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public static Cursor getEvents(SQLiteDatabase db, String event) {
+    public static List<Event> getEvents(SQLiteDatabase db, String event) {
 
-        Cursor newCursor = db.rawQuery("SELECT EVENT._id, EVENT.NAME, EVENT.COUNTRY, EVENT.GENRE, EVENT.YEAR, EVENT.AMOUNTTIME, " +
-                "EVENT.FORAGE, EVENT.ROLES, EVENT.ABOUT, EVENT.COVER, EVENT.VIDEOLINK, EVENT.LINK, EVENT.ISNOTIFIED, EVENT.TIMESTAMP" +
-                " FROM EVENT, ESTABLISHMENT " +
-                "WHERE ESTABLISHMENT._id = EVENT._ESTABLISHMENTID  AND ESTABLISHMENT.TYPE = '" + event + "' " +
-                "GROUP BY EVENT._id", null);
+        List<Event> data = new ArrayList<>();
 
-        return newCursor;
+        try {
+
+            Cursor newCursor = db.rawQuery("SELECT EVENT._id, EVENT.NAME, EVENT.COUNTRY, EVENT.GENRE, EVENT.YEAR, EVENT.AMOUNTTIME, EVENT._ESTABLISHMENTID, " +
+                    "EVENT.FORAGE, EVENT.ROLES, EVENT.ABOUT, EVENT.COVER, EVENT.VIDEOLINK, EVENT.LINK, EVENT.ISNOTIFIED, EVENT.TIMESTAMP" +
+                    " FROM EVENT, ESTABLISHMENT " +
+                    "WHERE ESTABLISHMENT._id = EVENT._ESTABLISHMENTID  AND ESTABLISHMENT.TYPE = '" + event + "' " +
+                    "GROUP BY EVENT._id", null);
+            data = cursorToListEvent(newCursor);
+
+            db.close();
+
+        } catch (SQLiteException e) {
+        }
+
+
+        return data;
 
     }
 
-    public static Cursor getEstablishment(SQLiteDatabase db, String establishment) {
-        Cursor newCursor = db.query("ESTABLISHMENT",
-                new String[]{"_id", "NAME", "ADDRESS"},
-                "TYPE = ?", new String[]{establishment}, null, null, null);
-        return newCursor;
+    public static Event getEvent(SQLiteDatabase db, int id) {
+
+        List<Event> data = new ArrayList<>();
+
+        try {
+            Cursor newCursor = db.rawQuery("SELECT EVENT._id, EVENT.NAME, EVENT.COUNTRY, EVENT.GENRE, EVENT.YEAR, EVENT.AMOUNTTIME, EVENT._ESTABLISHMENTID, " +
+                    "EVENT.FORAGE, EVENT.ROLES, EVENT.ABOUT, EVENT.COVER, EVENT.VIDEOLINK, EVENT.LINK, EVENT.ISNOTIFIED, EVENT.TIMESTAMP" +
+                    " FROM EVENT" +
+                    " WHERE EVENT._id = " + Integer.toString(id) +
+                    " GROUP BY EVENT._id", null);
+
+            data = cursorToListEvent(newCursor);
+
+            db.close();
+
+
+        } catch (SQLiteException e) {
+        }
+
+        return data.get(0);
+
+    }
+
+    public static List<Establishment> getEstablishments(SQLiteDatabase db, String type) {
+
+        List<Establishment> data = new ArrayList<>();
+
+        try {
+
+            Cursor newCursor = db.query("ESTABLISHMENT",
+                    new String[]{"_id", "NAME", "ADDRESS", "TYPE", "TIMESTAMP"},
+                    "TYPE = ?", new String[]{type}, null, null, null);
+            data = cursorToListEstablishment(newCursor);
+
+            db.close();
+
+        } catch (SQLiteException e) {
+        }
+
+
+        return data;
 
     }
 
@@ -479,5 +528,54 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         return date;
     }
 
+
+    private static List<Event> cursorToListEvent(Cursor newCursor) {
+
+        List<Event> data = new ArrayList<>();
+        while (newCursor.moveToNext()) {
+            Event curEvent = new Event();
+
+            curEvent.setId(newCursor.getInt(newCursor.getColumnIndex("_id")));
+            curEvent.setName(newCursor.getString(newCursor.getColumnIndex("NAME")));
+            curEvent.setCountry(newCursor.getString(newCursor.getColumnIndex("COUNTRY")));
+            curEvent.setGenre(newCursor.getString(newCursor.getColumnIndex("GENRE")));
+            curEvent.setYear(newCursor.getInt(newCursor.getColumnIndex("YEAR")));
+            curEvent.setAmountTime(newCursor.getString(newCursor.getColumnIndex("AMOUNTTIME")));
+            curEvent.setForAge(newCursor.getString(newCursor.getColumnIndex("FORAGE")));
+            curEvent.setRoles(newCursor.getString(newCursor.getColumnIndex("ROLES")));
+            curEvent.setAbout(newCursor.getString(newCursor.getColumnIndex("ABOUT")));
+            curEvent.setCover(newCursor.getString(newCursor.getColumnIndex("COVER")));
+            curEvent.setVideoLink(newCursor.getString(newCursor.getColumnIndex("VIDEOLINK")));
+            curEvent.setLink(newCursor.getString(newCursor.getColumnIndex("LINK")));
+            curEvent.setIsNotified(newCursor.getInt(newCursor.getColumnIndex("ISNOTIFIED")));
+            curEvent.setTimeStamp(getDateTime(newCursor.getString(newCursor.getColumnIndex("TIMESTAMP")), LONG_DATE));
+
+            data.add(curEvent);
+        }
+        newCursor.close();
+
+        return data;
+
+    }
+
+    private static List<Establishment> cursorToListEstablishment(Cursor newCursor) {
+
+        List<Establishment> data = new ArrayList<>();
+        while (newCursor.moveToNext()) {
+            Establishment curEstablishment = new Establishment();
+
+            curEstablishment.setId(newCursor.getInt(newCursor.getColumnIndex("_id")));
+            curEstablishment.setName(newCursor.getString(newCursor.getColumnIndex("NAME")));
+            curEstablishment.setAddress(newCursor.getString(newCursor.getColumnIndex("ADDRESS")));
+            curEstablishment.setType(newCursor.getString(newCursor.getColumnIndex("TYPE")));
+            curEstablishment.setTimeStamp(getDateTime(newCursor.getString(newCursor.getColumnIndex("TIMESTAMP")), LONG_DATE));
+
+            data.add(curEstablishment);
+        }
+        newCursor.close();
+
+        return data;
+
+    }
 
 }

@@ -1,6 +1,8 @@
 package com.delexa.chudobilet.DBHelpClasses;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.delexa.chudobilet.DBClasses.Event;
+import com.delexa.chudobilet.SubMenu.EventActivity;
 import com.squareup.picasso.Picasso;
 
 import com.delexa.chudobilet.R;
@@ -20,6 +23,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     private LayoutInflater inflater;
     List<Event> data = Collections.emptyList();
+    Context context;
+
 
     public EventAdapter(Context context, List<Event> data) {
 
@@ -69,7 +74,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         return data.size();
     }
 
-    public int num;
 
     class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -104,17 +108,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         @Override
         public void onClick(View v) {
 
-//            FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-//            Eve stopwatchFragment = new StopwatchFragment();
-//            ft.replace(R.id.stopwatch_container, stopwatchFragment);
-//            ft.addToBackStack(null);
-//            ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-//            ft.commit();
+            int id = data.get(getAdapterPosition()).getId();
+
+            Activity activity = (Activity) v.getContext();
+            Intent intent = new Intent(activity, EventActivity.class);
+
+            intent.putExtra("_id", Integer.valueOf(id));
+            v.getContext().startActivity(intent);
+
         }
 
-        public int getPos() {
-            return num;
-        }
+
 
     }
 

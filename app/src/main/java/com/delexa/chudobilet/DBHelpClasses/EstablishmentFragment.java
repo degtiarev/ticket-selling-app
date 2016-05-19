@@ -100,7 +100,7 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
         } else if (typeInfo == event)
 
         {
-            movieAdapter = new EventAdapter(getActivity(), getMovies());
+            movieAdapter = new EventAdapter(getActivity(), getEvents());
             recyclerView.setAdapter(movieAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
@@ -109,73 +109,21 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
     }
 
 
-    public List<Event> getMovies() {
+    public List<Event> getEvents() {
 
-
-        List<Event> data = new ArrayList<>();
-
-
-        try {
-            SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(getActivity());
-            SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
-            Cursor cursor = ChudobiletDatabaseHelper.getEvents(db, item);
-
-            while (cursor.moveToNext()) {
-                Event movie = new Event();
-
-
-                movie.setId(cursor.getInt(cursor.getColumnIndex("_id")));
-
-                movie.setName(cursor.getString(cursor.getColumnIndex("NAME")));
-                movie.setGenre(cursor.getString(cursor.getColumnIndex("GENRE")));
-                movie.setAmountTime(cursor.getString(cursor.getColumnIndex("AMOUNTTIME")));
-                movie.setCountry(cursor.getString(cursor.getColumnIndex("COUNTRY")));
-                movie.setForAge(cursor.getString(cursor.getColumnIndex("FORAGE")));
-                movie.setYear(cursor.getInt(cursor.getColumnIndex("YEAR")));
-                movie.setCover(cursor.getString(cursor.getColumnIndex("COVER")));
-
-                data.add(movie);
-            }
-            cursor.close();
-            db.close();
-
-        } catch (SQLiteException e) {
-        }
-
+        SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(getActivity());
+        SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
+        List<Event> data = ChudobiletDatabaseHelper.getEvents(db, item);
 
         return data;
-
     }
 
 
     public List<Establishment> getCinemas() {
 
-
-        List<Establishment> data = new ArrayList<>();
-
-
-        try {
-            SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(getActivity());
-            SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
-            Cursor cursor = ChudobiletDatabaseHelper.getEstablishment(db, item);
-
-            while (cursor.moveToNext()) {
-                Establishment cinema = new Establishment();
-
-                cinema.setId(cursor.getInt(cursor.getColumnIndex("_id")));
-                cinema.setName(cursor.getString(cursor.getColumnIndex("NAME")));
-                cinema.setAddress(cursor.getString(cursor.getColumnIndex("ADDRESS")));
-
-                data.add(cinema);
-            }
-            cursor.close();
-            db.close();
-
-        } catch (SQLiteException e) {
-
-        }
-
-
+        SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(getActivity());
+        SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
+        List<Establishment> data = ChudobiletDatabaseHelper.getEstablishments(db, item);
         return data;
 
     }
