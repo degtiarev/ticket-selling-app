@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/imageViewOrderCover"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ticket" />
+
+        <TextView
+            android:id="@+id/textViewOrderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imageViewOrderCover"
+            android:maxLines="1"
+            android:text="Эдди &quot;Орел&quot;"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textViewOrderEstablishment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewOrderName"
+            android:layout_toRightOf="@+id/imageViewOrderCover"
+            android:maxLines="1"
+            android:text="Большое кино" />
+
+
+        <TextView
+            android:id="@+id/textViewOrderCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:text="123456789012"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/textViewOrderSeriesNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/textViewOrderEstablishment"
+            android:padding="8dp"
+            android:text="RS 001468"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

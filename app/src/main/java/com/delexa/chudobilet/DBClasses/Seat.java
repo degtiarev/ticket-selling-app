@@ -24,6 +24,9 @@ public class Seat {
         this.timeStamp = timeStamp;
     }
 
+    public Seat()
+    {}
+
     public int getId() {
         return id;
     }

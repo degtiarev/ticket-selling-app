@@ -451,7 +451,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             Cursor newCursor = db.rawQuery("SELECT EVENT._id, EVENT.NAME, EVENT.COUNTRY, EVENT.GENRE, EVENT.YEAR, EVENT.AMOUNTTIME, EVENT._ESTABLISHMENTID, " +
                     "EVENT.FORAGE, EVENT.ROLES, EVENT.ABOUT, EVENT.COVER, EVENT.VIDEOLINK, EVENT.LINK, EVENT.ISNOTIFIED, EVENT.TIMESTAMP" +
                     " FROM EVENT, ESTABLISHMENT " +
-                    "WHERE ESTABLISHMENT._id = EVENT._ESTABLISHMENTID  AND ESTABLISHMENT.TYPE = '" + event + "' " +
+                    "WHERE  (EVENT._ESTABLISHMENTID = ESTABLISHMENT._id AND ESTABLISHMENT.TYPE = '" + event + "') " +
                     "GROUP BY EVENT._id", null);
             data = cursorToListEvent(newCursor);
 
@@ -488,6 +488,30 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public static List<Event> getEventsByEstablishment(SQLiteDatabase db, int establishmentId) {
+
+        List<Event> data = new ArrayList<>();
+
+        try {
+
+            Cursor newCursor = db.rawQuery("SELECT EVENT._id, EVENT.NAME, EVENT.COUNTRY, EVENT.GENRE, EVENT.YEAR, EVENT.AMOUNTTIME, EVENT._ESTABLISHMENTID, " +
+                    "EVENT.FORAGE, EVENT.ROLES, EVENT.ABOUT, EVENT.COVER, EVENT.VIDEOLINK, EVENT.LINK, EVENT.ISNOTIFIED, EVENT.TIMESTAMP" +
+                    " FROM EVENT " +
+                    "WHERE EVENT._ESTABLISHMENTID  = '" + establishmentId + "' " +
+                    "GROUP BY EVENT._id", null);
+            data = cursorToListEvent(newCursor);
+
+            db.close();
+
+
+        } catch (SQLiteException e) {
+        }
+
+
+        return data;
+
+    }
+
     public static List<Establishment> getEstablishments(SQLiteDatabase db, String type) {
 
         List<Establishment> data = new ArrayList<>();
@@ -500,6 +524,41 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             data = cursorToListEstablishment(newCursor);
 
             db.close();
+
+        } catch (SQLiteException e) {
+        }
+
+
+        return data;
+
+    }
+
+    public static List<TicketOrder> getTicketOrders(SQLiteDatabase db) {
+
+        List<TicketOrder> data = new ArrayList<>();
+
+        try {
+
+            Cursor newCursor = db.rawQuery("SELECT EVENT.NAME AS EVENTNAME, EVENT.COUNTRY, EVENT.GENRE, EVENT.YEAR, EVENT.AMOUNTTIME, \n" +
+                    "EVENT.FORAGE, EVENT.ROLES, EVENT.ABOUT, EVENT.COVER, EVENT.VIDEOLINK, EVENT.LINK, EVENT.ISNOTIFIED, \n" +
+                    "\n" +
+                    "ESTABLISHMENT.NAME AS ESTABLISHMENTNAME, ESTABLISHMENT.ADDRESS,  ESTABLISHMENT.TYPE, \n" +
+                    "\n" +
+                    "SEAT.NAME, SEAT.TIMEDATE, SEAT.PRICE, SEAT.SERVICEPRICE, SEAT.ISFREE, \n" +
+                    "\n" +
+                    "TICKETORDER._ID, TICKETORDER.PURCHASEDATE, TICKETORDER.STATUS, TICKETORDER.SERIES, \n" +
+                    "TICKETORDER.NUMBER, TICKETORDER.CODE\n" +
+                    "\n" +
+                    "FROM EVENT, TICKETORDER, ESTABLISHMENT, SEAT\n" +
+                    "\n" +
+                    "WHERE ESTABLISHMENT._ID = EVENT._ESTABLISHMENTID AND EVENT._ID = SEAT._EVENTID AND TICKETORDER._USERID = '1' AND TICKETORDER._SEATID = SEAT._ID " +
+                    "GROUP BY TICKETORDER._id", null);
+
+
+            data = cursorToListTicketOrder(newCursor);
+
+            db.close();
+
 
         } catch (SQLiteException e) {
         }
@@ -577,5 +636,58 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         return data;
 
     }
+
+    private static List<TicketOrder> cursorToListTicketOrder(Cursor newCursor) {
+
+        List<TicketOrder> data = new ArrayList<>();
+        while (newCursor.moveToNext()) {
+            TicketOrder ticketOrder = new TicketOrder();
+            Seat seat = new Seat();
+            Event event = new Event();
+            Establishment establishment = new Establishment();
+
+            event.setName(newCursor.getString(newCursor.getColumnIndex("EVENTNAME")));
+            event.setCountry(newCursor.getString(newCursor.getColumnIndex("COUNTRY")));
+            event.setGenre(newCursor.getString(newCursor.getColumnIndex("GENRE")));
+            event.setYear(newCursor.getInt(newCursor.getColumnIndex("YEAR")));
+            event.setAmountTime(newCursor.getString(newCursor.getColumnIndex("AMOUNTTIME")));
+            event.setForAge(newCursor.getString(newCursor.getColumnIndex("FORAGE")));
+            event.setRoles(newCursor.getString(newCursor.getColumnIndex("ROLES")));
+            event.setAbout(newCursor.getString(newCursor.getColumnIndex("ABOUT")));
+            event.setCover(newCursor.getString(newCursor.getColumnIndex("COVER")));
+            event.setVideoLink(newCursor.getString(newCursor.getColumnIndex("VIDEOLINK")));
+            event.setLink(newCursor.getString(newCursor.getColumnIndex("LINK")));
+            event.setIsNotified(newCursor.getInt(newCursor.getColumnIndex("ISNOTIFIED")));
+
+            establishment.setName(newCursor.getString(newCursor.getColumnIndex("ESTABLISHMENTNAME")));
+            establishment.setAddress(newCursor.getString(newCursor.getColumnIndex("ADDRESS")));
+            establishment.setType(newCursor.getString(newCursor.getColumnIndex("TYPE")));
+
+            seat.setName(newCursor.getString(newCursor.getColumnIndex("NAME")));
+            // seat.setTimeDate(newCursor.getString(newCursor.getColumnIndex(getDateTime("NAME", LONG_DATE))));
+            // seat.setPrice(newCursor.getString(newCursor.getColumnIndex("PRICE")));
+//            seat.setServicePrice(newCursor.getString(newCursor.getColumnIndex("SEVICEPRICE")));
+            seat.setIsFree(newCursor.getInt(newCursor.getColumnIndex("ISFREE")));
+
+            event.setEstablishment(establishment);
+            seat.setEvent(event);
+            ticketOrder.setSeat(seat);
+
+            ticketOrder.setId(newCursor.getInt(newCursor.getColumnIndex("_id")));
+            ticketOrder.setSeries(newCursor.getString(newCursor.getColumnIndex("PURCHASEDATE")));
+            ticketOrder.setStatus(newCursor.getString(newCursor.getColumnIndex("STATUS")));
+            ticketOrder.setSeries(newCursor.getString(newCursor.getColumnIndex("SERIES")));
+            ticketOrder.setNumber(newCursor.getString(newCursor.getColumnIndex("NUMBER")));
+            ticketOrder.setCode(newCursor.getString(newCursor.getColumnIndex("CODE")));
+
+
+            data.add(ticketOrder);
+        }
+        newCursor.close();
+
+        return data;
+
+    }
+
 
 }

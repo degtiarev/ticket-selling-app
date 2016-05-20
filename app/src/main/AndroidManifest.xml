@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SubMenu.EventActivity" />
-        <activity android:name=".SubMenu.EstablishmentActivity"></activity>
+        <activity android:name=".SubMenu.EstablishmentActivity" />
+        <activity android:name=".SubMenu.OrderActivity"></activity>
     </application>
 
 </manifest>

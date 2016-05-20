@@ -1,9 +1,7 @@
 package com.delexa.chudobilet.DBHelpClasses;
 
 
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,7 +15,6 @@ import com.delexa.chudobilet.DBClasses.Establishment;
 import com.delexa.chudobilet.DBClasses.Event;
 import com.delexa.chudobilet.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -32,8 +29,8 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
 
 
     private RecyclerView recyclerView;
-    private EventAdapter movieAdapter;
-    private EstablishmentAdapter cinemaAdapter;
+    private EventAdapter eventAdapter;
+    private EstablishmentAdapter establishmentAdapter;
 
 
     private String item;
@@ -94,14 +91,14 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
 
 
         if (typeInfo == place) {
-            cinemaAdapter = new EstablishmentAdapter(getActivity(), getCinemas());
-            recyclerView.setAdapter(cinemaAdapter);
+            establishmentAdapter = new EstablishmentAdapter(getActivity(), getCinemas());
+            recyclerView.setAdapter(establishmentAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         } else if (typeInfo == event)
 
         {
-            movieAdapter = new EventAdapter(getActivity(), getEvents());
-            recyclerView.setAdapter(movieAdapter);
+            eventAdapter = new EventAdapter(getActivity(), getEvents());
+            recyclerView.setAdapter(eventAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
 

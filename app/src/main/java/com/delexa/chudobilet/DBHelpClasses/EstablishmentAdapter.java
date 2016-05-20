@@ -83,8 +83,6 @@ public class EstablishmentAdapter extends RecyclerView.Adapter<EstablishmentAdap
 
             intent.putExtra("_id", Integer.valueOf(id));
             v.getContext().startActivity(intent);
-
-
         }
 
 

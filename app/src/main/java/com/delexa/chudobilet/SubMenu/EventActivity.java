@@ -26,7 +26,6 @@ public class EventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event);
 
 
-
         Intent intent = getIntent();
         int _id = intent.getIntExtra("_id", Integer.MAX_VALUE);
 
@@ -45,20 +44,25 @@ public class EventActivity extends AppCompatActivity {
         TextView rolesConst = (TextView) findViewById(R.id.textViewEventsRolesConst);
         TextView about = (TextView) findViewById(R.id.textViewEventAbout);
         ImageView videoLink = (ImageView) findViewById(R.id.imageViewEventVideoLink);
-        videoLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(event.getVideoLink())));
-            }
-        });
-        ImageView link = (ImageView) findViewById(R.id.imageViewEventLink);
-        link.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(event.getLink()));
-                startActivity(browserIntent);
-            }
-        });
+
+        if (event.getVideoLink()!=null) {
+            videoLink.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(event.getVideoLink())));
+                }
+            });
+            ImageView link = (ImageView) findViewById(R.id.imageViewEventLink);
+            link.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(event.getLink()));
+                    startActivity(browserIntent);
+                }
+            });
+        }
+        else  videoLink.setVisibility(View.GONE);
+
 
         Picasso.with(this) //передаем контекст приложения
                 .load(event.getCover())
@@ -94,7 +98,6 @@ public class EventActivity extends AppCompatActivity {
         }
 
     }
-
 
 
 }
