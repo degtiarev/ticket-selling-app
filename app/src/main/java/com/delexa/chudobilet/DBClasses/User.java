@@ -19,10 +19,12 @@ public class User {
     private String image;
     private String interestGenre;
     private String interestRoles;
-    private String interestEstablishment;
     private Date timeStamp;
 
-    public User(String name, String family, String patronymic, String email, Date date, String sex, String notificationToPay, String emailNotificationChangeStatus, String newsSubscriber, String phone, String password, String image, String interestGenre, String interestRoles, String interestEstablishment, Date timeStamp) {
+    public User(String name, String family, String patronymic, String email, Date date, String sex,
+                String notificationToPay, String emailNotificationChangeStatus, String newsSubscriber,
+                String phone, String password, String image, String interestGenre, String interestRoles,
+                Date timeStamp) {
         this.id = 0;
         this.name = name;
         this.family = family;
@@ -38,7 +40,6 @@ public class User {
         this.image = image;
         this.interestGenre = interestGenre;
         this.interestRoles = interestRoles;
-        this.interestEstablishment = interestEstablishment;
         this.timeStamp = timeStamp;
     }
 
@@ -161,14 +162,6 @@ public class User {
 
     public void setInterestRoles(String interestRoles) {
         this.interestRoles = interestRoles;
-    }
-
-    public String getInterestEstablishment() {
-        return interestEstablishment;
-    }
-
-    public void setInterestEstablishment(String interestEstablishment) {
-        this.interestEstablishment = interestEstablishment;
     }
 
     public Date getTimeStamp() {

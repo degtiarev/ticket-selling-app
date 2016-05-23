@@ -5,21 +5,18 @@ import java.util.Date;
 public class Establishment {
 
     private int id;
-    private String type;
     private String name;
     private String address;
     private Date timeStamp;
 
-    public Establishment(String type, String name, String address, Date timeStamp) {
+    public Establishment(String name, String address, Date timeStamp) {
         this.id = 0;
-        this.type = type;
         this.name = name;
         this.address = address;
         this.timeStamp = timeStamp;
     }
 
-    public Establishment ()
-    {
+    public Establishment() {
 
     }
 
@@ -29,14 +26,6 @@ public class Establishment {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getName() {

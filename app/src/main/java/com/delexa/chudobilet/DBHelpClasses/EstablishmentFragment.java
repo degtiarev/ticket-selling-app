@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.delexa.chudobilet.DBClasses.Establishment;
 import com.delexa.chudobilet.DBClasses.Event;
+import com.delexa.chudobilet.Link;
 import com.delexa.chudobilet.R;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 public class EstablishmentFragment extends Fragment implements Callback<List<Event>> {
@@ -62,8 +64,8 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
     }
 
 
-// public Retrofit retrofit;
-    //public Link service;
+//    public Retrofit retrofit;
+//    public Link service;
 
     public EstablishmentFragment() {
         // Required empty public constructor
@@ -85,9 +87,9 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
 //                .baseUrl("http://pastebin.com/raw/")
 //                .build();
 //        service = retrofit.create(Link.class);
-
-        //  Call<List<Event>> magenta = service.listRepoEve();
-        //   magenta.enqueue(this);
+//
+//          Call<List<Event>> magenta = service.listRepoEve();
+//           magenta.enqueue(this);
 
 
         if (typeInfo == place) {
@@ -129,8 +131,8 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
     @Override
     public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
 
-        // System.out.println("Мероприятия");
-        //System.out.println(response.body());
+//         System.out.println("Мероприятия");
+//        System.out.println(response.body());
 //        SQLiteOpenHelper magentaDatabaseHelper = new MagentaDatabaseHelper(App.instance.getApplicationContext(),"magenta",null,1);
 //        SQLiteDatabase db = magentaDatabaseHelper.getWritableDatabase();
 //        db.execSQL("delete from "+ "MEROPRIATIA");

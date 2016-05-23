@@ -10,6 +10,8 @@ import android.util.Log;
 
 import com.delexa.chudobilet.DBClasses.Establishment;
 import com.delexa.chudobilet.DBClasses.Event;
+import com.delexa.chudobilet.DBClasses.EventType;
+import com.delexa.chudobilet.DBClasses.InterestEstablishment;
 import com.delexa.chudobilet.DBClasses.Seat;
 import com.delexa.chudobilet.DBClasses.Subscription;
 import com.delexa.chudobilet.DBClasses.TicketOrder;
@@ -69,12 +71,12 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
             User user = new User("Алексей", "Дегтярев", "Сергеевич", "delexa0@gmail.com", getDateTime("1993-02-04", SHORT_DATE),
                     "M", "11", "0", "11", "89608519623", "123456789", "http://cdn01.ru/files/users/images/62/26/6226a248e23a10fccedf0c81e001285d.jpg",
-                    "фэнтези", null, null, new Date());
-            Establishment cinemaEstablishment = new Establishment("Кино", "Большое Кино", "ТРК Alimpic, ул. Боевая, 25, " +
+                    "фэнтези", null, new Date());
+            Establishment cinemaEstablishment = new Establishment("Большое Кино", "ТРК Alimpic, ул. Боевая, 25, " +
                     "Астрахань, Астраханская обл., 414024", new Date());
-            Establishment concertEstablishment = new Establishment("Концерты", "Театр Оперы и Балета", "ул. Максаковой, 2, " +
+            Establishment concertEstablishment = new Establishment("Театр Оперы и Балета", "ул. Максаковой, 2, " +
                     "Астрахань, Астраханская обл., 414024", new Date());
-            Establishment theaterEstablishment = new Establishment("Театры", "Астраханский ТЮЗ", "414000 г. Астрахань, ул. Мусы Джалиля, 4",
+            Establishment theaterEstablishment = new Establishment("Астраханский ТЮЗ", "414000 г. Астрахань, ул. Мусы Джалиля, 4",
                     new Date());
 
 
@@ -118,6 +120,14 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     "http://new.chudobilet.ru/media/images/events/6029be218a6c189b4cd6bf6f64243760.jpg",
                     null, "http://new.chudobilet.ru/event/1067/", new Date());
 
+            InterestEstablishment interestEstablishment1 = new InterestEstablishment(user, concertEstablishment, "A1", new Date());
+
+            EventType eventTypeCinema1 = new EventType(cinemaEvent1, "Кино", new Date());
+            EventType eventTypeCinema2 = new EventType(cinemaEvent2, "Кино", new Date());
+            EventType eventTypeConcert1 = new EventType(concertEvent1, "Концерты", new Date());
+            EventType eventTypeTheater1 = new EventType(theaterEvent1, "Театры", new Date());
+            EventType eventTypeTheater2 = new EventType(theaterEvent2, "Театры", new Date());
+            EventType eventTypeForChildren1 = new EventType(theaterEvent2, "Детям", new Date());
 
             insertUser(db, user);
 
@@ -131,9 +141,17 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             insertEvent(db, theaterEvent1);
             insertEvent(db, theaterEvent2);
 
+            insertEventType(db, eventTypeCinema1);
+            insertEventType(db, eventTypeCinema2);
+            insertEventType(db, eventTypeConcert1);
+            insertEventType(db, eventTypeTheater1);
+            insertEventType(db, eventTypeTheater2);
+            insertEventType(db, eventTypeForChildren1);
 
-            TicketOrder ticketOrder1 = new TicketOrder();
-            TicketOrder ticketOrder2 = new TicketOrder();
+            TicketOrder ticketOrder1;
+            TicketOrder ticketOrder2;
+
+            insertInterestEstablishment(db, interestEstablishment1);
 
 
             for (int i = 1; i < 21; i++) {
@@ -187,13 +205,11 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 "PHOTO TEXT, " +
                 "INTERESTGENRE TEXT, " +
                 "INTERESTROLES TEXT, " +
-                "INTERESTESTABLISHMENT TEXT, " +
                 "TIMESTAMP NUMERIC);");
 
         // таблица ESTABLISHMENT
         db.execSQL("CREATE TABLE ESTABLISHMENT (" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "TYPE TEXT, " +
                 "NAME TEXT, " +
                 "ADDRESS TEXT, " +
                 "TIMESTAMP NUMERIC);");
@@ -246,6 +262,23 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 "AMOUNTSEATS INTEGER, " +
                 "ISNOTIFIED INTEGER, " +
                 "TIMESTAMP NUMERIC);");
+
+        // таблица INTERESTESTABLISHMENT
+        db.execSQL("CREATE TABLE INTERESTESTABLISHMENT (" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "_USERID INTEGER, " +
+                "_ESTABLISHMENTID INTEGER, " +
+                "SEATNAMES TEXT, " +
+                "TIMESTAMP NUMERIC);");
+
+
+        // таблица EVENTTYPE
+        db.execSQL("CREATE TABLE EVENTTYPE (" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "_EVENTID INTEGER, " +
+                "TYPE TEXT, " +
+                "TIMESTAMP NUMERIC);");
+
     }
 
 
@@ -266,7 +299,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         userValues.put("PHOTO", user.getImage());
         userValues.put("INTERESTGENRE", user.getInterestGenre());
         userValues.put("INTERESTROLES", user.getInterestRoles());
-        userValues.put("INTERESTESTABLISHMENT", user.getInterestEstablishment());
         userValues.put("TIMESTAMP", getDateTime(user.getTimeStamp(), LONG_DATE));
 
         db.insert("USER", null, userValues);
@@ -275,7 +307,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
     private static void insertEstablishment(SQLiteDatabase db, Establishment establishment) {
         ContentValues establishmentValues = new ContentValues();
 
-        establishmentValues.put("TYPE", establishment.getType());
         establishmentValues.put("NAME", establishment.getName());
         establishmentValues.put("ADDRESS", establishment.getAddress());
         establishmentValues.put("TIMESTAMP", getDateTime(establishment.getTimeStamp(), LONG_DATE));
@@ -291,8 +322,8 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
             Cursor newCursor = db.query("ESTABLISHMENT",
                     new String[]{"_id"},
-                    "TYPE = ? AND NAME = ?",
-                    new String[]{event.getEstablishment().getType(), event.getEstablishment().getName()},
+                    "ADDRESS = ? AND NAME = ?",
+                    new String[]{event.getEstablishment().getAddress(), event.getEstablishment().getName()},
                     null, null, null);
 
             if (newCursor.getCount() == 1) {
@@ -327,6 +358,73 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    private static void insertEventType(SQLiteDatabase db, EventType eventType) {
+
+        int eventId = Integer.MAX_VALUE;
+
+        try {
+
+            Cursor newCursor = db.query("EVENT",
+                    new String[]{"_id"},
+                    "NAME = ? AND LINK = ?",
+                    new String[]{eventType.getEvent().getName(), eventType.getEvent().getLink()},
+                    null, null, null);
+
+
+            if (newCursor.getCount() == 1) {
+                if (newCursor.moveToFirst()) {
+                    eventId = newCursor.getInt(0);
+                }
+
+                ContentValues eventTypeValues = new ContentValues();
+
+                eventTypeValues.put("_EVENTID", eventId);
+                eventTypeValues.put("TYPE", eventType.getType());
+                eventTypeValues.put("TIMESTAMP", getDateTime(eventType.getTimeStamp(), LONG_DATE));
+
+                db.insert("EVENTTYPE", null, eventTypeValues);
+            }
+
+        } catch (SQLiteException e) {
+            Log.d("My Logs", "Ошибка доступа к БД!");
+        }
+
+    }
+
+    private static void insertInterestEstablishment(SQLiteDatabase db, InterestEstablishment interestEstablishment) {
+
+        int establishmentId = Integer.MAX_VALUE;
+
+        try {
+
+            Cursor newCursor = db.query("ESTABLISHMENT",
+                    new String[]{"_id"},
+                    "NAME = ? AND ADDRESS = ?",
+                    new String[]{interestEstablishment.getEstablishment().getName(), interestEstablishment.getEstablishment().getAddress()},
+                    null, null, null);
+
+
+            if (newCursor.getCount() == 1) {
+                if (newCursor.moveToFirst()) {
+                    establishmentId = newCursor.getInt(0);
+                }
+
+                ContentValues InterestEstablishmentValues = new ContentValues();
+
+                InterestEstablishmentValues.put("_ESTABLISHMENTID", establishmentId);
+                InterestEstablishmentValues.put("_USERID", "1");
+                InterestEstablishmentValues.put("SEATNAMES", interestEstablishment.getSeatNames());
+                InterestEstablishmentValues.put("TIMESTAMP", getDateTime(interestEstablishment.getTimeStamp(), LONG_DATE));
+
+                db.insert("INTERESTESTABLISHMENT", null, InterestEstablishmentValues);
+            }
+
+        } catch (SQLiteException e) {
+            Log.d("My Logs", "Ошибка доступа к БД!");
+        }
+
+    }
+
     private static void insertSeat(SQLiteDatabase db, Seat seat) {
 
         int eventId = Integer.MAX_VALUE;
@@ -336,10 +434,8 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
             Cursor newCursor = db.query("EVENT",
                     new String[]{"_id"},
-                    "NAME = ? AND COUNTRY = ? AND GENRE = ? AND AMOUNTTIME = ? AND YEAR = ?",
-                    new String[]{seat.getEvent().getName(), seat.getEvent().getCountry(),
-                            seat.getEvent().getGenre(), seat.getEvent().getAmountTime(),
-                            Integer.toString(seat.getEvent().getYear())},
+                    "NAME = ? AND LINK = ?",
+                    new String[]{seat.getEvent().getName(), seat.getEvent().getLink()},
                     null, null, null);
 
             if (newCursor.getCount() == 1) {
@@ -413,10 +509,8 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
             Cursor newCursor = db.query("EVENT",
                     new String[]{"_id"},
-                    "NAME = ? AND COUNTRY = ? AND GENRE = ? AND AMOUNTTIME = ? AND YEAR = ?",
-                    new String[]{subscription.getEvent().getName(), subscription.getEvent().getCountry(),
-                            subscription.getEvent().getGenre(), subscription.getEvent().getAmountTime(),
-                            Integer.toString(subscription.getEvent().getYear())},
+                    "NAME = ? AND LINK = ?",
+                    new String[]{subscription.getEvent().getName(), subscription.getEvent().getLink()},
                     null, null, null);
 
 
@@ -442,16 +536,17 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public static List<Event> getEvents(SQLiteDatabase db, String event) {
+    public static List<Event> getEvents(SQLiteDatabase db, String eventType) {
 
         List<Event> data = new ArrayList<>();
 
         try {
 
+
             Cursor newCursor = db.rawQuery("SELECT EVENT._id, EVENT.NAME, EVENT.COUNTRY, EVENT.GENRE, EVENT.YEAR, EVENT.AMOUNTTIME, EVENT._ESTABLISHMENTID, " +
                     "EVENT.FORAGE, EVENT.ROLES, EVENT.ABOUT, EVENT.COVER, EVENT.VIDEOLINK, EVENT.LINK, EVENT.ISNOTIFIED, EVENT.TIMESTAMP" +
-                    " FROM EVENT, ESTABLISHMENT " +
-                    "WHERE  (EVENT._ESTABLISHMENTID = ESTABLISHMENT._id AND ESTABLISHMENT.TYPE = '" + event + "') " +
+                    " FROM EVENT, EVENTTYPE " +
+                    "WHERE  (EVENT._id = EVENTTYPE._EVENTID AND EVENTTYPE.TYPE = '" + eventType + "') " +
                     "GROUP BY EVENT._id", null);
             data = cursorToListEvent(newCursor);
 
@@ -518,16 +613,18 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
         try {
 
-            Cursor newCursor = db.query("ESTABLISHMENT",
-                    new String[]{"_id", "NAME", "ADDRESS", "TYPE", "TIMESTAMP"},
-                    "TYPE = ?", new String[]{type}, null, null, null);
+            Cursor newCursor = db.rawQuery("SELECT ESTABLISHMENT._id, ESTABLISHMENT.NAME, ESTABLISHMENT.ADDRESS," +
+                    " ESTABLISHMENT.TIMESTAMP" +
+                    " FROM EVENT, ESTABLISHMENT, EVENTTYPE " +
+                    "WHERE  (EVENT._id = EVENTTYPE._EVENTID AND ESTABLISHMENT._ID = EVENT._ESTABLISHMENTID AND EVENTTYPE.TYPE = '" + type + "') " +
+                    "GROUP BY EVENT._id", null);
+
             data = cursorToListEstablishment(newCursor);
 
             db.close();
 
         } catch (SQLiteException e) {
         }
-
 
         return data;
 
@@ -542,7 +639,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             Cursor newCursor = db.rawQuery("SELECT EVENT.NAME AS EVENTNAME, EVENT.COUNTRY, EVENT.GENRE, EVENT.YEAR, EVENT.AMOUNTTIME, \n" +
                     "EVENT.FORAGE, EVENT.ROLES, EVENT.ABOUT, EVENT.COVER, EVENT.VIDEOLINK, EVENT.LINK, EVENT.ISNOTIFIED, \n" +
                     "\n" +
-                    "ESTABLISHMENT.NAME AS ESTABLISHMENTNAME, ESTABLISHMENT.ADDRESS,  ESTABLISHMENT.TYPE, \n" +
+                    "ESTABLISHMENT.NAME AS ESTABLISHMENTNAME, ESTABLISHMENT.ADDRESS, \n" +
                     "\n" +
                     "SEAT.NAME, SEAT.TIMEDATE, SEAT.PRICE, SEAT.SERVICEPRICE, SEAT.ISFREE, \n" +
                     "\n" +
@@ -626,7 +723,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             curEstablishment.setId(newCursor.getInt(newCursor.getColumnIndex("_id")));
             curEstablishment.setName(newCursor.getString(newCursor.getColumnIndex("NAME")));
             curEstablishment.setAddress(newCursor.getString(newCursor.getColumnIndex("ADDRESS")));
-            curEstablishment.setType(newCursor.getString(newCursor.getColumnIndex("TYPE")));
             curEstablishment.setTimeStamp(getDateTime(newCursor.getString(newCursor.getColumnIndex("TIMESTAMP")), LONG_DATE));
 
             data.add(curEstablishment);
@@ -661,7 +757,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
             establishment.setName(newCursor.getString(newCursor.getColumnIndex("ESTABLISHMENTNAME")));
             establishment.setAddress(newCursor.getString(newCursor.getColumnIndex("ADDRESS")));
-            establishment.setType(newCursor.getString(newCursor.getColumnIndex("TYPE")));
 
             seat.setName(newCursor.getString(newCursor.getColumnIndex("NAME")));
             // seat.setTimeDate(newCursor.getString(newCursor.getColumnIndex(getDateTime("NAME", LONG_DATE))));
