@@ -70,7 +70,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             createAllTables(db);
 
             User user = new User("Алексей", "Дегтярев", "Сергеевич", "delexa0@gmail.com", getDateTime("1993-02-04", SHORT_DATE),
-                    "M", "11", "0", "11", "89608519623", "123456789", "http://cdn01.ru/files/users/images/62/26/6226a248e23a10fccedf0c81e001285d.jpg",
+                    "M", "11", "0", "11", "89608519623", "123456789", "http://kotvokoshke.by/sites/default/files/field/image/image_cat.jpg",
                     "фэнтези", null, new Date());
             Establishment cinemaEstablishment = new Establishment("Большое Кино", "ТРК Alimpic, ул. Боевая, 25, " +
                     "Астрахань, Астраханская обл., 414024", new Date());
@@ -174,7 +174,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 }
             }
 
-            Subscription subscription1 = new Subscription(cinemaEvent1, 0, new Date());
+            Subscription subscription1 = new Subscription(cinemaEvent1, 2, new Date());
             insertSubscription(db, subscription1);
 
         }
@@ -617,7 +617,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     " ESTABLISHMENT.TIMESTAMP" +
                     " FROM EVENT, ESTABLISHMENT, EVENTTYPE " +
                     "WHERE  (EVENT._id = EVENTTYPE._EVENTID AND ESTABLISHMENT._ID = EVENT._ESTABLISHMENTID AND EVENTTYPE.TYPE = '" + type + "') " +
-                    "GROUP BY EVENT._id", null);
+                    "GROUP BY ESTABLISHMENT._id", null);
 
             data = cursorToListEstablishment(newCursor);
 
@@ -665,6 +665,100 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public static List<InterestEstablishment> getInterestEstablishment(SQLiteDatabase db) {
+
+        List<InterestEstablishment> data = new ArrayList<>();
+
+        try {
+
+            Cursor newCursor = db.rawQuery("SELECT ESTABLISHMENT.NAME, ESTABLISHMENT.ADDRESS," +
+                    " INTERESTESTABLISHMENT._id, INTERESTESTABLISHMENT.SEATNAMES " +
+                    " FROM ESTABLISHMENT, INTERESTESTABLISHMENT " +
+                    "WHERE ESTABLISHMENT._ID = INTERESTESTABLISHMENT._ESTABLISHMENTID " +
+                    "GROUP BY ESTABLISHMENT.NAME", null);
+
+            data = cursorInterestEstablishment(newCursor);
+
+            db.close();
+
+        } catch (SQLiteException e) {
+        }
+
+        return data;
+
+    }
+
+    public static List<String> getEstablishmentListNames(SQLiteDatabase db) {
+
+        List<String> data = new ArrayList<>();
+
+        try {
+
+            Cursor newCursor = db.rawQuery("SELECT ESTABLISHMENT.NAME FROM ESTABLISHMENT GROUP BY ESTABLISHMENT.NAME", null);
+
+
+            while (newCursor.moveToNext()) {
+
+                data.add(newCursor.getString(0));
+            }
+            newCursor.close();
+
+            db.close();
+
+        } catch (SQLiteException e) {
+        }
+
+
+        return data;
+
+    }
+
+    public static List<Subscription> getSubscription(SQLiteDatabase db) {
+
+        List<Subscription> data = new ArrayList<>();
+
+        try {
+
+            Cursor newCursor = db.rawQuery("SELECT SUBSCRIPTION._id, SUBSCRIPTION.AMOUNTSEATS, SUBSCRIPTION.ISNOTIFIED,\n" +
+                    "EVENT.NAME AS EVENTNAME, EVENT.COUNTRY, EVENT.GENRE, EVENT.YEAR, EVENT.AMOUNTTIME, EVENT.FORAGE, EVENT.ROLES, EVENT.ABOUT, EVENT.COVER, EVENT.VIDEOLINK, EVENT.LINK,\n" +
+                    "ESTABLISHMENT.ADDRESS, ESTABLISHMENT.NAME AS ESTABLISHMENTNAME\n" +
+                    "FROM EVENT, ESTABLISHMENT, SUBSCRIPTION \n" +
+                    "WHERE  (EVENT._id = SUBSCRIPTION._EVENTID AND ESTABLISHMENT._ID = EVENT._ESTABLISHMENTID)\n" +
+                    "GROUP BY SUBSCRIPTION._id", null);
+
+            data = cursorToListSubscription(newCursor);
+
+            db.close();
+
+        } catch (SQLiteException e) {
+        }
+
+        return data;
+
+    }
+
+    public static int getAmountOfFreeSeats(SQLiteDatabase db, int id) {
+
+        int amount = 0;
+
+        try {
+
+            Cursor newCursor = db.rawQuery("SELECT SEAT._id, SEAT.NAME " +
+                    "FROM SEAT WHERE SEAT._EVENTID = '"+id+"' AND SEAT.ISFREE = '0' GROUP BY SEAT._id", null);
+
+            amount = newCursor.getCount();
+
+            newCursor.close();
+
+            db.close();
+
+        } catch (SQLiteException e) {
+        }
+
+        return amount;
+
+    }
+
 
     private static String getDateTime(Date date, String dateFormat) {
         SimpleDateFormat myDateFormat = new SimpleDateFormat(
@@ -683,6 +777,9 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         }
         return date;
     }
+
+
+    //   public static void changeinterestGenre
 
 
     private static List<Event> cursorToListEvent(Cursor newCursor) {
@@ -777,6 +874,67 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
 
             data.add(ticketOrder);
+        }
+        newCursor.close();
+
+        return data;
+
+    }
+
+    private static List<InterestEstablishment> cursorInterestEstablishment(Cursor newCursor) {
+
+        List<InterestEstablishment> data = new ArrayList<>();
+        while (newCursor.moveToNext()) {
+            InterestEstablishment interestEstablishment = new InterestEstablishment();
+            Establishment establishment = new Establishment();
+
+            interestEstablishment.setSeatNames(newCursor.getString(newCursor.getColumnIndex("SEATNAMES")));
+            interestEstablishment.setId(newCursor.getInt(newCursor.getColumnIndex("_id")));
+            establishment.setName(newCursor.getString(newCursor.getColumnIndex("NAME")));
+            establishment.setAddress(newCursor.getString(newCursor.getColumnIndex("ADDRESS")));
+            interestEstablishment.setEstablishment(establishment);
+
+
+            data.add(interestEstablishment);
+        }
+        newCursor.close();
+
+        return data;
+
+    }
+
+    private static List<Subscription> cursorToListSubscription(Cursor newCursor) {
+
+        List<Subscription> data = new ArrayList<>();
+        while (newCursor.moveToNext()) {
+            Subscription subscription = new Subscription();
+            Event event = new Event();
+            Establishment establishment = new Establishment();
+
+            event.setName(newCursor.getString(newCursor.getColumnIndex("EVENTNAME")));
+            event.setCountry(newCursor.getString(newCursor.getColumnIndex("COUNTRY")));
+            event.setGenre(newCursor.getString(newCursor.getColumnIndex("GENRE")));
+            event.setYear(newCursor.getInt(newCursor.getColumnIndex("YEAR")));
+            event.setAmountTime(newCursor.getString(newCursor.getColumnIndex("AMOUNTTIME")));
+            event.setForAge(newCursor.getString(newCursor.getColumnIndex("FORAGE")));
+            event.setRoles(newCursor.getString(newCursor.getColumnIndex("ROLES")));
+            event.setAbout(newCursor.getString(newCursor.getColumnIndex("ABOUT")));
+            event.setCover(newCursor.getString(newCursor.getColumnIndex("COVER")));
+            event.setVideoLink(newCursor.getString(newCursor.getColumnIndex("VIDEOLINK")));
+            event.setLink(newCursor.getString(newCursor.getColumnIndex("LINK")));
+            event.setIsNotified(newCursor.getInt(newCursor.getColumnIndex("ISNOTIFIED")));
+
+            establishment.setName(newCursor.getString(newCursor.getColumnIndex("ESTABLISHMENTNAME")));
+            establishment.setAddress(newCursor.getString(newCursor.getColumnIndex("ADDRESS")));
+
+            subscription.setId(newCursor.getInt(newCursor.getColumnIndex("_id")));
+            subscription.setAmountSeats(newCursor.getInt(newCursor.getColumnIndex("AMOUNTSEATS")));
+            subscription.setIsNotified(newCursor.getInt(newCursor.getColumnIndex("ISNOTIFIED")));
+
+            event.setEstablishment(establishment);
+            subscription.setEvent(event);
+
+            data.add(subscription);
         }
         newCursor.close();
 

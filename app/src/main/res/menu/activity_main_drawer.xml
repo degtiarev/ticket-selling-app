@@ -33,6 +33,10 @@
         <item
             android:id="@+id/my_orders"
             android:title="@string/my_orders" />
+
+        <item
+            android:id="@+id/my_subscriptions"
+            android:title="@string/my_subscriptions" />
     </group>
 
 

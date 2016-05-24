@@ -1,6 +1,8 @@
 package com.delexa.chudobilet.MainMenu;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -10,13 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.R;
+import com.delexa.chudobilet.SubMenu.EstablishmentActivity;
+import com.delexa.chudobilet.SubMenu.SubscriberActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,6 +49,30 @@ public class SetingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_setings, container, false);
+
+
+        ListView listView = (ListView) view.findViewById(R.id.listView_options);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+
+                if (id == 0) {
+                    Activity activity = (Activity) view.getContext();
+                    Intent intent = new Intent(activity, SubscriberActivity.class);
+                    view.getContext().startActivity(intent);
+
+
+                }
+
+//                else if (id==1)
+//                {
+//
+//
+//                }
+
+            }
+        });
+
 
         gettingUserData();
         return view;
@@ -126,11 +156,16 @@ public class SetingsFragment extends Fragment {
                 if (sex.equals("M")) radio_groupSex.check(R.id.radio_M);
                 else radio_groupSex.check(R.id.radio_F);
 
-                if (notificationToPay.charAt(0)=='1') checkBoxNotificationForPayEmail.setChecked(true);
-                if (notificationToPay.charAt(1)=='1') checkBoxNotificationForPaySMS.setChecked(true);
-                if (emailNotificationChangeStatus.charAt(0)=='1') checkBoxNotificationAboutStatusEmail.setChecked(true);
-                if (newsSubscriber.charAt(0)=='1') checkBoxNotificationAboutNewEventsEmail.setChecked(true);
-                if (newsSubscriber.charAt(1)=='1') checkBoxNotificationAboutNewEventsSMS.setChecked(true);
+                if (notificationToPay.charAt(0) == '1')
+                    checkBoxNotificationForPayEmail.setChecked(true);
+                if (notificationToPay.charAt(1) == '1')
+                    checkBoxNotificationForPaySMS.setChecked(true);
+                if (emailNotificationChangeStatus.charAt(0) == '1')
+                    checkBoxNotificationAboutStatusEmail.setChecked(true);
+                if (newsSubscriber.charAt(0) == '1')
+                    checkBoxNotificationAboutNewEventsEmail.setChecked(true);
+                if (newsSubscriber.charAt(1) == '1')
+                    checkBoxNotificationAboutNewEventsSMS.setChecked(true);
             }
 
 

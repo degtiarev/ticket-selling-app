@@ -19,6 +19,9 @@ public class Subscription {
         this.timeStamp = timeStamp;
     }
 
+    public Subscription() {
+    }
+
     public int getId() {
         return id;
     }

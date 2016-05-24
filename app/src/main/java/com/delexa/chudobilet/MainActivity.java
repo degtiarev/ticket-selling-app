@@ -1,5 +1,6 @@
 package com.delexa.chudobilet;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.Cursor;
@@ -28,6 +29,7 @@ import com.delexa.chudobilet.MainMenu.AuthorizationFragment;
 import com.delexa.chudobilet.MainMenu.MyOrdersFragment;
 import com.delexa.chudobilet.MainMenu.SetingsFragment;
 import com.delexa.chudobilet.MainMenu.TabFragment;
+import com.delexa.chudobilet.SubMenu.SubscriberActivity;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity
@@ -216,6 +218,11 @@ public class MainActivity extends AppCompatActivity
                 title = getString(R.string.my_orders);
                 break;
 
+            case R.id.my_subscriptions:
+                Intent intent1 = new Intent(this, SubscriberActivity.class);
+                this.startActivity(intent1);
+                break;
+
             case R.id.other_apps:
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("market://search?q=pub:CHUDOBILET"));
@@ -225,6 +232,7 @@ public class MainActivity extends AppCompatActivity
                     Toast.makeText(this, "Не найдено приложение GooglePlay", Toast.LENGTH_LONG).show();
                 }
                 break;
+
 
             case R.id.about:
                 fragment = new AboutFragment();
