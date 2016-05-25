@@ -1,10 +1,12 @@
 package com.delexa.chudobilet.SubMenu;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +24,10 @@ public class NewsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+
+        ((AppCompatActivity)this).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
         Intent intent = getIntent();
         final int _id = intent.getIntExtra("_id", Integer.MAX_VALUE);
@@ -52,4 +58,16 @@ public class NewsActivity extends AppCompatActivity {
                 .into(cover); //ссылка на ImageView
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

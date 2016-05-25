@@ -3,14 +3,13 @@ package com.delexa.chudobilet.SubMenu;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,12 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.delexa.chudobilet.DBClasses.Event;
-import com.delexa.chudobilet.DBClasses.Subscription;
 import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.R;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 
 public class EventActivity extends AppCompatActivity {
@@ -32,6 +28,8 @@ public class EventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
+
+        ((AppCompatActivity) this).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         final int _id = intent.getIntExtra("_id", Integer.MAX_VALUE);
@@ -152,6 +150,18 @@ public class EventActivity extends AppCompatActivity {
                 dependTextView.setVisibility(View.GONE);
         }
 
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

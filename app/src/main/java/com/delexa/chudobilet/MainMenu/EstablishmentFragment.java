@@ -1,4 +1,4 @@
-package com.delexa.chudobilet.DBHelpClasses;
+package com.delexa.chudobilet.MainMenu;
 
 
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 
 import com.delexa.chudobilet.DBClasses.Establishment;
 import com.delexa.chudobilet.DBClasses.Event;
+import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.DBHelpClasses.EstablishmentAdapter;
+import com.delexa.chudobilet.DBHelpClasses.EventAdapter;
 import com.delexa.chudobilet.Link;
 import com.delexa.chudobilet.R;
 

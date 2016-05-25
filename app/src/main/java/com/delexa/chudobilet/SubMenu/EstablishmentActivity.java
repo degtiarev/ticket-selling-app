@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 
 import com.delexa.chudobilet.DBClasses.Event;
 import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
@@ -25,6 +26,8 @@ public class EstablishmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_event_tab);
+
+        ((AppCompatActivity) this).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         Intent intent = getIntent();
@@ -47,6 +50,18 @@ public class EstablishmentActivity extends AppCompatActivity {
         List<Event> data = ChudobiletDatabaseHelper.getEventsByEstablishment(db, id);
 
         return data;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 
