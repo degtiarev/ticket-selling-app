@@ -1,8 +1,6 @@
 package com.delexa.chudobilet.MainMenu;
 
 
-import android.app.Activity;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -12,17 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.R;
-import com.delexa.chudobilet.SubMenu.EstablishmentActivity;
-import com.delexa.chudobilet.SubMenu.SubscriberActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

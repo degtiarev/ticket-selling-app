@@ -1,4 +1,4 @@
-package com.delexa.chudobilet.SubMenu;
+package com.delexa.chudobilet.MainMenu;
 
 
 import android.app.Activity;
@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.delexa.chudobilet.DBClasses.Subscription;
 import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.R;
+import com.delexa.chudobilet.SubMenu.EditSubscriptionInterestActivity;
 
 import java.util.ArrayList;
 import java.util.List;

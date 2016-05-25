@@ -1,6 +1,5 @@
 package com.delexa.chudobilet;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.Cursor;
@@ -29,8 +28,8 @@ import com.delexa.chudobilet.MainMenu.AuthorizationFragment;
 import com.delexa.chudobilet.MainMenu.MyOrdersFragment;
 import com.delexa.chudobilet.MainMenu.NewsFragment;
 import com.delexa.chudobilet.MainMenu.SetingsFragment;
+import com.delexa.chudobilet.MainMenu.SubscriberFragment;
 import com.delexa.chudobilet.MainMenu.TabFragment;
-import com.delexa.chudobilet.SubMenu.SubscriberActivity;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity
@@ -232,8 +231,8 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.my_subscriptions:
-                Intent intent1 = new Intent(this, SubscriberActivity.class);
-                this.startActivity(intent1);
+                fragment = new SubscriberFragment();
+                title = "Мои подписки";
                 break;
 
             case R.id.other_apps:

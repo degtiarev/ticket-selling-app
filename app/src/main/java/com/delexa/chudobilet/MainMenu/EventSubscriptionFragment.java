@@ -1,4 +1,4 @@
-package com.delexa.chudobilet.SubMenu;
+package com.delexa.chudobilet.MainMenu;
 
 
 import android.database.sqlite.SQLiteDatabase;

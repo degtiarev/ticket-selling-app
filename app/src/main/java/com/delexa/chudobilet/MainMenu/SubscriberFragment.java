@@ -1,43 +1,56 @@
-package com.delexa.chudobilet.SubMenu;
+package com.delexa.chudobilet.MainMenu;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.delexa.chudobilet.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubscriberActivity extends AppCompatActivity {
+public class SubscriberFragment extends Fragment {
 
     TabLayout tabLayout;
     ViewPager viewPager;
     TabAdapter adapter;
 
 
+    //   public static int int_items = 3;
+
+    public SubscriberFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_subscriber);
+    }
 
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        viewPager = (ViewPager) findViewById(R.id.SubscriberViewpager);
-        tabLayout = (TabLayout) findViewById(R.id.SubscriberTabs);
+        View v = inflater.inflate(R.layout.fragment_subscriber, container, false);
+
+
+        viewPager = (ViewPager) v.findViewById(R.id.SubscriberViewpager);
+        tabLayout = (TabLayout) v.findViewById(R.id.SubscriberTabs);
 
         buildFragments();
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
-
-
+        return v;
 
     }
 
@@ -49,7 +62,7 @@ public class SubscriberActivity extends AppCompatActivity {
         EventSubscriptionFragment eventSubscriptionFragment = new EventSubscriptionFragment();
 
 
-        adapter = new TabAdapter(getSupportFragmentManager());
+        adapter = new TabAdapter(getChildFragmentManager());
         adapter.addFragment(subscriptionInterestFragment);
         adapter.addFragment(eventSubscriptionFragment);
 

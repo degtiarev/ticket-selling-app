@@ -24,7 +24,7 @@
         <activity android:name=".SubMenu.EventActivity" />
         <activity android:name=".SubMenu.EstablishmentActivity" />
         <activity android:name=".SubMenu.OrderActivity" />
-        <activity android:name=".SubMenu.SubscriberActivity" />
+        <activity android:name=".MainMenu.SubscriberFragment" />
         <activity android:name=".SubMenu.EditSubscriptionInterestActivity" />
         <activity android:name=".SubMenu.NewsActivity"></activity>
     </application>
