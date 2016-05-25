@@ -8,16 +8,17 @@ public class Establishment {
     private String name;
     private String address;
     private Date timeStamp;
+    private String favouriteSeats;
 
-    public Establishment(String name, String address, Date timeStamp) {
-        this.id = 0;
+    public Establishment() {
+    }
+
+
+    public Establishment( String name, String address, Date timeStamp, String favouriteSeats) {
         this.name = name;
         this.address = address;
         this.timeStamp = timeStamp;
-    }
-
-    public Establishment() {
-
+        this.favouriteSeats = favouriteSeats;
     }
 
     public int getId() {
@@ -50,5 +51,13 @@ public class Establishment {
 
     public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public String getFavouriteSeats() {
+        return favouriteSeats;
+    }
+
+    public void setFavouriteSeats(String favouriteSeats) {
+        this.favouriteSeats = favouriteSeats;
     }
 }

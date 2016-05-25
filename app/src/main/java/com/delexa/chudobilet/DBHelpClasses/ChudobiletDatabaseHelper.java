@@ -11,8 +11,8 @@ import android.util.Log;
 import com.delexa.chudobilet.DBClasses.Establishment;
 import com.delexa.chudobilet.DBClasses.Event;
 import com.delexa.chudobilet.DBClasses.EventType;
-import com.delexa.chudobilet.DBClasses.InterestEstablishment;
 import com.delexa.chudobilet.DBClasses.Seat;
+import com.delexa.chudobilet.DBClasses.SeatName;
 import com.delexa.chudobilet.DBClasses.Subscription;
 import com.delexa.chudobilet.DBClasses.TicketOrder;
 import com.delexa.chudobilet.DBClasses.User;
@@ -20,6 +20,7 @@ import com.delexa.chudobilet.DBClasses.User;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -73,12 +74,15 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     "M", "11", "0", "11", "89608519623", "123456789", "http://kotvokoshke.by/sites/default/files/field/image/image_cat.jpg",
                     "фэнтези", null, new Date());
             Establishment cinemaEstablishment = new Establishment("Большое Кино", "ТРК Alimpic, ул. Боевая, 25, " +
-                    "Астрахань, Астраханская обл., 414024", new Date());
-            Establishment concertEstablishment = new Establishment("Театр Оперы и Балета", "ул. Максаковой, 2, " +
-                    "Астрахань, Астраханская обл., 414024", new Date());
-            Establishment theaterEstablishment = new Establishment("Астраханский ТЮЗ", "414000 г. Астрахань, ул. Мусы Джалиля, 4",
-                    new Date());
+                    "Астрахань, Астраханская обл., 414024", new Date(), "1 3 4, 3 4 8,");
 
+
+            Establishment concertEstablishment = new Establishment("Театр Оперы и Балета", "ул. Максаковой, 2, " +
+                    "Астрахань, Астраханская обл., 414024", new Date(), "1 3 4, 3 5 8,");
+            Establishment theaterEstablishment1 = new Establishment("Астраханский ТЮЗ", "414000 г. Астрахань, ул. Мусы Джалиля, 4",
+                    new Date(), "1 3 4, 3 4 5,");
+            Establishment theaterEstablishment2 = new Establishment("Астраханский театр кукол", "г. Астрахань, ул. Розы Люксембург, 7",
+                    new Date(), null);
 
             Event cinemaEvent1 = new Event("Книга джунглей", cinemaEstablishment, "США", "фэнтези, драма, приключения, семейный, ...", 2016, " 1 час 50 минут", "6+",
                     "Скарлетт Йоханссон, Идрис Эльба, Билл Мюррей, Лупита Нионго, Кристофер Уокен, Джанкарло Эспозито, Нил Сетхи, Бен Кингсли, Ралф Айнесон, " +
@@ -105,14 +109,14 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     "http://new.chudobilet.ru/media/images/events/503fb582ae571c8fd8c359330e0eb79c.jpg",
                     null, "http://new.chudobilet.ru/event/404", new Date());
 
-            Event theaterEvent1 = new Event("Жил-был Геракл", theaterEstablishment, null, null, 0, "1 час 40 минут", "6+", "С. Мартемьянов, Е. Ревкова, С. Журавлёв, " +
+            Event theaterEvent1 = new Event("Жил-был Геракл", theaterEstablishment1, null, null, 0, "1 час 40 минут", "6+", "С. Мартемьянов, Е. Ревкова, С. Журавлёв, " +
                     "К. Хахлев, Д. Юницкий, В. Яхтина, ...", "Жил-был Геракл… Тот самый? Тот самый. И хоть родился он героем – и рост, и сила при нём – вынужден был " +
                     "служить рабом у царя Эврисфея. Так случается - бог Зевс повелел, что уж тут поделаешь? Но, что-то делать надо... Чтобы стать свободным, " +
                     "Гераклу необходимо совершить двенадцать великих поступков, каждый из которых - ПОДВИГ. Он справляется с самыми непредсказуемыми испытаниями, " +
                     "ведь впереди его ожидает заветная награда - СВОБОДА!",
                     "http://new.chudobilet.ru/media/images/events/d8ed4896e6507faca33a5199ab59003c.jpg",
                     null, "http://new.chudobilet.ru/event/669/", new Date());
-            Event theaterEvent2 = new Event("Приключения в стране непослушания", theaterEstablishment, null, null, 0, "40 минут", "6+", "Е. Ревкова, Е. Перова, Л. Альмяшева, О." +
+            Event theaterEvent2 = new Event("Приключения в стране непослушания", theaterEstablishment1, null, null, 0, "40 минут", "6+", "Е. Ревкова, Е. Перова, Л. Альмяшева, О." +
                     " Перова, А. Казакова, Е. Егорова, А. Еремицкая, В. Сельнинова", "Невероятная история, придуманная студентами театрального отделения Астраханской консерватории. " +
                     " Эта добрая, весёлая, очень музыкально-танцевальная история учит правильно оценивать добро и зло, различать плохое и хорошее, учит любви и ответственности.  Её" +
                     " понимание легко и доступно всем возрастам - от самых маленьких до самых взрослых.  Ещё более привлекательной эту историю делает то, что большинство исполнителей " +
@@ -120,7 +124,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     "http://new.chudobilet.ru/media/images/events/6029be218a6c189b4cd6bf6f64243760.jpg",
                     null, "http://new.chudobilet.ru/event/1067/", new Date());
 
-            InterestEstablishment interestEstablishment1 = new InterestEstablishment(user, concertEstablishment, "A1", new Date());
 
             EventType eventTypeCinema1 = new EventType(cinemaEvent1, "Кино", new Date());
             EventType eventTypeCinema2 = new EventType(cinemaEvent2, "Кино", new Date());
@@ -133,7 +136,8 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
             insertEstablishment(db, cinemaEstablishment);
             insertEstablishment(db, concertEstablishment);
-            insertEstablishment(db, theaterEstablishment);
+            insertEstablishment(db, theaterEstablishment1);
+            insertEstablishment(db, theaterEstablishment2);
 
             insertEvent(db, cinemaEvent1);
             insertEvent(db, cinemaEvent2);
@@ -150,8 +154,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
             TicketOrder ticketOrder1;
             TicketOrder ticketOrder2;
-
-            insertInterestEstablishment(db, interestEstablishment1);
 
 
             for (int i = 1; i < 21; i++) {
@@ -212,6 +214,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "NAME TEXT, " +
                 "ADDRESS TEXT, " +
+                "FAVOURITESEATS TEXT, " +
                 "TIMESTAMP NUMERIC);");
 
         // таблица EVENT
@@ -263,14 +266,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 "ISNOTIFIED INTEGER, " +
                 "TIMESTAMP NUMERIC);");
 
-        // таблица INTERESTESTABLISHMENT
-        db.execSQL("CREATE TABLE INTERESTESTABLISHMENT (" +
-                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "_USERID INTEGER, " +
-                "_ESTABLISHMENTID INTEGER, " +
-                "SEATNAMES TEXT, " +
-                "TIMESTAMP NUMERIC);");
-
 
         // таблица EVENTTYPE
         db.execSQL("CREATE TABLE EVENTTYPE (" +
@@ -309,6 +304,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
         establishmentValues.put("NAME", establishment.getName());
         establishmentValues.put("ADDRESS", establishment.getAddress());
+        establishmentValues.put("FAVOURITESEATS", establishment.getFavouriteSeats());
         establishmentValues.put("TIMESTAMP", getDateTime(establishment.getTimeStamp(), LONG_DATE));
 
         db.insert("ESTABLISHMENT", null, establishmentValues);
@@ -391,39 +387,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    private static void insertInterestEstablishment(SQLiteDatabase db, InterestEstablishment interestEstablishment) {
-
-        int establishmentId = Integer.MAX_VALUE;
-
-        try {
-
-            Cursor newCursor = db.query("ESTABLISHMENT",
-                    new String[]{"_id"},
-                    "NAME = ? AND ADDRESS = ?",
-                    new String[]{interestEstablishment.getEstablishment().getName(), interestEstablishment.getEstablishment().getAddress()},
-                    null, null, null);
-
-
-            if (newCursor.getCount() == 1) {
-                if (newCursor.moveToFirst()) {
-                    establishmentId = newCursor.getInt(0);
-                }
-
-                ContentValues InterestEstablishmentValues = new ContentValues();
-
-                InterestEstablishmentValues.put("_ESTABLISHMENTID", establishmentId);
-                InterestEstablishmentValues.put("_USERID", "1");
-                InterestEstablishmentValues.put("SEATNAMES", interestEstablishment.getSeatNames());
-                InterestEstablishmentValues.put("TIMESTAMP", getDateTime(interestEstablishment.getTimeStamp(), LONG_DATE));
-
-                db.insert("INTERESTESTABLISHMENT", null, InterestEstablishmentValues);
-            }
-
-        } catch (SQLiteException e) {
-            Log.d("My Logs", "Ошибка доступа к БД!");
-        }
-
-    }
 
     private static void insertSeat(SQLiteDatabase db, Seat seat) {
 
@@ -665,29 +628,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public static List<InterestEstablishment> getInterestEstablishment(SQLiteDatabase db) {
-
-        List<InterestEstablishment> data = new ArrayList<>();
-
-        try {
-
-            Cursor newCursor = db.rawQuery("SELECT ESTABLISHMENT.NAME, ESTABLISHMENT.ADDRESS," +
-                    " INTERESTESTABLISHMENT._id, INTERESTESTABLISHMENT.SEATNAMES " +
-                    " FROM ESTABLISHMENT, INTERESTESTABLISHMENT " +
-                    "WHERE ESTABLISHMENT._ID = INTERESTESTABLISHMENT._ESTABLISHMENTID " +
-                    "GROUP BY ESTABLISHMENT.NAME", null);
-
-            data = cursorInterestEstablishment(newCursor);
-
-            db.close();
-
-        } catch (SQLiteException e) {
-        }
-
-        return data;
-
-    }
-
     public static List<String> getEstablishmentListNames(SQLiteDatabase db) {
 
         List<String> data = new ArrayList<>();
@@ -744,7 +684,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         try {
 
             Cursor newCursor = db.rawQuery("SELECT SEAT._id, SEAT.NAME " +
-                    "FROM SEAT WHERE SEAT._EVENTID = '"+id+"' AND SEAT.ISFREE = '0' GROUP BY SEAT._id", null);
+                    "FROM SEAT WHERE SEAT._EVENTID = '" + id + "' AND SEAT.ISFREE = '0' GROUP BY SEAT._id", null);
 
             amount = newCursor.getCount();
 
@@ -756,6 +696,48 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         }
 
         return amount;
+
+    }
+
+    public static List<SeatName> getEstablishmentFavouriteSeatsbyEstablishmentid(SQLiteDatabase db, String establishmentName) {
+
+        List<SeatName> data = new ArrayList<>();
+        String seats = "";
+
+        try {
+
+            Cursor newCursor = db.rawQuery("SELECT ESTABLISHMENT.FAVOURITESEATS FROM ESTABLISHMENT ESTABLISHMENT WHERE " +
+                    "ESTABLISHMENT.NAME = '" + establishmentName + "'", null);
+
+            while (newCursor.moveToNext()) {
+                seats = (newCursor.getString(newCursor.getColumnIndex("FAVOURITESEATS")));
+            }
+
+            newCursor.close();
+            db.close();
+
+        } catch (SQLiteException e) {
+        }
+
+        List<String> List1 = Arrays.asList(seats.split(","));
+
+        for (String i : List1) {
+            SeatName seatName = new SeatName();
+
+            if (i.charAt(0) == ' ') i=i.substring(1);
+            List<String> List2 = Arrays.asList(i.split("\\s"));
+
+            seatName.setSector(List2.get(0));
+            seatName.setRow(List2.get(1));
+            seatName.setSeat(List2.get(2));
+
+            data.add(seatName);
+
+        }
+
+
+        return data;
+
 
     }
 
@@ -780,6 +762,19 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
 
     //   public static void changeinterestGenre
+
+    public static void InsertSubscriptionbyEventid(SQLiteDatabase db, int id, int amountSeats) {
+
+        ContentValues subscriptionValues = new ContentValues();
+
+        subscriptionValues.put("_EVENTID", id);
+        subscriptionValues.put("AMOUNTSEATS", amountSeats);
+        subscriptionValues.put("ISNOTIFIED", 0);
+        subscriptionValues.put("TIMESTAMP", getDateTime(new Date(), LONG_DATE));
+
+        db.insert("SUBSCRIPTION", null, subscriptionValues);
+
+    }
 
 
     private static List<Event> cursorToListEvent(Cursor newCursor) {
@@ -881,27 +876,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    private static List<InterestEstablishment> cursorInterestEstablishment(Cursor newCursor) {
-
-        List<InterestEstablishment> data = new ArrayList<>();
-        while (newCursor.moveToNext()) {
-            InterestEstablishment interestEstablishment = new InterestEstablishment();
-            Establishment establishment = new Establishment();
-
-            interestEstablishment.setSeatNames(newCursor.getString(newCursor.getColumnIndex("SEATNAMES")));
-            interestEstablishment.setId(newCursor.getInt(newCursor.getColumnIndex("_id")));
-            establishment.setName(newCursor.getString(newCursor.getColumnIndex("NAME")));
-            establishment.setAddress(newCursor.getString(newCursor.getColumnIndex("ADDRESS")));
-            interestEstablishment.setEstablishment(establishment);
-
-
-            data.add(interestEstablishment);
-        }
-        newCursor.close();
-
-        return data;
-
-    }
 
     private static List<Subscription> cursorToListSubscription(Cursor newCursor) {
 

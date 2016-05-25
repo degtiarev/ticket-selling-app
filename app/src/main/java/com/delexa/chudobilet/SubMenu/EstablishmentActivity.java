@@ -37,6 +37,7 @@ public class EstablishmentActivity extends AppCompatActivity {
         recyclerView.setAdapter(eventAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+
     }
 
     public List<Event> getEvents(int id) {

@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.delexa.chudobilet.DBClasses.Event;
+import com.delexa.chudobilet.DBClasses.Subscription;
 import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.R;
 import com.squareup.picasso.Picasso;
@@ -33,7 +34,7 @@ public class EventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event);
 
         Intent intent = getIntent();
-        int _id = intent.getIntExtra("_id", Integer.MAX_VALUE);
+        final int _id = intent.getIntExtra("_id", Integer.MAX_VALUE);
 
 
         SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(this);
@@ -116,7 +117,10 @@ public class EventActivity extends AppCompatActivity {
                     alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
 
-                            // Do something with value!
+                            SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(EventActivity.this);
+                            SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
+                            ChudobiletDatabaseHelper.InsertSubscriptionbyEventid(db, _id, Integer.parseInt(input.getText().toString()));
+
                         }
                     });
 

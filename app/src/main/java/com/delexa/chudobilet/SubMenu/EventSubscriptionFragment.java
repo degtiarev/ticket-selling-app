@@ -11,10 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.delexa.chudobilet.DBClasses.InterestEstablishment;
 import com.delexa.chudobilet.DBClasses.Subscription;
 import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
-import com.delexa.chudobilet.DBHelpClasses.InterestEstablishmentAdapter;
 import com.delexa.chudobilet.DBHelpClasses.SubscriptionAdapter;
 import com.delexa.chudobilet.R;
 
@@ -32,7 +30,6 @@ public class EventSubscriptionFragment extends Fragment {
     public EventSubscriptionFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

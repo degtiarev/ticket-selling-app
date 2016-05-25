@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,14 +13,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
-import com.delexa.chudobilet.DBClasses.InterestEstablishment;
-import com.delexa.chudobilet.DBClasses.TicketOrder;
+import com.delexa.chudobilet.DBClasses.Subscription;
 import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
-import com.delexa.chudobilet.DBHelpClasses.InterestEstablishmentAdapter;
 import com.delexa.chudobilet.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,8 +35,6 @@ public class SubscriptionInterestFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private RecyclerView recyclerView;
-    private InterestEstablishmentAdapter interestEstablishmentAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,55 +42,39 @@ public class SubscriptionInterestFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View v = inflater.inflate(R.layout.fragment_subscription_interest, container, false);
-
-
-        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-                Activity activity = (Activity) view.getContext();
-                Intent intent = new Intent(activity, EditSubscriptionInterestActivity.class);
-
-                view.getContext().startActivity(intent);
-
-            }
-        });
-
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-
-        recyclerView = (RecyclerView) v.findViewById(R.id.EventInterestList);
-
-        interestEstablishmentAdapter = new InterestEstablishmentAdapter(getActivity(), getInterestEstablishment());
-        recyclerView.setAdapter(interestEstablishmentAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-//        ((EditText)v.findViewById(R.id.editTextGenre)).setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//    /* When focus is lost check that the text field
-//    * has valid values.
-//    */
-//                if (!hasFocus) {
-//                    validateInput(v);
-//                }
-//            }
-//        });
-
-
-        return v;
-
-    }
-
-    public List<InterestEstablishment> getInterestEstablishment() {
+        final ListView listView = (ListView) v.findViewById(R.id.listViewEstablishments);
 
         SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(getActivity());
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
-        List<InterestEstablishment> data = ChudobiletDatabaseHelper.getInterestEstablishment(db);
+        List<String> data = ChudobiletDatabaseHelper.getEstablishmentListNames(db);
 
-        return data;
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                v.getContext(),
+                android.R.layout.simple_list_item_1,
+                data);
+        listView.setAdapter(arrayAdapter);
+
+        listView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
+
+                        String establishmentname = ((TextView) (view.findViewById(android.R.id.text1))).getText().toString();
+
+
+                        Activity activity = (Activity) getContext();
+                        Intent intent = new Intent(activity, EditSubscriptionInterestActivity.class);
+
+                        intent.putExtra("establishmentName", String.valueOf(establishmentname));
+                        getContext().startActivity(intent);
+                    }
+                }
+        );
+
+        return v;
+
     }
 
 }

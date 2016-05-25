@@ -64,8 +64,8 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
     }
 
 
-//    public Retrofit retrofit;
-//    public Link service;
+    public Retrofit retrofit;
+    public Link service;
 
     public EstablishmentFragment() {
         // Required empty public constructor
@@ -88,7 +88,7 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
 //                .build();
 //        service = retrofit.create(Link.class);
 //
-//          Call<List<Event>> magenta = service.listRepoEve();
+//          Call<List<Event>> events = service.listRepoEve();
 //           magenta.enqueue(this);
 
 
@@ -133,7 +133,7 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
 
 //         System.out.println("Мероприятия");
 //        System.out.println(response.body());
-//        SQLiteOpenHelper magentaDatabaseHelper = new MagentaDatabaseHelper(App.instance.getApplicationContext(),"magenta",null,1);
+//        SQLiteOpenHelper chudeobiletDatabaseHelper = new ChudobiletDatabaseHelper(App.instance.getApplicationContext(),"magenta",null,1);
 //        SQLiteDatabase db = magentaDatabaseHelper.getWritableDatabase();
 //        db.execSQL("delete from "+ "MEROPRIATIA");
 //

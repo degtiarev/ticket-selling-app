@@ -26,6 +26,7 @@
         <activity android:name=".SubMenu.OrderActivity" />
         <activity android:name=".SubMenu.SubscriberActivity" />
         <activity android:name=".SubMenu.EditSubscriptionInterestActivity"></activity>
+
     </application>
 
 </manifest>

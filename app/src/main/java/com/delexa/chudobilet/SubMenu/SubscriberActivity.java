@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 
 import com.delexa.chudobilet.R;
 
@@ -26,6 +27,7 @@ public class SubscriberActivity extends AppCompatActivity {
         setContentView(R.layout.activity_subscriber);
 
 
+
         viewPager = (ViewPager) findViewById(R.id.SubscriberViewpager);
         tabLayout = (TabLayout) findViewById(R.id.SubscriberTabs);
 
@@ -33,6 +35,8 @@ public class SubscriberActivity extends AppCompatActivity {
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+
 
 
     }

@@ -9,11 +9,6 @@
         android:layout_height="match_parent"
         android:padding="10dp">
 
-        <ScrollView
-            android:id="@+id/scrollViewInterestEstablishment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/EventInterestList"
             android:layout_width="wrap_content"
