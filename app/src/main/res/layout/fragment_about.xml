@@ -10,75 +10,68 @@
     tools:context=".MainMenu.AboutFragment">
 
 
-    <ImageView
-        android:id="@+id/imageViewLogo"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/logo" />
 
-    <TextView
-        android:id="@+id/textViewAbout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imageViewLogo"
-        android:layout_marginTop="16dp"
-        android:text="ЧУДОБИЛЕТ – круглосуточная онлайн-система предварительного бронирования и покупки билетов на развлекательные мероприятия. "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/logo" />
 
-    <TextView
-        android:id="@+id/textViewDeveloper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewAbout"
-        android:layout_marginTop="16dp"
-        android:text="Разработчик: "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/textViewAbout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageViewLogo"
+            android:layout_marginTop="16dp"
+            android:text="ЧУДОБИЛЕТ – круглосуточная онлайн-система предварительного бронирования и покупки билетов на развлекательные мероприятия. "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/textViewDeveloperName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/textViewAbout"
-        android:layout_marginTop="16dp"
-        android:text="Дегтярев Алексей"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/textViewDeveloper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewAbout"
+            android:layout_marginTop="16dp"
+            android:text="Разработчик: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/textViewEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewDeveloper"
-        android:layout_marginTop="16dp"
-        android:text="Email: "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/textViewDeveloperName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/textViewAbout"
+            android:layout_marginTop="16dp"
+            android:text="Дегтярев Алексей"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/textViewEmailAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/textViewDeveloperName"
-        android:layout_marginTop="16dp"
-        android:text="delexa0@gmail.com"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/textViewEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewDeveloper"
+            android:layout_marginTop="16dp"
+            android:text="Email: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/buttonError"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewEmail"
-        android:layout_marginTop="16dp"
-        android:text="Сообщить об ошибке" />
+        <TextView
+            android:id="@+id/textViewEmailAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/textViewDeveloperName"
+            android:layout_marginTop="16dp"
+            android:text="delexa0@gmail.com"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/buttonSetRating"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Поставить оценку"
-        android:layout_marginTop="16dp"
-        android:layout_below="@id/buttonError"/>
+        <ListView
+            android:id="@+id/listViewAbout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewEmail"
+            android:layout_marginTop="16dp" />
+
 
 
 </RelativeLayout>
