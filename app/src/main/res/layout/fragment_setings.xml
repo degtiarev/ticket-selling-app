@@ -303,14 +303,6 @@
                 android:layout_toRightOf="@+id/textViewNotificationForPay"
                 android:text="По SMS" />
 
-            <ListView
-                android:id="@+id/listView_options"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_below="@+id/checkBoxNotificationAboutNewEventsSMS"
-                android:entries="@array/list" />
-
-
         </RelativeLayout>
     </ScrollView>
 </FrameLayout>

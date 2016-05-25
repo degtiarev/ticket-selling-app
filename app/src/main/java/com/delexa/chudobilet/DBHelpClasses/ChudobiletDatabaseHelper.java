@@ -1,7 +1,7 @@
 package com.delexa.chudobilet.DBHelpClasses;
 
-import android.content.Context;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -28,14 +28,21 @@ import java.util.Locale;
 
 public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
-    private static ChudobiletDatabaseHelper sInstance;
-
     private static final String SHORT_DATE = "yyyy-MM-dd";
     private static final String LONG_DATE = "yyyy-MM-dd HH:mm:ss";
-
     private static final String DB_NAME = "chudobilet"; // Имя базы данных
     private static final int DB_VERSION = 1; // Версия базы данных
+    private static ChudobiletDatabaseHelper sInstance;
 
+
+    /**
+     * Constructor should be private to prevent direct instantiation.
+     * make call to static method "getInstance()" instead.
+     */
+
+    public ChudobiletDatabaseHelper(Context context) {
+        super(context, DB_NAME, null, DB_VERSION);
+    }
 
     public static synchronized ChudobiletDatabaseHelper getInstance(Context context) {
 
@@ -47,179 +54,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         }
         return sInstance;
     }
-
-    /**
-     * Constructor should be private to prevent direct instantiation.
-     * make call to static method "getInstance()" instead.
-     */
-
-    public ChudobiletDatabaseHelper(Context context) {
-        super(context, DB_NAME, null, DB_VERSION);
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        updateMyDatabase(db, 0, DB_VERSION);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        updateMyDatabase(db, oldVersion, newVersion);
-    }
-
-    private void updateMyDatabase(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (oldVersion < 1) {
-            createAllTables(db);
-
-            User user = new User("Алексей", "Дегтярев", "Сергеевич", "delexa0@gmail.com", getDateTime("1993-02-04", SHORT_DATE),
-                    "M", "11", "0", "11", "89608519623", "123456789", "http://kotvokoshke.by/sites/default/files/field/image/image_cat.jpg",
-                    "фэнтези", null, new Date());
-            Establishment cinemaEstablishment = new Establishment("Большое Кино", "ТРК Alimpic, ул. Боевая, 25, " +
-                    "Астрахань, Астраханская обл., 414024", new Date(), "1 3 4, 3 4 8,");
-
-
-            Establishment concertEstablishment = new Establishment("Театр Оперы и Балета", "ул. Максаковой, 2, " +
-                    "Астрахань, Астраханская обл., 414024", new Date(), "1 3 4, 3 5 8,");
-            Establishment theaterEstablishment1 = new Establishment("Астраханский ТЮЗ", "414000 г. Астрахань, ул. Мусы Джалиля, 4",
-                    new Date(), "1 3 4, 3 4 5,");
-            Establishment theaterEstablishment2 = new Establishment("Астраханский театр кукол", "г. Астрахань, ул. Розы Люксембург, 7",
-                    new Date(), null);
-
-            Event cinemaEvent1 = new Event("Книга джунглей", cinemaEstablishment, "США", "фэнтези, драма, приключения, семейный, ...", 2016, " 1 час 50 минут", "6+",
-                    "Скарлетт Йоханссон, Идрис Эльба, Билл Мюррей, Лупита Нионго, Кристофер Уокен, Джанкарло Эспозито, Нил Сетхи, Бен Кингсли, Ралф Айнесон, " +
-                            "Ханна Тойнтон, ...", "Непримиримая борьба с опасным и внушающим страх тигром Шерханом вынуждает Маугли покинуть волчью стаю и отправиться в " +
-                    "захватывающее путешествие. На пути мальчика ждут удивительные открытия и запоминающиеся встречи с пантерой Багирой, медведем Балу, питоном Каа и " +
-                    "другими обитателями дремучих джунглей.", "http://new.chudobilet.ru/media/images/events/c05f81e44660d05b3c20bcf76cc76973.jpg", "https://www.youtube.com/watch?v=TwNXOE2yxPU",
-                    "http://new.chudobilet.ru/event/992/", new Date());
-            Event cinemaEvent2 = new Event("Белоснежка и Охотник 2", cinemaEstablishment, "США", "фэнтези, боевик, драма, приключения, ...", 2016, "1 час 55 минут", "6+",
-                    "Крис Хемсворт, Сэм Клафлин, Эмили Блант, Джессика Честейн, Шарлиз Терон, Софи Куксон, Ник Фрост, Колин Морган, Ралф Айнесон, Шеридан Смит, ...",
-                    "Когда любовь уходит, сердце прекрасной девы обращается в лед. И даже сотни королевств не смогут сдержать поступь ее несметного воинства. Лишь Охотник не ведает страха." +
-                            " Сквозь проклятый лес он идет навстречу своей судьбе.", "http://new.chudobilet.ru/media/images/events/dd0d82740c770242d151223691a2b2df.jpg",
-                    "https://www.youtube.com/watch?v=TwNXOE2yxPU",
-                    "http://new.chudobilet.ru/event/1008/", new Date());
-            Event concertEvent1 = new Event("Балет Лебединое озерo", concertEstablishment, null, null, 0, "2 часа", "6+", null,
-                    "«Лебединое озеро» - шедевр мирового балетного искусства. Спектакль Астраханского театра оперы и балета, бессмертное произведение " +
-                            "бессмертного композитора Петра Ильича Чайковского с аншлагами проходил во многих городах Европы. Не обошла его своим вниманием" +
-                            " и астраханская публика.  С первых дней жизни в репертуаре Астраханского государственного театра Оперы и Балета спектакль " +
-                            "«Лебединое Озеро» сопровождают аншлаги. Это символ нашего балета и очень серьезный экзамен для молодой труппы, который она " +
-                            "сдаёт на «отлично». Этот балет Чайковского - один из самых сложных спектаклей классического репертуара. Тем отрадней, что в" +
-                            " нынешнем составе балетной труппы астраханского театра есть исполнители, способные пройти серьёзное «испытание классикой»," +
-                            " причём не просто преодолеть технические трудности, а подчинить каждый элемент танца художественным целям. Скоро нежный " +
-                            "романтичный принц Зигфрид, готовый жертвовать собой ради любимой, вновь появится в свете театральных софитов на Большой " +
-                            "сцене. А исполняемое солистами астраханского балета па-де-труа из «Лебединого озера» вызовет бурю оваций.",
-                    "http://new.chudobilet.ru/media/images/events/503fb582ae571c8fd8c359330e0eb79c.jpg",
-                    null, "http://new.chudobilet.ru/event/404", new Date());
-
-            Event theaterEvent1 = new Event("Жил-был Геракл", theaterEstablishment1, null, null, 0, "1 час 40 минут", "6+", "С. Мартемьянов, Е. Ревкова, С. Журавлёв, " +
-                    "К. Хахлев, Д. Юницкий, В. Яхтина, ...", "Жил-был Геракл… Тот самый? Тот самый. И хоть родился он героем – и рост, и сила при нём – вынужден был " +
-                    "служить рабом у царя Эврисфея. Так случается - бог Зевс повелел, что уж тут поделаешь? Но, что-то делать надо... Чтобы стать свободным, " +
-                    "Гераклу необходимо совершить двенадцать великих поступков, каждый из которых - ПОДВИГ. Он справляется с самыми непредсказуемыми испытаниями, " +
-                    "ведь впереди его ожидает заветная награда - СВОБОДА!",
-                    "http://new.chudobilet.ru/media/images/events/d8ed4896e6507faca33a5199ab59003c.jpg",
-                    null, "http://new.chudobilet.ru/event/669/", new Date());
-            Event theaterEvent2 = new Event("Приключения в стране непослушания", theaterEstablishment1, null, null, 0, "40 минут", "6+", "Е. Ревкова, Е. Перова, Л. Альмяшева, О." +
-                    " Перова, А. Казакова, Е. Егорова, А. Еремицкая, В. Сельнинова", "Невероятная история, придуманная студентами театрального отделения Астраханской консерватории. " +
-                    " Эта добрая, весёлая, очень музыкально-танцевальная история учит правильно оценивать добро и зло, различать плохое и хорошее, учит любви и ответственности.  Её" +
-                    " понимание легко и доступно всем возрастам - от самых маленьких до самых взрослых.  Ещё более привлекательной эту историю делает то, что большинство исполнителей " +
-                    "очень молоды. Их юношеский задор заражает зрителей неподдельной искренностью.",
-                    "http://new.chudobilet.ru/media/images/events/6029be218a6c189b4cd6bf6f64243760.jpg",
-                    null, "http://new.chudobilet.ru/event/1067/", new Date());
-
-            News news1 = new News("В Астрахань приедет с гастролями Липецкий театр драмы", "10,11 и 12 июня Липецкий государственный академический театр драмы им. Л. Толстого на сцене Астраханского Драматического театра покажет спектакли «Квадратура Круга» В. Катаева, «Ужасные родители - С Ума сойти!» Ж. Кокто и сказку для детей «Дюймовочка» Г. Андерсена, Н. Эрдмана. \n" +
-                    "\n" +
-                    "Это одни из самых лучших спектаклей Липецкого театра драмы. Музыкальный спектакль для детей \"Дюймовочка\" по известной сказке Ганса-Христиана Андерсена и сценарию Николая Эрдмана наполнен яркими танцами и песням, а также включает в себя удивительные и разнообразные элементы театрального экспириенса - теневой театр, фонтан из мыльных пузырей и много другого, что порадует как самых маленьких зрителей, так и их родителей.\n" +
-                    "\n" +
-                    "\"Квадратура Круга\" - одно из самых знаменитых произведений Валентина Катаева. Написанная в 1927 г. и через год представленная на сцене МХТ, она до сих пор остается актуальной и интеллигентной \"шуткой Катаева\", рассказывая о простых и вечных ценностях, о молодости и любви, о радости жизни. История двух молодоженов-комсомольцев и их необычная история, рассказанная на фоне обычной квартиры, наполнена искрометным юмором и трогательными поисками любви.\n" +
-                    "\n" +
-                    "Жемчужиной гастролей станет спектакль \"Ужасные родители - С Ума сойти!\" - спектакль, по определению московского режиссера Дмитрия Горника, на грани фарса. В основе сюжета - семейный конфликт, который довольно часто встречается в нашей жизни: властные своенравные родители возражают против того, чтобы сын начал самостоятельную взрослую жизнь с девушкой. Актуальная, яркая и безумно смешная комедия - потрясающий подарок для астраханских зрителей всех возрастов.",
-                    "Три постановки в подарок астраханцам", "http://new.chudobilet.ru/media/images/news/16ef30eaa6942b835d874eddd5f6570a.jpg",
-                    getDateTime("2016-05-23", SHORT_DATE), new Date());
-            News news2 = new News("Cпортивная весна", "А вы уже начали активную подготовку к предстоящему пляжному сезону? Составьте свою программу тренировок, не выходя из дома, с помощью сайта ЧУДОБИЛЕТ! В рубрике «На здоровье» нашего сайта вы можете приобрести билеты на посещение разнообразных тренировок wellness-центра «Идеал» (ул. Куликова, 66, к. 2). Сеансы помогут избавиться от проблем с лишним весом и целлюлитом, восстановят обмен веществ, работу лимфосистемы, мышечный и жизненный тонус. Отличная возможность привести в порядок свое тело, ведь лето уже не за горами!\n" +
-                    "\n" +
-                    "Разработанный план тренировок включает в себя занятия на уникальных wellness-тренажерах нового поколения: Виброплатформа Evo, Тонусные столы, Роликовый массажер Body Roll, Вакуумный тренажер VacuStep, а также Прессотерапию SlimFigure. Вы сами выбираете уровень нагрузки и планируете количество посещений, приобретая билеты онлайн.\n" +
-                    "\n" +
-                    "Кроме того, с помощью сайта ЧУДОБИЛЕТ вы можете приобрести билеты на разовое посещение занятий по восточным танцам, аэробике, на йогу или детский фитнес в wellness-центре «Идеал». \n" +
-                    " \n" +
-                    "Добро пожаловать в мир здоровья и красоты!" +
-                    " \n" +
-                    "С нами каждый день с удовольствием!", "Открываем сезон вместе", "http://new.chudobilet.ru/media/images/news/6ac22a5695f52a4c139334aa855af4c6.jpg",
-                    getDateTime("2016-05-20", SHORT_DATE), new Date());
-            News news3 = new News("\"Ночь музеев-2016\"", "21 мая в Астраханской области пройдет ежегодная весенняя акция «Ночь музеев». Тема мероприятия в этом году — российский кинематограф.\n" +
-                    "Испытать себя на знание советских кинолент, погрузиться в мир коммунального быта и не только, смогут участники многочисленных викторин и интерактивных мероприятий в Краеведческом музее.Парящие острова, межгалактические корабль, безумное чаепитие – всё это ждет посетителей акции «Ночь музеев» в Астраханском кремле. В Артиллерийском дворе развернется презентация театрализованного проекта «Астраханская свадьба». Здесь же будут действовать квесты «Машина времени» и «Азбука стрелецкого снаряжения». На плацу Гауптвахты в исполнении духового казачьего оркестра прозвучат марши из кинофильмов, пройдет развод караула, а около Красной башни развернется музейная обсерватория.\n" +
-                    "В Музее боевой славы откроется выставка «Советская эпоха в лицах, событиях», где будет представлена скульптура, живопись, графика. Музей культуры пригласит на выставку астраханских дизайнеров «Единство контрастов. Дизайн и декор», также там пройдет встреча с В.К. Петрушкиным, краеведом, историком астраханских кинотеатров. Музей истории города предложит погрузиться в «золотой век» русской культуры. При участии Астраханского бального движения пройдет бал в стиле XIX века с котильоном, ручейками и хороводами.\n" +
-                    "В картинной галерее им. П.М. Догадина посетителей ждут обзорные экскурсии, увлекательные квесты, театральные зарисовки, «Ожившие картины» в исполнении студентов колледжа культуры, классическая музыка, литературно-музыкальная композиция «Вначале было Слово» театральной студии под руководством Сергея Тараскина.\n" +
-                    "Дом-музей Б.М. Кустодиева приглашает принять участие в вечерней программе «Весенняя история». Гостей вечера ждут экскурсии по экспозиции и выставке «Весеннее отражение», где представлены живописные произведения и работы в технике горячего батика волгоградской художницы Натальи Рухлиной.\n" +
-                    "В Доме-музее Велимира Хлебникова для любителей нонконформистского искусства на знаменитой Хлебниковской веранде откроется выставка живописных работ Вячеслава Шмагина (г. Дубны, Московская область). Увлекающимся авангардной поэзией будет представлен моноспектакль «Друк другу», где в исполнении Григория Миляшкина прозвучат стихотворения Владимира Друка.\n" +
-                    "Дом купца Г.В.Тетюшинова приглашает побывать на открытии выставки астраханского мастера ткачества и вышивки Натальи Максимовой, увидеть концерт народного ансамбля «Астраханская песня». Различные тематические кинопоказы будут осуществляться в музейных двориках и помещениях галереи: любимые фильмы советской эпохи, краеведческие и научно-популярные фильмы из цикла «Искусство и кино».",
-                    "Какой мы ее увидим?", "http://new.chudobilet.ru/media/images/news/6ae7d32c409a8f6d8ad87355d0e6cf64.jpg", getDateTime("2016-05-19", SHORT_DATE), new Date());
-
-
-            EventType eventTypeCinema1 = new EventType(cinemaEvent1, "Кино", new Date());
-            EventType eventTypeCinema2 = new EventType(cinemaEvent2, "Кино", new Date());
-            EventType eventTypeConcert1 = new EventType(concertEvent1, "Концерты", new Date());
-            EventType eventTypeTheater1 = new EventType(theaterEvent1, "Театры", new Date());
-            EventType eventTypeTheater2 = new EventType(theaterEvent2, "Театры", new Date());
-            EventType eventTypeForChildren1 = new EventType(theaterEvent2, "Детям", new Date());
-
-            insertUser(db, user);
-
-            insertNews(db, news1);
-            insertNews(db, news2);
-            insertNews(db, news3);
-
-            insertEstablishment(db, cinemaEstablishment);
-            insertEstablishment(db, concertEstablishment);
-            insertEstablishment(db, theaterEstablishment1);
-            insertEstablishment(db, theaterEstablishment2);
-
-            insertEvent(db, cinemaEvent1);
-            insertEvent(db, cinemaEvent2);
-            insertEvent(db, concertEvent1);
-            insertEvent(db, theaterEvent1);
-            insertEvent(db, theaterEvent2);
-
-            insertEventType(db, eventTypeCinema1);
-            insertEventType(db, eventTypeCinema2);
-            insertEventType(db, eventTypeConcert1);
-            insertEventType(db, eventTypeTheater1);
-            insertEventType(db, eventTypeTheater2);
-            insertEventType(db, eventTypeForChildren1);
-
-            TicketOrder ticketOrder1;
-            TicketOrder ticketOrder2;
-
-
-            for (int i = 1; i < 21; i++) {
-                Seat seat = new Seat(cinemaEvent1, "А" + i, getDateTime("2016-07-01 12:00:00", LONG_DATE), 400, 20, new Date());
-                insertSeat(db, seat);
-
-                if (i == 1) {
-                    ticketOrder1 = new TicketOrder(user, seat, getDateTime("2016-06-01 13:00:00", LONG_DATE), "неоплачено", "RS", "001468", "123456789012", new Date());
-                    insertTicketOrder(db, ticketOrder1);
-                }
-            }
-
-            for (int i = 1; i < 21; i++) {
-                Seat seat = new Seat(cinemaEvent2, "А" + i, getDateTime("2016-07-02 12:00:00", LONG_DATE), 400, 20, new Date());
-                insertSeat(db, seat);
-
-                if (i == 1) {
-                    ticketOrder2 = new TicketOrder(user, seat, getDateTime("2016-06-01 13:48:00", LONG_DATE), "оплачено", "RS", "001468", "123456789012", new Date());
-                    insertTicketOrder(db, ticketOrder2);
-                }
-            }
-
-            Subscription subscription1 = new Subscription(cinemaEvent1, 2, new Date());
-            insertSubscription(db, subscription1);
-
-        }
-
-        if (oldVersion < 2) {
-
-
-        }
-    }
-
 
     private static void createAllTables(SQLiteDatabase db) {
 
@@ -319,7 +153,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 "TIMESTAMP NUMERIC);");
 
     }
-
 
     private static void insertUser(SQLiteDatabase db, User user) {
         ContentValues userValues = new ContentValues();
@@ -553,7 +386,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
         db.insert("NEWS", null, newsValues);
     }
-
 
     public static List<Event> getEvents(SQLiteDatabase db, String eventType) {
 
@@ -810,6 +642,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 news.setId(newCursor.getInt(newCursor.getColumnIndex("_id")));
                 news.setName(newCursor.getString(newCursor.getColumnIndex("NAME")));
                 news.setCover(newCursor.getString(newCursor.getColumnIndex("COVER")));
+                news.setAbout(newCursor.getString(newCursor.getColumnIndex("ABOUT")));
                 news.setInShort(newCursor.getString(newCursor.getColumnIndex("INSHORT")));
                 news.setDate(getDateTime(newCursor.getString(newCursor.getColumnIndex("DATE")), SHORT_DATE));
                 news.setTimeStamp(getDateTime(newCursor.getString(newCursor.getColumnIndex("TIMESTAMP")), LONG_DATE));
@@ -829,6 +662,36 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public static News getNews(SQLiteDatabase db, int id) {
+
+        News news = new News();
+        try {
+
+            Cursor newCursor = db.rawQuery("SELECT * FROM NEWS WHERE _id= " + id, null);
+            while (newCursor.moveToNext()) {
+                news = new News();
+
+                news.setId(newCursor.getInt(newCursor.getColumnIndex("_id")));
+                news.setName(newCursor.getString(newCursor.getColumnIndex("NAME")));
+                news.setCover(newCursor.getString(newCursor.getColumnIndex("COVER")));
+                news.setAbout(newCursor.getString(newCursor.getColumnIndex("ABOUT")));
+                news.setInShort(newCursor.getString(newCursor.getColumnIndex("INSHORT")));
+                news.setDate(getDateTime(newCursor.getString(newCursor.getColumnIndex("DATE")), SHORT_DATE));
+                news.setTimeStamp(getDateTime(newCursor.getString(newCursor.getColumnIndex("TIMESTAMP")), LONG_DATE));
+
+            }
+            newCursor.close();
+
+            db.close();
+
+
+        } catch (SQLiteException e) {
+        }
+
+
+        return news;
+
+    }
 
     private static String getDateTime(Date date, String dateFormat) {
         SimpleDateFormat myDateFormat = new SimpleDateFormat(
@@ -848,9 +711,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         return date;
     }
 
-
-    //   public static void changeinterestGenre
-
     public static void InsertSubscriptionbyEventid(SQLiteDatabase db, int id, int amountSeats) {
 
         ContentValues subscriptionValues = new ContentValues();
@@ -863,7 +723,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         db.insert("SUBSCRIPTION", null, subscriptionValues);
 
     }
-
 
     private static List<Event> cursorToListEvent(Cursor newCursor) {
 
@@ -912,6 +771,9 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         return data;
 
     }
+
+
+    //   public static void changeinterestGenre
 
     private static List<TicketOrder> cursorToListTicketOrder(Cursor newCursor) {
 
@@ -964,7 +826,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-
     private static List<Subscription> cursorToListSubscription(Cursor newCursor) {
 
         List<Subscription> data = new ArrayList<>();
@@ -1002,6 +863,169 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
         return data;
 
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        updateMyDatabase(db, 0, DB_VERSION);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        updateMyDatabase(db, oldVersion, newVersion);
+    }
+
+    private void updateMyDatabase(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if (oldVersion < 1) {
+            createAllTables(db);
+
+            User user = new User("Алексей", "Дегтярев", "Сергеевич", "delexa0@gmail.com", getDateTime("1993-02-04", SHORT_DATE),
+                    "M", "11", "0", "11", "89608519623", "123456789", "http://kotvokoshke.by/sites/default/files/field/image/image_cat.jpg",
+                    "фэнтези", null, new Date());
+            Establishment cinemaEstablishment = new Establishment("Большое Кино", "ТРК Alimpic, ул. Боевая, 25, " +
+                    "Астрахань, Астраханская обл., 414024", new Date(), "1 3 4, 3 4 8,");
+
+
+            Establishment concertEstablishment = new Establishment("Театр Оперы и Балета", "ул. Максаковой, 2, " +
+                    "Астрахань, Астраханская обл., 414024", new Date(), "1 3 4, 3 5 8,");
+            Establishment theaterEstablishment1 = new Establishment("Астраханский ТЮЗ", "414000 г. Астрахань, ул. Мусы Джалиля, 4",
+                    new Date(), "1 3 4, 3 4 5,");
+            Establishment theaterEstablishment2 = new Establishment("Астраханский театр кукол", "г. Астрахань, ул. Розы Люксембург, 7",
+                    new Date(), null);
+
+            Event cinemaEvent1 = new Event("Книга джунглей", cinemaEstablishment, "США", "фэнтези, драма, приключения, семейный, ...", 2016, " 1 час 50 минут", "6+",
+                    "Скарлетт Йоханссон, Идрис Эльба, Билл Мюррей, Лупита Нионго, Кристофер Уокен, Джанкарло Эспозито, Нил Сетхи, Бен Кингсли, Ралф Айнесон, " +
+                            "Ханна Тойнтон, ...", "Непримиримая борьба с опасным и внушающим страх тигром Шерханом вынуждает Маугли покинуть волчью стаю и отправиться в " +
+                    "захватывающее путешествие. На пути мальчика ждут удивительные открытия и запоминающиеся встречи с пантерой Багирой, медведем Балу, питоном Каа и " +
+                    "другими обитателями дремучих джунглей.", "http://new.chudobilet.ru/media/images/events/c05f81e44660d05b3c20bcf76cc76973.jpg", "https://www.youtube.com/watch?v=TwNXOE2yxPU",
+                    "http://new.chudobilet.ru/event/992/", new Date());
+            Event cinemaEvent2 = new Event("Белоснежка и Охотник 2", cinemaEstablishment, "США", "фэнтези, боевик, драма, приключения, ...", 2016, "1 час 55 минут", "6+",
+                    "Крис Хемсворт, Сэм Клафлин, Эмили Блант, Джессика Честейн, Шарлиз Терон, Софи Куксон, Ник Фрост, Колин Морган, Ралф Айнесон, Шеридан Смит, ...",
+                    "Когда любовь уходит, сердце прекрасной девы обращается в лед. И даже сотни королевств не смогут сдержать поступь ее несметного воинства. Лишь Охотник не ведает страха." +
+                            " Сквозь проклятый лес он идет навстречу своей судьбе.", "http://new.chudobilet.ru/media/images/events/dd0d82740c770242d151223691a2b2df.jpg",
+                    "https://www.youtube.com/watch?v=TwNXOE2yxPU",
+                    "http://new.chudobilet.ru/event/1008/", new Date());
+            Event concertEvent1 = new Event("Балет Лебединое озерo", concertEstablishment, null, null, 0, "2 часа", "6+", null,
+                    "«Лебединое озеро» - шедевр мирового балетного искусства. Спектакль Астраханского театра оперы и балета, бессмертное произведение " +
+                            "бессмертного композитора Петра Ильича Чайковского с аншлагами проходил во многих городах Европы. Не обошла его своим вниманием" +
+                            " и астраханская публика.  С первых дней жизни в репертуаре Астраханского государственного театра Оперы и Балета спектакль " +
+                            "«Лебединое Озеро» сопровождают аншлаги. Это символ нашего балета и очень серьезный экзамен для молодой труппы, который она " +
+                            "сдаёт на «отлично». Этот балет Чайковского - один из самых сложных спектаклей классического репертуара. Тем отрадней, что в" +
+                            " нынешнем составе балетной труппы астраханского театра есть исполнители, способные пройти серьёзное «испытание классикой»," +
+                            " причём не просто преодолеть технические трудности, а подчинить каждый элемент танца художественным целям. Скоро нежный " +
+                            "романтичный принц Зигфрид, готовый жертвовать собой ради любимой, вновь появится в свете театральных софитов на Большой " +
+                            "сцене. А исполняемое солистами астраханского балета па-де-труа из «Лебединого озера» вызовет бурю оваций.",
+                    "http://new.chudobilet.ru/media/images/events/503fb582ae571c8fd8c359330e0eb79c.jpg",
+                    null, "http://new.chudobilet.ru/event/404", new Date());
+
+            Event theaterEvent1 = new Event("Жил-был Геракл", theaterEstablishment1, null, null, 0, "1 час 40 минут", "6+", "С. Мартемьянов, Е. Ревкова, С. Журавлёв, " +
+                    "К. Хахлев, Д. Юницкий, В. Яхтина, ...", "Жил-был Геракл… Тот самый? Тот самый. И хоть родился он героем – и рост, и сила при нём – вынужден был " +
+                    "служить рабом у царя Эврисфея. Так случается - бог Зевс повелел, что уж тут поделаешь? Но, что-то делать надо... Чтобы стать свободным, " +
+                    "Гераклу необходимо совершить двенадцать великих поступков, каждый из которых - ПОДВИГ. Он справляется с самыми непредсказуемыми испытаниями, " +
+                    "ведь впереди его ожидает заветная награда - СВОБОДА!",
+                    "http://new.chudobilet.ru/media/images/events/d8ed4896e6507faca33a5199ab59003c.jpg",
+                    null, "http://new.chudobilet.ru/event/669/", new Date());
+            Event theaterEvent2 = new Event("Приключения в стране непослушания", theaterEstablishment1, null, null, 0, "40 минут", "6+", "Е. Ревкова, Е. Перова, Л. Альмяшева, О." +
+                    " Перова, А. Казакова, Е. Егорова, А. Еремицкая, В. Сельнинова", "Невероятная история, придуманная студентами театрального отделения Астраханской консерватории. " +
+                    " Эта добрая, весёлая, очень музыкально-танцевальная история учит правильно оценивать добро и зло, различать плохое и хорошее, учит любви и ответственности.  Её" +
+                    " понимание легко и доступно всем возрастам - от самых маленьких до самых взрослых.  Ещё более привлекательной эту историю делает то, что большинство исполнителей " +
+                    "очень молоды. Их юношеский задор заражает зрителей неподдельной искренностью.",
+                    "http://new.chudobilet.ru/media/images/events/6029be218a6c189b4cd6bf6f64243760.jpg",
+                    null, "http://new.chudobilet.ru/event/1067/", new Date());
+
+            News news1 = new News("В Астрахань приедет с гастролями Липецкий театр драмы", "10,11 и 12 июня Липецкий государственный академический театр драмы им. Л. Толстого на сцене Астраханского Драматического театра покажет спектакли «Квадратура Круга» В. Катаева, «Ужасные родители - С Ума сойти!» Ж. Кокто и сказку для детей «Дюймовочка» Г. Андерсена, Н. Эрдмана. \n" +
+                    "\n" +
+                    "Это одни из самых лучших спектаклей Липецкого театра драмы. Музыкальный спектакль для детей \"Дюймовочка\" по известной сказке Ганса-Христиана Андерсена и сценарию Николая Эрдмана наполнен яркими танцами и песням, а также включает в себя удивительные и разнообразные элементы театрального экспириенса - теневой театр, фонтан из мыльных пузырей и много другого, что порадует как самых маленьких зрителей, так и их родителей.\n" +
+                    "\n" +
+                    "\"Квадратура Круга\" - одно из самых знаменитых произведений Валентина Катаева. Написанная в 1927 г. и через год представленная на сцене МХТ, она до сих пор остается актуальной и интеллигентной \"шуткой Катаева\", рассказывая о простых и вечных ценностях, о молодости и любви, о радости жизни. История двух молодоженов-комсомольцев и их необычная история, рассказанная на фоне обычной квартиры, наполнена искрометным юмором и трогательными поисками любви.\n" +
+                    "\n" +
+                    "Жемчужиной гастролей станет спектакль \"Ужасные родители - С Ума сойти!\" - спектакль, по определению московского режиссера Дмитрия Горника, на грани фарса. В основе сюжета - семейный конфликт, который довольно часто встречается в нашей жизни: властные своенравные родители возражают против того, чтобы сын начал самостоятельную взрослую жизнь с девушкой. Актуальная, яркая и безумно смешная комедия - потрясающий подарок для астраханских зрителей всех возрастов.",
+                    "Три постановки в подарок астраханцам", "http://new.chudobilet.ru/media/images/news/16ef30eaa6942b835d874eddd5f6570a.jpg",
+                    getDateTime("2016-05-23", SHORT_DATE), new Date());
+            News news2 = new News("Cпортивная весна", "А вы уже начали активную подготовку к предстоящему пляжному сезону? Составьте свою программу тренировок, не выходя из дома, с помощью сайта ЧУДОБИЛЕТ! В рубрике «На здоровье» нашего сайта вы можете приобрести билеты на посещение разнообразных тренировок wellness-центра «Идеал» (ул. Куликова, 66, к. 2). Сеансы помогут избавиться от проблем с лишним весом и целлюлитом, восстановят обмен веществ, работу лимфосистемы, мышечный и жизненный тонус. Отличная возможность привести в порядок свое тело, ведь лето уже не за горами!\n" +
+                    "\n" +
+                    "Разработанный план тренировок включает в себя занятия на уникальных wellness-тренажерах нового поколения: Виброплатформа Evo, Тонусные столы, Роликовый массажер Body Roll, Вакуумный тренажер VacuStep, а также Прессотерапию SlimFigure. Вы сами выбираете уровень нагрузки и планируете количество посещений, приобретая билеты онлайн.\n" +
+                    "\n" +
+                    "Кроме того, с помощью сайта ЧУДОБИЛЕТ вы можете приобрести билеты на разовое посещение занятий по восточным танцам, аэробике, на йогу или детский фитнес в wellness-центре «Идеал». \n" +
+                    " \n" +
+                    "Добро пожаловать в мир здоровья и красоты!" +
+                    " \n" +
+                    "С нами каждый день с удовольствием!", "Открываем сезон вместе", "http://new.chudobilet.ru/media/images/news/6ac22a5695f52a4c139334aa855af4c6.jpg",
+                    getDateTime("2016-05-20", SHORT_DATE), new Date());
+            News news3 = new News("\"Ночь музеев-2016\"", "21 мая в Астраханской области пройдет ежегодная весенняя акция «Ночь музеев». Тема мероприятия в этом году — российский кинематограф.\n" +
+                    "Испытать себя на знание советских кинолент, погрузиться в мир коммунального быта и не только, смогут участники многочисленных викторин и интерактивных мероприятий в Краеведческом музее.Парящие острова, межгалактические корабль, безумное чаепитие – всё это ждет посетителей акции «Ночь музеев» в Астраханском кремле. В Артиллерийском дворе развернется презентация театрализованного проекта «Астраханская свадьба». Здесь же будут действовать квесты «Машина времени» и «Азбука стрелецкого снаряжения». На плацу Гауптвахты в исполнении духового казачьего оркестра прозвучат марши из кинофильмов, пройдет развод караула, а около Красной башни развернется музейная обсерватория.\n" +
+                    "В Музее боевой славы откроется выставка «Советская эпоха в лицах, событиях», где будет представлена скульптура, живопись, графика. Музей культуры пригласит на выставку астраханских дизайнеров «Единство контрастов. Дизайн и декор», также там пройдет встреча с В.К. Петрушкиным, краеведом, историком астраханских кинотеатров. Музей истории города предложит погрузиться в «золотой век» русской культуры. При участии Астраханского бального движения пройдет бал в стиле XIX века с котильоном, ручейками и хороводами.\n" +
+                    "В картинной галерее им. П.М. Догадина посетителей ждут обзорные экскурсии, увлекательные квесты, театральные зарисовки, «Ожившие картины» в исполнении студентов колледжа культуры, классическая музыка, литературно-музыкальная композиция «Вначале было Слово» театральной студии под руководством Сергея Тараскина.\n" +
+                    "Дом-музей Б.М. Кустодиева приглашает принять участие в вечерней программе «Весенняя история». Гостей вечера ждут экскурсии по экспозиции и выставке «Весеннее отражение», где представлены живописные произведения и работы в технике горячего батика волгоградской художницы Натальи Рухлиной.\n" +
+                    "В Доме-музее Велимира Хлебникова для любителей нонконформистского искусства на знаменитой Хлебниковской веранде откроется выставка живописных работ Вячеслава Шмагина (г. Дубны, Московская область). Увлекающимся авангардной поэзией будет представлен моноспектакль «Друк другу», где в исполнении Григория Миляшкина прозвучат стихотворения Владимира Друка.\n" +
+                    "Дом купца Г.В.Тетюшинова приглашает побывать на открытии выставки астраханского мастера ткачества и вышивки Натальи Максимовой, увидеть концерт народного ансамбля «Астраханская песня». Различные тематические кинопоказы будут осуществляться в музейных двориках и помещениях галереи: любимые фильмы советской эпохи, краеведческие и научно-популярные фильмы из цикла «Искусство и кино».",
+                    "Какой мы ее увидим?", "http://new.chudobilet.ru/media/images/news/6ae7d32c409a8f6d8ad87355d0e6cf64.jpg", getDateTime("2016-05-19", SHORT_DATE), new Date());
+
+
+            EventType eventTypeCinema1 = new EventType(cinemaEvent1, "Кино", new Date());
+            EventType eventTypeCinema2 = new EventType(cinemaEvent2, "Кино", new Date());
+            EventType eventTypeConcert1 = new EventType(concertEvent1, "Концерты", new Date());
+            EventType eventTypeTheater1 = new EventType(theaterEvent1, "Театры", new Date());
+            EventType eventTypeTheater2 = new EventType(theaterEvent2, "Театры", new Date());
+            EventType eventTypeForChildren1 = new EventType(theaterEvent2, "Детям", new Date());
+
+            insertUser(db, user);
+
+            insertNews(db, news1);
+            insertNews(db, news2);
+            insertNews(db, news3);
+
+            insertEstablishment(db, cinemaEstablishment);
+            insertEstablishment(db, concertEstablishment);
+            insertEstablishment(db, theaterEstablishment1);
+            insertEstablishment(db, theaterEstablishment2);
+
+            insertEvent(db, cinemaEvent1);
+            insertEvent(db, cinemaEvent2);
+            insertEvent(db, concertEvent1);
+            insertEvent(db, theaterEvent1);
+            insertEvent(db, theaterEvent2);
+
+            insertEventType(db, eventTypeCinema1);
+            insertEventType(db, eventTypeCinema2);
+            insertEventType(db, eventTypeConcert1);
+            insertEventType(db, eventTypeTheater1);
+            insertEventType(db, eventTypeTheater2);
+            insertEventType(db, eventTypeForChildren1);
+
+            TicketOrder ticketOrder1;
+            TicketOrder ticketOrder2;
+
+
+            for (int i = 1; i < 21; i++) {
+                Seat seat = new Seat(cinemaEvent1, "А" + i, getDateTime("2016-07-01 12:00:00", LONG_DATE), 400, 20, new Date());
+                insertSeat(db, seat);
+
+                if (i == 1) {
+                    ticketOrder1 = new TicketOrder(user, seat, getDateTime("2016-06-01 13:00:00", LONG_DATE), "неоплачено", "RS", "001468", "123456789012", new Date());
+                    insertTicketOrder(db, ticketOrder1);
+                }
+            }
+
+            for (int i = 1; i < 21; i++) {
+                Seat seat = new Seat(cinemaEvent2, "А" + i, getDateTime("2016-07-02 12:00:00", LONG_DATE), 400, 20, new Date());
+                insertSeat(db, seat);
+
+                if (i == 1) {
+                    ticketOrder2 = new TicketOrder(user, seat, getDateTime("2016-06-01 13:48:00", LONG_DATE), "оплачено", "RS", "001468", "123456789012", new Date());
+                    insertTicketOrder(db, ticketOrder2);
+                }
+            }
+
+            Subscription subscription1 = new Subscription(cinemaEvent1, 2, new Date());
+            insertSubscription(db, subscription1);
+
+        }
+
+        if (oldVersion < 2) {
+
+
+        }
     }
 
 

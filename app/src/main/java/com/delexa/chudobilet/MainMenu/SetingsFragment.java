@@ -51,28 +51,6 @@ public class SetingsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_setings, container, false);
 
 
-        ListView listView = (ListView) view.findViewById(R.id.listView_options);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-
-                if (id == 0) {
-                    Activity activity = (Activity) view.getContext();
-                    Intent intent = new Intent(activity, SubscriberActivity.class);
-                    view.getContext().startActivity(intent);
-
-
-                }
-
-//                else if (id==1)
-//                {
-//
-//
-//                }
-
-            }
-        });
-
 
         gettingUserData();
         return view;

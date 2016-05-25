@@ -12,10 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.delexa.chudobilet.DBClasses.News;
-import com.delexa.chudobilet.DBClasses.TicketOrder;
 import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.DBHelpClasses.NewsAdapter;
-import com.delexa.chudobilet.DBHelpClasses.TicketOrderAdapter;
 import com.delexa.chudobilet.R;
 
 import java.util.List;

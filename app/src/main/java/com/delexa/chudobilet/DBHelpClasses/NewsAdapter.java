@@ -14,6 +14,7 @@ import com.delexa.chudobilet.DBClasses.Event;
 import com.delexa.chudobilet.DBClasses.News;
 import com.delexa.chudobilet.R;
 import com.delexa.chudobilet.SubMenu.EventActivity;
+import com.delexa.chudobilet.SubMenu.NewsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.text.Format;
@@ -97,13 +98,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         @Override
         public void onClick(View v) {
 
-//            int id = data.get(getAdapterPosition()).getId();
-//
-//            Activity activity = (Activity) v.getContext();
-//            Intent intent = new Intent(activity, NewsActivity.class);
-//
-//            intent.putExtra("_id", Integer.valueOf(id));
-//            v.getContext().startActivity(intent);
+            int id = data.get(getAdapterPosition()).getId();
+
+            Activity activity = (Activity) v.getContext();
+            Intent intent = new Intent(activity, NewsActivity.class);
+
+            intent.putExtra("_id", Integer.valueOf(id));
+            v.getContext().startActivity(intent);
 
         }
 
