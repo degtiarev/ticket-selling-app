@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity
                 ft.replace(R.id.content_frame, fragment);
                 ft.commit();
 
-                getSupportActionBar().setTitle("Settings");
+                getSupportActionBar().setTitle("Настройки профиля");
 
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity
                 ft.replace(R.id.content_frame, fragment);
                 ft.commit();
 
-                getSupportActionBar().setTitle("Authorization");
+                getSupportActionBar().setTitle("Авторизация");
 
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity
 
             case R.id.about:
                 fragment = new AboutFragment();
-                title = getString(R.string.about);
+                title = "О приложении";
                 break;
         }
 
