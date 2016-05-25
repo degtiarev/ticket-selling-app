@@ -27,6 +27,7 @@ import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.MainMenu.AboutFragment;
 import com.delexa.chudobilet.MainMenu.AuthorizationFragment;
 import com.delexa.chudobilet.MainMenu.MyOrdersFragment;
+import com.delexa.chudobilet.MainMenu.NewsFragment;
 import com.delexa.chudobilet.MainMenu.SetingsFragment;
 import com.delexa.chudobilet.MainMenu.TabFragment;
 import com.delexa.chudobilet.SubMenu.SubscriberActivity;
@@ -94,6 +95,13 @@ public class MainActivity extends AppCompatActivity
         });
 
         gettingUserData();
+
+
+        Fragment fragment = new NewsFragment();
+        setTitle(R.string.news);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, fragment);
+        ft.commit();
 
     }
 
@@ -211,6 +219,11 @@ public class MainActivity extends AppCompatActivity
                 fr.setItem("Мастерклассы");
                 fragment = fr;
 
+                break;
+
+            case R.id.news:
+                fragment = new NewsFragment();
+                title = getString(R.string.news);
                 break;
 
             case R.id.my_orders:

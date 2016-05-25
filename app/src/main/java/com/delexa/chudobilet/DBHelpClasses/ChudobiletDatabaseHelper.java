@@ -11,6 +11,7 @@ import android.util.Log;
 import com.delexa.chudobilet.DBClasses.Establishment;
 import com.delexa.chudobilet.DBClasses.Event;
 import com.delexa.chudobilet.DBClasses.EventType;
+import com.delexa.chudobilet.DBClasses.News;
 import com.delexa.chudobilet.DBClasses.Seat;
 import com.delexa.chudobilet.DBClasses.SeatName;
 import com.delexa.chudobilet.DBClasses.Subscription;
@@ -124,6 +125,34 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     "http://new.chudobilet.ru/media/images/events/6029be218a6c189b4cd6bf6f64243760.jpg",
                     null, "http://new.chudobilet.ru/event/1067/", new Date());
 
+            News news1 = new News("В Астрахань приедет с гастролями Липецкий театр драмы", "10,11 и 12 июня Липецкий государственный академический театр драмы им. Л. Толстого на сцене Астраханского Драматического театра покажет спектакли «Квадратура Круга» В. Катаева, «Ужасные родители - С Ума сойти!» Ж. Кокто и сказку для детей «Дюймовочка» Г. Андерсена, Н. Эрдмана. \n" +
+                    "\n" +
+                    "Это одни из самых лучших спектаклей Липецкого театра драмы. Музыкальный спектакль для детей \"Дюймовочка\" по известной сказке Ганса-Христиана Андерсена и сценарию Николая Эрдмана наполнен яркими танцами и песням, а также включает в себя удивительные и разнообразные элементы театрального экспириенса - теневой театр, фонтан из мыльных пузырей и много другого, что порадует как самых маленьких зрителей, так и их родителей.\n" +
+                    "\n" +
+                    "\"Квадратура Круга\" - одно из самых знаменитых произведений Валентина Катаева. Написанная в 1927 г. и через год представленная на сцене МХТ, она до сих пор остается актуальной и интеллигентной \"шуткой Катаева\", рассказывая о простых и вечных ценностях, о молодости и любви, о радости жизни. История двух молодоженов-комсомольцев и их необычная история, рассказанная на фоне обычной квартиры, наполнена искрометным юмором и трогательными поисками любви.\n" +
+                    "\n" +
+                    "Жемчужиной гастролей станет спектакль \"Ужасные родители - С Ума сойти!\" - спектакль, по определению московского режиссера Дмитрия Горника, на грани фарса. В основе сюжета - семейный конфликт, который довольно часто встречается в нашей жизни: властные своенравные родители возражают против того, чтобы сын начал самостоятельную взрослую жизнь с девушкой. Актуальная, яркая и безумно смешная комедия - потрясающий подарок для астраханских зрителей всех возрастов.",
+                    "Три постановки в подарок астраханцам", "http://new.chudobilet.ru/media/images/news/16ef30eaa6942b835d874eddd5f6570a.jpg",
+                    getDateTime("2016-05-23", SHORT_DATE), new Date());
+            News news2 = new News("Cпортивная весна", "А вы уже начали активную подготовку к предстоящему пляжному сезону? Составьте свою программу тренировок, не выходя из дома, с помощью сайта ЧУДОБИЛЕТ! В рубрике «На здоровье» нашего сайта вы можете приобрести билеты на посещение разнообразных тренировок wellness-центра «Идеал» (ул. Куликова, 66, к. 2). Сеансы помогут избавиться от проблем с лишним весом и целлюлитом, восстановят обмен веществ, работу лимфосистемы, мышечный и жизненный тонус. Отличная возможность привести в порядок свое тело, ведь лето уже не за горами!\n" +
+                    "\n" +
+                    "Разработанный план тренировок включает в себя занятия на уникальных wellness-тренажерах нового поколения: Виброплатформа Evo, Тонусные столы, Роликовый массажер Body Roll, Вакуумный тренажер VacuStep, а также Прессотерапию SlimFigure. Вы сами выбираете уровень нагрузки и планируете количество посещений, приобретая билеты онлайн.\n" +
+                    "\n" +
+                    "Кроме того, с помощью сайта ЧУДОБИЛЕТ вы можете приобрести билеты на разовое посещение занятий по восточным танцам, аэробике, на йогу или детский фитнес в wellness-центре «Идеал». \n" +
+                    " \n" +
+                    "Добро пожаловать в мир здоровья и красоты!" +
+                    " \n" +
+                    "С нами каждый день с удовольствием!", "Открываем сезон вместе", "http://new.chudobilet.ru/media/images/news/6ac22a5695f52a4c139334aa855af4c6.jpg",
+                    getDateTime("2016-05-20", SHORT_DATE), new Date());
+            News news3 = new News("\"Ночь музеев-2016\"", "21 мая в Астраханской области пройдет ежегодная весенняя акция «Ночь музеев». Тема мероприятия в этом году — российский кинематограф.\n" +
+                    "Испытать себя на знание советских кинолент, погрузиться в мир коммунального быта и не только, смогут участники многочисленных викторин и интерактивных мероприятий в Краеведческом музее.Парящие острова, межгалактические корабль, безумное чаепитие – всё это ждет посетителей акции «Ночь музеев» в Астраханском кремле. В Артиллерийском дворе развернется презентация театрализованного проекта «Астраханская свадьба». Здесь же будут действовать квесты «Машина времени» и «Азбука стрелецкого снаряжения». На плацу Гауптвахты в исполнении духового казачьего оркестра прозвучат марши из кинофильмов, пройдет развод караула, а около Красной башни развернется музейная обсерватория.\n" +
+                    "В Музее боевой славы откроется выставка «Советская эпоха в лицах, событиях», где будет представлена скульптура, живопись, графика. Музей культуры пригласит на выставку астраханских дизайнеров «Единство контрастов. Дизайн и декор», также там пройдет встреча с В.К. Петрушкиным, краеведом, историком астраханских кинотеатров. Музей истории города предложит погрузиться в «золотой век» русской культуры. При участии Астраханского бального движения пройдет бал в стиле XIX века с котильоном, ручейками и хороводами.\n" +
+                    "В картинной галерее им. П.М. Догадина посетителей ждут обзорные экскурсии, увлекательные квесты, театральные зарисовки, «Ожившие картины» в исполнении студентов колледжа культуры, классическая музыка, литературно-музыкальная композиция «Вначале было Слово» театральной студии под руководством Сергея Тараскина.\n" +
+                    "Дом-музей Б.М. Кустодиева приглашает принять участие в вечерней программе «Весенняя история». Гостей вечера ждут экскурсии по экспозиции и выставке «Весеннее отражение», где представлены живописные произведения и работы в технике горячего батика волгоградской художницы Натальи Рухлиной.\n" +
+                    "В Доме-музее Велимира Хлебникова для любителей нонконформистского искусства на знаменитой Хлебниковской веранде откроется выставка живописных работ Вячеслава Шмагина (г. Дубны, Московская область). Увлекающимся авангардной поэзией будет представлен моноспектакль «Друк другу», где в исполнении Григория Миляшкина прозвучат стихотворения Владимира Друка.\n" +
+                    "Дом купца Г.В.Тетюшинова приглашает побывать на открытии выставки астраханского мастера ткачества и вышивки Натальи Максимовой, увидеть концерт народного ансамбля «Астраханская песня». Различные тематические кинопоказы будут осуществляться в музейных двориках и помещениях галереи: любимые фильмы советской эпохи, краеведческие и научно-популярные фильмы из цикла «Искусство и кино».",
+                    "Какой мы ее увидим?", "http://new.chudobilet.ru/media/images/news/6ae7d32c409a8f6d8ad87355d0e6cf64.jpg", getDateTime("2016-05-19", SHORT_DATE), new Date());
+
 
             EventType eventTypeCinema1 = new EventType(cinemaEvent1, "Кино", new Date());
             EventType eventTypeCinema2 = new EventType(cinemaEvent2, "Кино", new Date());
@@ -133,6 +162,10 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             EventType eventTypeForChildren1 = new EventType(theaterEvent2, "Детям", new Date());
 
             insertUser(db, user);
+
+            insertNews(db, news1);
+            insertNews(db, news2);
+            insertNews(db, news3);
 
             insertEstablishment(db, cinemaEstablishment);
             insertEstablishment(db, concertEstablishment);
@@ -274,6 +307,17 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 "TYPE TEXT, " +
                 "TIMESTAMP NUMERIC);");
 
+
+        // таблица NEWS
+        db.execSQL("CREATE TABLE NEWS (" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "NAME TEXT, " +
+                "ABOUT TEXT, " +
+                "INSHORT TEXT, " +
+                "COVER TEXT, " +
+                "DATE NUMERIC, " +
+                "TIMESTAMP NUMERIC);");
+
     }
 
 
@@ -387,7 +431,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-
     private static void insertSeat(SQLiteDatabase db, Seat seat) {
 
         int eventId = Integer.MAX_VALUE;
@@ -496,6 +539,19 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             Log.d("My Logs", "Ошибка доступа к БД!");
         }
 
+    }
+
+    private static void insertNews(SQLiteDatabase db, News news) {
+        ContentValues newsValues = new ContentValues();
+
+        newsValues.put("NAME", news.getName());
+        newsValues.put("ABOUT", news.getAbout());
+        newsValues.put("INSHORT", news.getInShort());
+        newsValues.put("COVER", news.getCover());
+        newsValues.put("DATE", getDateTime(news.getDate(), SHORT_DATE));
+        newsValues.put("TIMESTAMP", getDateTime(news.getTimeStamp(), LONG_DATE));
+
+        db.insert("NEWS", null, newsValues);
     }
 
 
@@ -724,7 +780,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         for (String i : List1) {
             SeatName seatName = new SeatName();
 
-            if (i.charAt(0) == ' ') i=i.substring(1);
+            if (i.charAt(0) == ' ') i = i.substring(1);
             List<String> List2 = Arrays.asList(i.split("\\s"));
 
             seatName.setSector(List2.get(0));
@@ -738,6 +794,38 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
         return data;
 
+
+    }
+
+    public static List<News> getNews(SQLiteDatabase db) {
+
+        List<News> data = new ArrayList<>();
+
+        try {
+
+            Cursor newCursor = db.rawQuery("SELECT * FROM NEWS", null);
+            while (newCursor.moveToNext()) {
+                News news = new News();
+
+                news.setId(newCursor.getInt(newCursor.getColumnIndex("_id")));
+                news.setName(newCursor.getString(newCursor.getColumnIndex("NAME")));
+                news.setCover(newCursor.getString(newCursor.getColumnIndex("COVER")));
+                news.setInShort(newCursor.getString(newCursor.getColumnIndex("INSHORT")));
+                news.setDate(getDateTime(newCursor.getString(newCursor.getColumnIndex("DATE")), SHORT_DATE));
+                news.setTimeStamp(getDateTime(newCursor.getString(newCursor.getColumnIndex("TIMESTAMP")), LONG_DATE));
+
+                data.add(news);
+            }
+            newCursor.close();
+
+            db.close();
+
+
+        } catch (SQLiteException e) {
+        }
+
+
+        return data;
 
     }
 
