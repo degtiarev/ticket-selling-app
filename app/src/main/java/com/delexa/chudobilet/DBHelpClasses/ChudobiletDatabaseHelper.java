@@ -516,6 +516,41 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public static TicketOrder getTicketOrder(SQLiteDatabase db, int id) {
+
+        List<TicketOrder> data = new ArrayList<>();
+
+        try {
+
+            Cursor newCursor = db.rawQuery("SELECT EVENT.NAME AS EVENTNAME, EVENT.COUNTRY, EVENT.GENRE, EVENT.YEAR, EVENT.AMOUNTTIME, \n" +
+                    "EVENT.FORAGE, EVENT.ROLES, EVENT.ABOUT, EVENT.COVER, EVENT.VIDEOLINK, EVENT.LINK, EVENT.ISNOTIFIED, \n" +
+                    "\n" +
+                    "ESTABLISHMENT.NAME AS ESTABLISHMENTNAME, ESTABLISHMENT.ADDRESS, \n" +
+                    "\n" +
+                    "SEAT.NAME, SEAT.TIMEDATE, SEAT.PRICE, SEAT.SERVICEPRICE, SEAT.ISFREE, \n" +
+                    "\n" +
+                    "TICKETORDER._ID, TICKETORDER.PURCHASEDATE, TICKETORDER.STATUS, TICKETORDER.SERIES, \n" +
+                    "TICKETORDER.NUMBER, TICKETORDER.CODE\n" +
+                    "\n" +
+                    "FROM EVENT, TICKETORDER, ESTABLISHMENT, SEAT\n" +
+                    "\n" +
+                    "WHERE ESTABLISHMENT._ID = EVENT._ESTABLISHMENTID AND EVENT._ID = SEAT._EVENTID AND TICKETORDER._USERID = '1' AND TICKETORDER._SEATID = SEAT._ID AND TICKETORDER._id = " + id +
+                    " GROUP BY TICKETORDER._id", null);
+
+
+            data = cursorToListTicketOrder(newCursor);
+
+            db.close();
+
+
+        } catch (SQLiteException e) {
+        }
+
+
+        return data.get(0);
+
+    }
+
     public static List<String> getEstablishmentListNames(SQLiteDatabase db) {
 
         List<String> data = new ArrayList<>();
@@ -801,9 +836,10 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             establishment.setAddress(newCursor.getString(newCursor.getColumnIndex("ADDRESS")));
 
             seat.setName(newCursor.getString(newCursor.getColumnIndex("NAME")));
-            // seat.setTimeDate(newCursor.getString(newCursor.getColumnIndex(getDateTime("NAME", LONG_DATE))));
-            // seat.setPrice(newCursor.getString(newCursor.getColumnIndex("PRICE")));
-//            seat.setServicePrice(newCursor.getString(newCursor.getColumnIndex("SEVICEPRICE")));
+
+            seat.setTimeDate(getDateTime(newCursor.getString(newCursor.getColumnIndex("TIMEDATE")), LONG_DATE));
+            seat.setPrice(newCursor.getDouble(newCursor.getColumnIndex("PRICE")));
+            seat.setServicePrice(newCursor.getDouble(newCursor.getColumnIndex("SERVICEPRICE")));
             seat.setIsFree(newCursor.getInt(newCursor.getColumnIndex("ISFREE")));
 
             event.setEstablishment(establishment);
@@ -811,7 +847,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             ticketOrder.setSeat(seat);
 
             ticketOrder.setId(newCursor.getInt(newCursor.getColumnIndex("_id")));
-            ticketOrder.setSeries(newCursor.getString(newCursor.getColumnIndex("PURCHASEDATE")));
+            ticketOrder.setPurchaseDate(getDateTime(newCursor.getString(newCursor.getColumnIndex("PURCHASEDATE")), LONG_DATE));
             ticketOrder.setStatus(newCursor.getString(newCursor.getColumnIndex("STATUS")));
             ticketOrder.setSeries(newCursor.getString(newCursor.getColumnIndex("SERIES")));
             ticketOrder.setNumber(newCursor.getString(newCursor.getColumnIndex("NUMBER")));

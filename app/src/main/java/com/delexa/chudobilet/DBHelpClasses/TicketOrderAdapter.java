@@ -14,6 +14,7 @@ import com.delexa.chudobilet.DBClasses.Event;
 import com.delexa.chudobilet.DBClasses.TicketOrder;
 import com.delexa.chudobilet.R;
 import com.delexa.chudobilet.SubMenu.EventActivity;
+import com.delexa.chudobilet.SubMenu.OrderActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
@@ -89,7 +90,7 @@ public class TicketOrderAdapter extends RecyclerView.Adapter<TicketOrderAdapter.
             int id = data.get(getAdapterPosition()).getId();
 
             Activity activity = (Activity) v.getContext();
-            Intent intent = new Intent(activity, EventActivity.class);
+            Intent intent = new Intent(activity, OrderActivity.class);
 
             intent.putExtra("_id", Integer.valueOf(id));
             v.getContext().startActivity(intent);
