@@ -6,6 +6,9 @@
         android:id="@+id/first_group"
         android:checkableBehavior="single">
         <item
+            android:id="@+id/main"
+            android:title="@string/main" />
+        <item
             android:id="@+id/cinema"
             android:title="@string/cinema" />
         <item
@@ -53,14 +56,6 @@
             android:id="@+id/about"
             android:title="@string/about" />
     </group>
-
-    <item
-        android:id="@+id/action_search"
-        android:icon="@android:drawable/ic_menu_search"
-        android:showAsAction="always"
-        android:title="Поиск"
-        app:actionViewClass="android.support.v7.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView"></item>
 
 
 </menu>

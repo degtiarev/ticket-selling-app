@@ -15,7 +15,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,6 +24,7 @@ import android.widget.Toast;
 import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.MainMenu.AboutFragment;
 import com.delexa.chudobilet.MainMenu.AuthorizationFragment;
+import com.delexa.chudobilet.MainMenu.MainFragment;
 import com.delexa.chudobilet.MainMenu.MyOrdersFragment;
 import com.delexa.chudobilet.MainMenu.NewsFragment;
 import com.delexa.chudobilet.MainMenu.SetingsFragment;
@@ -95,8 +95,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         gettingUserData();
 
 
-        Fragment fragment = new NewsFragment();
-        setTitle(R.string.news);
+//        Fragment fragment = new NewsFragment();
+//        setTitle(R.string.news);
+//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        ft.replace(R.id.content_frame, fragment);
+//        ft.commit();
+
+
+        Fragment fragment = new MainFragment();
+        setTitle("Главная");
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, fragment);
         ft.commit();
@@ -152,6 +159,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         switch (id) {
+            case R.id.main:
+                fragment = new MainFragment();
+                title = getString(R.string.main);
+                break;
+
             case R.id.cinema:
                 fragment = new TabFragment();
                 fr = (TabFragment) fragment;

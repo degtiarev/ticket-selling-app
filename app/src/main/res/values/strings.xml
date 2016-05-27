@@ -6,6 +6,7 @@
 
     <string name="action_settings">Settings</string>
 
+    <string name="main">Главная</string>
     <string name="cinema">Кино</string>
     <string name="concerts">Концерты</string>
     <string name="theaters">Театры</string>
@@ -20,6 +21,5 @@
     <string name="news">Новости</string>
     <string name="other_apps">Другие приложения</string>
     <string name="about">О приложении</string>
-
 
 </resources>
