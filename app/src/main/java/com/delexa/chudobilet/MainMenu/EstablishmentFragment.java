@@ -11,12 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.delexa.chudobilet.DBClasses.Establishment;
-import com.delexa.chudobilet.DBClasses.Event;
-import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
-import com.delexa.chudobilet.DBHelpClasses.EstablishmentAdapter;
-import com.delexa.chudobilet.DBHelpClasses.EventAdapter;
-import com.delexa.chudobilet.Link;
+import com.delexa.chudobilet.MainClasses.Establishment;
+import com.delexa.chudobilet.MainClasses.Event;
+import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.Adapters.EstablishmentAdapter;
+import com.delexa.chudobilet.Adapters.EventAdapter;
+import com.delexa.chudobilet.API.Link;
 import com.delexa.chudobilet.R;
 
 import java.util.List;
@@ -91,7 +91,7 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
 //                .build();
 //        service = retrofit.create(Link.class);
 //
-//          Call<List<Event>> events = service.listRepoEve();
+//          Call<List<EventAPI>> events = service.listRepoEve();
 //           magenta.enqueue(this);
 
 
@@ -113,7 +113,7 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
 
     public List<Event> getEvents() {
 
-        SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(getActivity());
+        SQLiteOpenHelper chudobiletDatabaseHelper =  ChudobiletDatabaseHelper.getInstance(getContext());
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
         List<Event> data = ChudobiletDatabaseHelper.getEvents(db, item);
 
@@ -123,7 +123,7 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
 
     public List<Establishment> getCinemas() {
 
-        SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(getActivity());
+        SQLiteOpenHelper chudobiletDatabaseHelper =  ChudobiletDatabaseHelper.getInstance(getContext());
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
         List<Establishment> data = ChudobiletDatabaseHelper.getEstablishments(db, item);
         return data;
@@ -136,11 +136,11 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
 
 //         System.out.println("Мероприятия");
 //        System.out.println(response.body());
-//        SQLiteOpenHelper chudeobiletDatabaseHelper = new ChudobiletDatabaseHelper(App.instance.getApplicationContext(),"magenta",null,1);
+//        SQLiteOpenHelper chudeobiletDatabaseHelper = new ChudobiletDatabaseHelper.getInstance(getcontesxt);
 //        SQLiteDatabase db = magentaDatabaseHelper.getWritableDatabase();
 //        db.execSQL("delete from "+ "MEROPRIATIA");
 //
-//        for(Event k: response.body()){
+//        for(EventAPI k: response.body()){
 //            System.out.println(k._id_meropr);
 //            String insertQuery = "INSERT INTO MEROPRIATIA" +
 //                    " ( _id_meropr, KATEGORIA, NAME,OPISANIE,REITING,PICTURE) VALUES " +

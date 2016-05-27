@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.R;
 
 import java.text.ParseException;

@@ -16,8 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.delexa.chudobilet.DBClasses.Event;
-import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.MainClasses.Event;
+import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.R;
 import com.squareup.picasso.Picasso;
 
@@ -35,7 +35,7 @@ public class EventActivity extends AppCompatActivity {
         final int _id = intent.getIntExtra("_id", Integer.MAX_VALUE);
 
 
-        SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(this);
+        SQLiteOpenHelper chudobiletDatabaseHelper =  ChudobiletDatabaseHelper.getInstance(this);
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
         int amountFreeSeats = ChudobiletDatabaseHelper.getAmountOfFreeSeats(db, _id);
         db = chudobiletDatabaseHelper.getReadableDatabase();

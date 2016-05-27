@@ -11,18 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.delexa.chudobilet.DBClasses.Event;
-import com.delexa.chudobilet.DBClasses.TicketOrder;
-import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
-import com.delexa.chudobilet.DBHelpClasses.EstablishmentAdapter;
-import com.delexa.chudobilet.DBHelpClasses.EventAdapter;
-import com.delexa.chudobilet.DBHelpClasses.TicketOrderAdapter;
+import com.delexa.chudobilet.MainClasses.TicketOrder;
+import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.Adapters.TicketOrderAdapter;
 import com.delexa.chudobilet.R;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
 
 
 /**
@@ -58,7 +52,7 @@ public class MyOrdersFragment extends Fragment {
 
     public List<TicketOrder> getTicketOrders() {
 
-        SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(getActivity());
+        SQLiteOpenHelper chudobiletDatabaseHelper =  ChudobiletDatabaseHelper.getInstance(getContext());
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
         List<TicketOrder> data = ChudobiletDatabaseHelper.getTicketOrders(db);
 

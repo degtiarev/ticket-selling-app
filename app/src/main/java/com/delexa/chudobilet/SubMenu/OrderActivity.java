@@ -11,8 +11,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.delexa.chudobilet.DBClasses.TicketOrder;
-import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.MainClasses.TicketOrder;
+import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -34,7 +34,7 @@ public class OrderActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int id = intent.getIntExtra("_id", Integer.MAX_VALUE);
 
-        SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(this);
+        SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(this);
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
         TicketOrder ticketOrder = ChudobiletDatabaseHelper.getTicketOrder(db, id);
 

@@ -1,29 +1,22 @@
 package com.delexa.chudobilet.SubMenu;
 
-import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 
-import com.delexa.chudobilet.DBClasses.Establishment;
-import com.delexa.chudobilet.DBClasses.Event;
-import com.delexa.chudobilet.DBClasses.SeatName;
-import com.delexa.chudobilet.DBClasses.TicketOrder;
-import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
-import com.delexa.chudobilet.DBHelpClasses.EventAdapter;
-import com.delexa.chudobilet.DBHelpClasses.FavouriteSeatAdapter;
+import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.Adapters.FavouriteSeatAdapter;
+import com.delexa.chudobilet.MainClasses.Establishment;
+import com.delexa.chudobilet.MainClasses.SeatName;
 import com.delexa.chudobilet.R;
 
 import java.util.Collections;
@@ -43,7 +36,7 @@ public class EditSubscriptionInterestActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_subscription_interest);
-        ((AppCompatActivity)this).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) this).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         Intent intent = getIntent();
@@ -53,6 +46,27 @@ public class EditSubscriptionInterestActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                List<SeatName> seatNames = getSeatNames();
+                //     seatNames.add(new SeatName("1", "1", "1"));
+//                String s = "";
+//
+//                for (SeatName seatName : seatNames) {
+//
+//                    s+=seatName.getSector()+" ";
+//                    s+=seatName.getRow()+" ";
+//                    s+=seatName.getSeat()+", ";
+//                }
+//
+//                SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getParent());
+//                SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
+//                ContentValues newValues = new ContentValues();
+//                newValues.put("SEATNAMES", s);
+//
+//                db.update("ESTABLISHMENT", newValues, "NAME = '"+establishmentName+"'", null);
+//
+//
+//                db.close();
+
 
             }
         });
@@ -66,9 +80,11 @@ public class EditSubscriptionInterestActivity extends AppCompatActivity {
 
     public List<SeatName> getSeatNames() {
 
-        SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(this);
+
+        SQLiteOpenHelper chudobiletDatabaseHelper =  ChudobiletDatabaseHelper.getInstance(getParent());
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
         List<SeatName> data = ChudobiletDatabaseHelper.getEstablishmentFavouriteSeatsbyEstablishmentid(db, establishmentName);
+        db.close();
         return data;
 
     }

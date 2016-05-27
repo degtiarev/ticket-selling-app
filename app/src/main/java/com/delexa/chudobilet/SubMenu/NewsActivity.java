@@ -1,6 +1,5 @@
 package com.delexa.chudobilet.SubMenu;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,8 +9,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.delexa.chudobilet.DBClasses.News;
-import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.MainClasses.News;
+import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.R;
 import com.squareup.picasso.Picasso;
 
@@ -33,7 +32,7 @@ public class NewsActivity extends AppCompatActivity {
         final int _id = intent.getIntExtra("_id", Integer.MAX_VALUE);
 
 
-        SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(this);
+        SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(this);
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
         News news = ChudobiletDatabaseHelper.getNews(db, _id);
 

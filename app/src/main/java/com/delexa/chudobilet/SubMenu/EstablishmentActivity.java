@@ -9,9 +9,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
-import com.delexa.chudobilet.DBClasses.Event;
-import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
-import com.delexa.chudobilet.DBHelpClasses.EventAdapter;
+import com.delexa.chudobilet.MainClasses.Event;
+import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.Adapters.EventAdapter;
 import com.delexa.chudobilet.R;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public class EstablishmentActivity extends AppCompatActivity {
 
     public List<Event> getEvents(int id) {
 
-        SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(this);
+        SQLiteOpenHelper chudobiletDatabaseHelper =  ChudobiletDatabaseHelper.getInstance(this);
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
         List<Event> data = ChudobiletDatabaseHelper.getEventsByEstablishment(db, id);
 

@@ -22,7 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.MainMenu.AboutFragment;
 import com.delexa.chudobilet.MainMenu.AuthorizationFragment;
 import com.delexa.chudobilet.MainMenu.MyOrdersFragment;
@@ -32,8 +32,7 @@ import com.delexa.chudobilet.MainMenu.SubscriberFragment;
 import com.delexa.chudobilet.MainMenu.TabFragment;
 import com.squareup.picasso.Picasso;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private SQLiteDatabase db;
     private Cursor userCursor;
@@ -115,12 +114,13 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main, menu);
+//
+//        return true;
+//    }
 
     // выбор из action bar
     @Override
@@ -321,17 +321,13 @@ public class MainActivity extends AppCompatActivity
                     myName.setText(name);
                     myEmail.setText(email);
 
-
                 }
-
-
             }
 
         } catch (SQLiteException e) {
             Toast toast = Toast.makeText(this, "Ошибка достура к БД", Toast.LENGTH_SHORT);
             toast.show();
         }
-
 
     }
 

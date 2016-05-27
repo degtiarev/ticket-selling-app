@@ -11,9 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.delexa.chudobilet.DBClasses.Subscription;
-import com.delexa.chudobilet.DBHelpClasses.ChudobiletDatabaseHelper;
-import com.delexa.chudobilet.DBHelpClasses.SubscriptionAdapter;
+import com.delexa.chudobilet.MainClasses.Subscription;
+import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.Adapters.SubscriptionAdapter;
 import com.delexa.chudobilet.R;
 
 import java.util.List;
@@ -51,7 +51,7 @@ public class EventSubscriptionFragment extends Fragment {
 
     public List<Subscription> getSubscription() {
 
-        SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(getActivity());
+        SQLiteOpenHelper chudobiletDatabaseHelper =  ChudobiletDatabaseHelper.getInstance(getContext());
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
         List<Subscription> data = ChudobiletDatabaseHelper.getSubscription(db);
 
