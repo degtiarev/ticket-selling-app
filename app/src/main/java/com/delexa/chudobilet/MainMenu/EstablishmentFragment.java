@@ -8,6 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -99,12 +102,15 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
             establishmentAdapter = new EstablishmentAdapter(getActivity(), getCinemas());
             recyclerView.setAdapter(establishmentAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            setHasOptionsMenu(false);
         } else if (typeInfo == event)
 
         {
             eventAdapter = new EventAdapter(getActivity(), getEvents());
             recyclerView.setAdapter(eventAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            setHasOptionsMenu(true);
+
         }
 
         return v;
@@ -154,5 +160,25 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
     @Override
     public void onFailure(Call<List<Event>> call, Throwable t) {
         System.out.println("CallListMovie " + t.getLocalizedMessage());
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.main:
+                //newGame();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

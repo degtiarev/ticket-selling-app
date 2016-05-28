@@ -76,11 +76,13 @@ public class EstablishmentAdapter extends RecyclerView.Adapter<EstablishmentAdap
 
 
             int id = data.get(getAdapterPosition()).getId();
+            String name = data.get(getAdapterPosition()).getName();
 
             Activity activity = (Activity) v.getContext();
             Intent intent = new Intent(activity, EstablishmentActivity.class);
 
             intent.putExtra("_id", Integer.valueOf(id));
+            intent.putExtra("name", String.valueOf(name));
             v.getContext().startActivity(intent);
         }
 

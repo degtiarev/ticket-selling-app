@@ -7,6 +7,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -38,6 +41,8 @@ public class SubscriberFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+
 
         View v = inflater.inflate(R.layout.fragment_subscriber, container, false);
 
@@ -88,8 +93,10 @@ public class SubscriberFragment extends Fragment {
         public CharSequence getPageTitle(int position) {
 
             if (position == 0) {
+
                 return "По интересам";
             } else {
+
                 return "По событиям";
 
             }
@@ -100,5 +107,6 @@ public class SubscriberFragment extends Fragment {
             fragments.add(fragment);
         }
     }
+
 
 }

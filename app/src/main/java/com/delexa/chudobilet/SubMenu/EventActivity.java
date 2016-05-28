@@ -51,7 +51,7 @@ public class EventActivity extends AppCompatActivity {
         TextView rolesConst = (TextView) findViewById(R.id.textViewEventsRolesConst);
         TextView about = (TextView) findViewById(R.id.textViewEventAbout);
         ImageView videoLink = (ImageView) findViewById(R.id.imageViewEventVideoLink);
-        ImageView link = (ImageView) findViewById(R.id.imageViewEventLink);
+        Button link = (Button) findViewById(R.id.ButtonEventLink);
         Button button = (Button) findViewById(R.id.Subscribe);
 
         if (event.getVideoLink() != null) {

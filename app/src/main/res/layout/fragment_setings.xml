@@ -303,6 +303,7 @@
                 android:layout_toRightOf="@+id/textViewNotificationForPay"
                 android:text="По SMS" />
 
+
         </RelativeLayout>
     </ScrollView>
 </FrameLayout>

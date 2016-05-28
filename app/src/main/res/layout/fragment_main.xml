@@ -10,15 +10,17 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/TextViewRecomend"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="Рекомендуемые"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
@@ -29,13 +31,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="10dp"></android.support.v7.widget.RecyclerView>
+                android:paddingRight="10dp"></android.support.v7.widget.RecyclerView>
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/TextViewCinema"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="Кино"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
@@ -43,16 +46,17 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/CinemaList"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="10dp"></android.support.v7.widget.RecyclerView>
+                android:paddingRight="10dp"></android.support.v7.widget.RecyclerView>
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/TextViewConcert"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="Концерты"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
@@ -66,8 +70,10 @@
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/TextViewTheater"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="Театры"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
@@ -78,12 +84,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="10dp"></android.support.v7.widget.RecyclerView>
+                android:paddingRight="10dp"></android.support.v7.widget.RecyclerView>
 
             <TextView
+                android:id="@+id/TextViewForChildren"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="Детям"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
@@ -94,12 +101,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="10dp"></android.support.v7.widget.RecyclerView>
+                android:paddingRight="10dp"></android.support.v7.widget.RecyclerView>
 
             <TextView
+                android:id="@+id/TextViewMasterClass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="Мастер-класс"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
@@ -110,13 +118,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="10dp"></android.support.v7.widget.RecyclerView>
+                android:paddingRight="10dp"></android.support.v7.widget.RecyclerView>
 
 
             <TextView
+                android:id="@+id/TextViewOther"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="Другое"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
@@ -127,8 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="10dp"></android.support.v7.widget.RecyclerView>
+                android:paddingRight="10dp"></android.support.v7.widget.RecyclerView>
 
 
         </LinearLayout>

@@ -42,6 +42,8 @@ public class EditSubscriptionInterestActivity extends AppCompatActivity {
         Intent intent = getIntent();
         establishmentName = intent.getStringExtra("establishmentName");
 
+        setTitle(establishmentName);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -85,6 +85,7 @@ public class TabFragment extends Fragment {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
+
         return v;
     }
 
