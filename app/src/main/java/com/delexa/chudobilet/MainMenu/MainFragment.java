@@ -32,7 +32,6 @@ public class MainFragment extends Fragment {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -110,6 +109,7 @@ public class MainFragment extends Fragment {
                 fragment.setType1("Фильмы");
                 fragment.setType2("Кинотеатры");
                 fragment.setItem("Кино");
+                getActivity().setTitle("Кино");
 
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_frame, fragment);
@@ -185,6 +185,8 @@ public class MainFragment extends Fragment {
 
         return v;
     }
+
+
 
     public List<Event> getEvents(String type) {
 

@@ -43,6 +43,8 @@ public class User {
         this.timeStamp = timeStamp;
     }
 
+    public User() {
+    }
 
     public int getId() {
         return id;

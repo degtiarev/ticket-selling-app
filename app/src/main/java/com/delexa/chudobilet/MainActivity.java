@@ -45,6 +45,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+//        Intent intent = new Intent(this, MyIntentService.class);
+//        intent.putExtra(MyIntentService.EXTRA_MESSAGE, "Timing!");
+//        startService(intent);
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
