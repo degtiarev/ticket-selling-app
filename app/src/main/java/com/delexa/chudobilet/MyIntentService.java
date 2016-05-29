@@ -14,7 +14,7 @@ import android.support.v4.app.TaskStackBuilder;
 public class MyIntentService extends IntentService {
 
 
-    public static final String EXTRA_MESSAGE = "message";
+    public static final String EXTRA_MESSAGE = "Чудобилет";
     public static final int NOTIFICATION_ID = 5453;
 
     public MyIntentService() {
@@ -43,7 +43,7 @@ public class MyIntentService extends IntentService {
         PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT
         );
         Notification notification = new Notification.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher).setContentTitle(getString(R.string.app_name))
+                .setSmallIcon(R.mipmap.ic_launcher).setContentTitle("Чудобилет")
                 .setAutoCancel(true).setPriority(Notification.PRIORITY_MAX)
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setContentIntent(pendingIntent).

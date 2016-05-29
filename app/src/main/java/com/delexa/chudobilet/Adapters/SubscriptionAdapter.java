@@ -1,7 +1,9 @@
 package com.delexa.chudobilet.Adapters;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -97,7 +99,7 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
         public void onClick(View v) {
 
 //            int id = data.get(getAdapterPosition()).getId();
-//
+
 //            Activity activity = (Activity) v.getContext();
 //            Intent intent = new Intent(activity, SubscriptionActivity.class);
 //

@@ -18,9 +18,6 @@ import com.delexa.chudobilet.R;
 
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class EventSubscriptionFragment extends Fragment {
 
 

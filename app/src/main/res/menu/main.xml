@@ -47,4 +47,12 @@
         android:title="Позже"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:showAsAction="always"
+        android:title="Поиск"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView"></item>
+
 </menu>

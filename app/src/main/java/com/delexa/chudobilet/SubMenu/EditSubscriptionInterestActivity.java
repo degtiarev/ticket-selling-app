@@ -48,45 +48,52 @@ public class EditSubscriptionInterestActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                List<SeatName> seatNames = getSeatNames();
-                //     seatNames.add(new SeatName("1", "1", "1"));
-//                String s = "";
-//
-//                for (SeatName seatName : seatNames) {
-//
-//                    s+=seatName.getSector()+" ";
-//                    s+=seatName.getRow()+" ";
-//                    s+=seatName.getSeat()+", ";
-//                }
-//
-//                SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getParent());
-//                SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
-//                ContentValues newValues = new ContentValues();
-//                newValues.put("SEATNAMES", s);
-//
-//                db.update("ESTABLISHMENT", newValues, "NAME = '"+establishmentName+"'", null);
-//
-//
-//                db.close();
+                List<SeatName> seatNames = getSeatNames();
+                seatNames.add(new SeatName("1", "1", "1"));
+                String s = "";
 
+                for (SeatName seatName : seatNames) {
+
+                    s += seatName.getSector() + " ";
+                    s += seatName.getRow() + " ";
+                    s += seatName.getSeat() + ", ";
+                }
+
+                s = s.substring(0, s.length() - 1);
+
+                SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getParent());
+                SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
+                ContentValues newValues = new ContentValues();
+                newValues.put("FAVOURITESEATS", s);
+
+                db.update("ESTABLISHMENT", newValues, "NAME = '" + establishmentName + "'", null);
+                db.close();
+
+                favouriteSeatAdapter = new FavouriteSeatAdapter(getParent(), getSeatNames(), establishmentName);
+                recyclerView.setAdapter(favouriteSeatAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getParent()));
 
             }
         });
 
+
         recyclerView = (RecyclerView) findViewById(R.id.SeatsList);
-        favouriteSeatAdapter = new FavouriteSeatAdapter(this, getSeatNames());
+        favouriteSeatAdapter = new FavouriteSeatAdapter(this, getSeatNames(), establishmentName);
         recyclerView.setAdapter(favouriteSeatAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+
+
 
     }
 
     public List<SeatName> getSeatNames() {
 
-
-        SQLiteOpenHelper chudobiletDatabaseHelper =  ChudobiletDatabaseHelper.getInstance(getParent());
+        SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getParent());
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
         List<SeatName> data = ChudobiletDatabaseHelper.getEstablishmentFavouriteSeatsbyEstablishmentid(db, establishmentName);
-        db.close();
         return data;
 
     }

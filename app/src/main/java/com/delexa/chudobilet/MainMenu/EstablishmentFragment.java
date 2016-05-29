@@ -5,8 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,6 +24,7 @@ import com.delexa.chudobilet.MainClasses.Establishment;
 import com.delexa.chudobilet.MainClasses.Event;
 import com.delexa.chudobilet.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -30,7 +33,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-public class EstablishmentFragment extends Fragment implements Callback<List<Event>> {
+public class EstablishmentFragment extends Fragment implements Callback<List<Event>>, SearchView.OnQueryTextListener {
 
     final static String place = "place";
     final static String event = "event";
@@ -39,6 +42,8 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
     private RecyclerView recyclerView;
     private EventAdapter eventAdapter;
     private EstablishmentAdapter establishmentAdapter;
+    private List<Event> events;
+    private View v;
 
 
     private String item;
@@ -84,27 +89,37 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
 
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.fragment_event_tab, container, false);
+        v = inflater.inflate(R.layout.fragment_event_tab, container, false);
         recyclerView = (RecyclerView) v.findViewById(R.id.EventList);
 
+
+        return v;
+    }
+
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
 
         if (typeInfo == place) {
             establishmentAdapter = new EstablishmentAdapter(getActivity(), getCinemas());
             recyclerView.setAdapter(establishmentAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
             setHasOptionsMenu(false);
         } else if (typeInfo == event)
 
         {
-            eventAdapter = new EventAdapter(getActivity(), getEvents());
+            setHasOptionsMenu(true);
+            events = getEvents();
+            eventAdapter = new EventAdapter(getActivity(), events);
             recyclerView.setAdapter(eventAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            setHasOptionsMenu(true);
 
         }
 
-        return v;
+
     }
 
 
@@ -138,12 +153,44 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
         System.out.println("CallListMovie " + t.getLocalizedMessage());
     }
 
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main, menu);
-        super.onCreateOptionsMenu(menu, inflater);
+//        super.onCreateOptionsMenu(menu, inflater);
+//
+        final MenuItem item = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setQueryHint("Поиск");
+        searchView.setOnQueryTextListener(this);
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        final List<Event> filteredModelList = filter(events, query);
+        eventAdapter.animateTo(filteredModelList);
+        recyclerView.scrollToPosition(0);
+        return true;
+    }
+
+
+    private List<Event> filter(List<Event> models, String query) {
+        query = query.toLowerCase();
+
+        final List<Event> filteredModelList = new ArrayList<>();
+        for (Event curEvent : models) {
+            final String text = curEvent.getName().toLowerCase();
+            if (text.contains(query)) {
+                filteredModelList.add(curEvent);
+            }
+        }
+        return filteredModelList;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -44,11 +44,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+//
 //        Intent intent = new Intent(this, MyIntentService.class);
-//        intent.putExtra(MyIntentService.EXTRA_MESSAGE, "Timing!");
+//        intent.putExtra(MyIntentService.EXTRA_MESSAGE, "Новое событие по вашим подпискам!");
 //        startService(intent);
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -11,9 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.delexa.chudobilet.MainClasses.TicketOrder;
 import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.Adapters.TicketOrderAdapter;
+import com.delexa.chudobilet.MainClasses.TicketOrder;
 import com.delexa.chudobilet.R;
 
 import java.util.List;
@@ -25,7 +25,7 @@ import java.util.List;
 public class MyOrdersFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private TicketOrderAdapter ticketOrderAdapter ;
+    private TicketOrderAdapter ticketOrderAdapter;
 
 
     public MyOrdersFragment() {
@@ -47,18 +47,16 @@ public class MyOrdersFragment extends Fragment {
 
 
         return v;
-
     }
 
     public List<TicketOrder> getTicketOrders() {
 
-        SQLiteOpenHelper chudobiletDatabaseHelper =  ChudobiletDatabaseHelper.getInstance(getContext());
+        SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getContext());
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
         List<TicketOrder> data = ChudobiletDatabaseHelper.getTicketOrders(db);
 
         return data;
     }
-
 
 
 }

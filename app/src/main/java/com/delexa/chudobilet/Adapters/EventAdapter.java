@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.delexa.chudobilet.MainClasses.Event;
+import com.delexa.chudobilet.MainClasses.News;
 import com.delexa.chudobilet.SubMenu.EventActivity;
 import com.squareup.picasso.Picasso;
 
@@ -74,6 +75,61 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         return data.size();
     }
 
+    //поиск
+
+    public void animateTo(List<Event> models) {
+        applyAndAnimateRemovals(models);
+        applyAndAnimateAdditions(models);
+        applyAndAnimateMovedItems(models);
+    }
+
+    private void applyAndAnimateRemovals(List<Event> newModels) {
+        for (int i = data.size() - 1; i >= 0; i--) {
+            final Event model = data.get(i);
+            if (!newModels.contains(model)) {
+                removeItem(i);
+            }
+        }
+    }
+
+    private void applyAndAnimateAdditions(List<Event> newModels) {
+        for (int i = 0, count = newModels.size(); i < count; i++) {
+            final Event model = newModels.get(i);
+            if (!data.contains(model)) {
+                addItem(i, model);
+            }
+        }
+    }
+
+    private void applyAndAnimateMovedItems(List<Event> newModels) {
+        for (int toPosition = newModels.size() - 1; toPosition >= 0; toPosition--) {
+            final Event model = newModels.get(toPosition);
+            final int fromPosition = data.indexOf(model);
+            if (fromPosition >= 0 && fromPosition != toPosition) {
+                moveItem(fromPosition, toPosition);
+            }
+        }
+    }
+
+    public Event removeItem(int position) {
+        final Event model = data.remove(position);
+        notifyItemRemoved(position);
+        return model;
+    }
+
+    public void addItem(int position, Event model) {
+        data.add(position, model);
+        notifyItemInserted(position);
+    }
+
+    public void moveItem(int fromPosition, int toPosition) {
+        final Event model = data.remove(fromPosition);
+        data.add(toPosition, model);
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+
+//поиск
 
     class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 

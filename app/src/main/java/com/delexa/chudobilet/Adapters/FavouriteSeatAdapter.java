@@ -2,11 +2,14 @@ package com.delexa.chudobilet.Adapters;
 
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.delexa.chudobilet.MainClasses.SeatName;
 import com.delexa.chudobilet.R;
@@ -17,10 +20,12 @@ import java.util.List;
 public class FavouriteSeatAdapter extends RecyclerView.Adapter<FavouriteSeatAdapter.EstablishmentViewHolder> {
 
     List<SeatName> data = Collections.emptyList();
+    String establishmentName;
 
-    public FavouriteSeatAdapter(Context context, List<SeatName> data) {
+    public FavouriteSeatAdapter(Context context, List<SeatName> data, String establishmentName) {
 
         this.data = data;
+        this.establishmentName = establishmentName;
 
     }
 
@@ -54,6 +59,7 @@ public class FavouriteSeatAdapter extends RecyclerView.Adapter<FavouriteSeatAdap
         EditText sector;
         EditText row;
         EditText seat;
+        ImageView delete;
 
 
         public EstablishmentViewHolder(View itemView) {
@@ -67,21 +73,26 @@ public class FavouriteSeatAdapter extends RecyclerView.Adapter<FavouriteSeatAdap
             row = (EditText) itemView.findViewById(R.id.editTextRow);
             seat = (EditText) itemView.findViewById(R.id.editTextSeat);
 
+            delete = (ImageView) itemView.findViewById(R.id.delete_img);
+            delete.setOnClickListener(this);
+
         }
 
         @Override
         public void onClick(View v) {
+            SeatName seatName = data.get(getAdapterPosition());
 
 
-//            int id = data.get(getAdapterPosition()).getId();
-//
-//            Activity activity = (Activity) v.getContext();
-//            Intent intent = new Intent(activity, EstablishmentActivity.class);
-//
-//            intent.putExtra("_id", Integer.valueOf(id));
-//            v.getContext().startActivity(intent);
+            if (v.getId() == R.id.delete_img) {
+
+                SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(v.getContext());
+                SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
+                ChudobiletDatabaseHelper.deleteSeatBySeatNamendEstablishmentName(db, establishmentName, seatName);
+
+            }
+
         }
-
-
     }
+
+
 }

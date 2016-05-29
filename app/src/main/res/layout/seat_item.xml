@@ -47,6 +47,14 @@
                 android:textSize="15dp" />
 
 
+            <ImageView
+                android:id="@+id/delete_img"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="0"
+                android:src="@drawable/icon_cross" />
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -86,8 +94,6 @@
 
 
     </LinearLayout>
-
-
 
 
 </android.support.v7.widget.CardView>

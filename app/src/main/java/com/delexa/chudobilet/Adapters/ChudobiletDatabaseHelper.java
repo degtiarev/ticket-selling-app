@@ -849,20 +849,22 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         } catch (SQLiteException e) {
         }
 
-        List<String> List1 = Arrays.asList(seats.split(","));
+        try {
+            List<String> List1 = Arrays.asList(seats.split(","));
 
-        for (String i : List1) {
-            SeatName seatName = new SeatName();
+            for (String i : List1) {
+                SeatName seatName = new SeatName();
 
-            if (i.charAt(0) == ' ') i = i.substring(1);
-            List<String> List2 = Arrays.asList(i.split("\\s"));
+                if (i.charAt(0) == ' ') i = i.substring(1);
+                List<String> List2 = Arrays.asList(i.split("\\s"));
 
-            seatName.setSector(List2.get(0));
-            seatName.setRow(List2.get(1));
-            seatName.setSeat(List2.get(2));
+                seatName.setSector(List2.get(0));
+                seatName.setRow(List2.get(1));
+                seatName.setSeat(List2.get(2));
 
-            data.add(seatName);
-
+                data.add(seatName);
+            }
+        } catch (Exception e) {
         }
 
 
@@ -935,7 +937,6 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-
     public static User getUser(SQLiteDatabase db) {
 
         User user = new User();
@@ -972,6 +973,39 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+
+    // delete
+
+    public static void deleteSeatBySeatNamendEstablishmentName(SQLiteDatabase db, String establishmentName, SeatName seatName) {
+
+        String currentValue = "";
+        try {
+            Cursor newCursor = db.rawQuery("SELECT FAVOURITESEATS FROM ESTABLISHMENT" +
+                    " WHERE ESTABLISHMENT.NAME = '" + establishmentName + "'", null);
+
+            while (newCursor.moveToNext()) {
+
+                currentValue = newCursor.getString(0);
+            }
+
+            String seat = seatName.getSector() + " " + seatName.getRow() + " " + seatName.getSeat() + ", ";
+            String s = currentValue.replace(seat, "");
+
+            if (currentValue.length() == 7 || currentValue.length() == 6) s = "";
+
+
+            ContentValues newValues = new ContentValues();
+            newValues.put("FAVOURITESEATS", s);
+            db.update("ESTABLISHMENT", newValues, "NAME = '" + establishmentName + "'", null);
+
+            db.close();
+
+
+        } catch (SQLiteException e) {
+        }
+
+
+    }
 
     //  converters from cursor
 

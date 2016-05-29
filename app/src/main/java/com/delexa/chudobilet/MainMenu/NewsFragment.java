@@ -113,7 +113,6 @@ public class NewsFragment extends Fragment implements Callback<List<NewsAPI>>, S
 
     }
 
-
     @Override
     public void onFailure(Call<List<NewsAPI>> call, Throwable t) {
 
@@ -142,7 +141,6 @@ public class NewsFragment extends Fragment implements Callback<List<NewsAPI>>, S
             }
         }, 3000);
     }
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
