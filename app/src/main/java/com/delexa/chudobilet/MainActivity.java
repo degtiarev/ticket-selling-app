@@ -2,9 +2,7 @@ package com.delexa.chudobilet;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -22,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.MainClasses.User;
 import com.delexa.chudobilet.MainMenu.AboutFragment;
 import com.delexa.chudobilet.MainMenu.AuthorizationFragment;
 import com.delexa.chudobilet.MainMenu.MainFragment;
@@ -33,9 +32,6 @@ import com.delexa.chudobilet.MainMenu.TabFragment;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private SQLiteDatabase db;
-    private Cursor userCursor;
 
 
     @Override
@@ -96,14 +92,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        gettingUserData();
+        View header = navigationView.getHeaderView(0);
+        TextView myName = (TextView) header.findViewById(R.id.textViewName);
+        TextView myEmail = (TextView) header.findViewById(R.id.textViewEmail);
+        ImageView myPhoto = (ImageView) header.findViewById(R.id.imageViewPhoto);
 
+        ChudobiletDatabaseHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(this);
+        SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
+        if (ChudobiletDatabaseHelper.isAuthorized(db)) {
 
-//        Fragment fragment = new NewsFragment();
-//        setTitle(R.string.news);
-//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//        ft.replace(R.id.content_frame, fragment);
-//        ft.commit();
+            db = chudobiletDatabaseHelper.getWritableDatabase();
+            User user = ChudobiletDatabaseHelper.getUser(db);
+
+            Picasso.with(this) //передаем контекст приложения
+                    .load(user.getImage())
+                    .placeholder(R.drawable.no_photo)
+                    .error(R.drawable.ic_menu_camera)
+                    .into(myPhoto); //ссылка на ImageView
+
+            myName.setText(user.getName());
+            myEmail.setText(user.getEmail());
+        } else {
+
+            myPhoto.setImageResource(R.drawable.no_photo);
+            myName.setText("Для авторизации");
+            myEmail.setText("нажмите на картинку");
+
+        }
 
 
         Fragment fragment = new MainFragment();
@@ -283,69 +298,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    @Override
-    public void onRestart() {
-        super.onRestart();
-        gettingUserData();
-    }
-
-
-    // закрытие курсора и бд
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        userCursor.close();
-        db.close();
-    }
-
-    private void gettingUserData() {
-        try {
-
-            ChudobiletDatabaseHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(this);
-            db = chudobiletDatabaseHelper.getReadableDatabase();
-            Cursor newCursor = db.query("USER",
-                    new String[]{"NAME", "EMAIL", "PHOTO"},
-                    null,
-                    null, null, null, null);
-
-            userCursor = newCursor;
-
-            if (userCursor.getCount() == 1) {
-                if (userCursor.moveToFirst()) {
-
-
-                    String name = userCursor.getString(0);
-                    String email = userCursor.getString(1);
-                    String cover = userCursor.getString(2);
-
-
-                    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-                    navigationView.setNavigationItemSelectedListener(this);
-                    View header = navigationView.getHeaderView(0);
-                    TextView myName = (TextView) header.findViewById(R.id.textViewName);
-                    TextView myEmail = (TextView) header.findViewById(R.id.textViewEmail);
-                    ImageView myPhoto = (ImageView) header.findViewById(R.id.imageViewPhoto);
-
-
-                    Picasso.with(this) //передаем контекст приложения
-                            .load(cover)
-                            .placeholder(R.drawable.no_photo)
-                            .error(R.drawable.ic_menu_camera)
-                            .into(myPhoto); //ссылка на ImageView
-
-                    myName.setText(name);
-                    myEmail.setText(email);
-
-                }
-            }
-
-        } catch (SQLiteException e) {
-            Toast toast = Toast.makeText(this, "Ошибка достура к БД", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-
-    }
-
 
 }

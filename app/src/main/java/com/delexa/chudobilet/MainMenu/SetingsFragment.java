@@ -5,6 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,6 +19,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.MainActivity;
 import com.delexa.chudobilet.MainClasses.User;
 import com.delexa.chudobilet.R;
 
@@ -42,10 +46,23 @@ public class SetingsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_setings, container, false);
-        setHasOptionsMenu(true);
 
         SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getContext());
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
+        if (ChudobiletDatabaseHelper.isAuthorized(db) == false) {
+
+            Fragment fragment = new AuthorizationFragment();
+
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
+
+        }
+
+
+        setHasOptionsMenu(true);
+
+        db = chudobiletDatabaseHelper.getReadableDatabase();
         User user = ChudobiletDatabaseHelper.getUser(db);
 
         EditText editTextName = (EditText) view.findViewById(R.id.editTextName);

@@ -944,7 +944,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
             Cursor newCursor = db.query("USER",
                     new String[]{"NAME", "FAMILY", "PATRONYMIC", "EMAIL", "DATE", "SEX", "NOTIFICATIONTOPAY", "EMAILNOTIFICATIONCHANGESTATUS",
-                            "NEWSSUBSCRIBER", "PHONE", "PASSWORD", "TIMESTAMP"},
+                            "NEWSSUBSCRIBER", "PHONE", "PASSWORD", "PHOTO", "TIMESTAMP"},
                     null, null, null, null, null);
 
 
@@ -961,7 +961,8 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 user.setNewsSubscriber(newCursor.getString(8));
                 user.setPhone(newCursor.getString(9));
                 user.setPassword(newCursor.getString(10));
-                user.setTimeStamp(getDateTime(newCursor.getString(11), LONG_DATE));
+                user.setImage(newCursor.getString(11));
+                user.setTimeStamp(getDateTime(newCursor.getString(12), LONG_DATE));
             }
 
 
@@ -981,7 +982,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
             Cursor newCursor = db.query("USER",
                     new String[]{"NAME", "FAMILY", "PATRONYMIC", "EMAIL", "DATE", "SEX", "NOTIFICATIONTOPAY", "EMAILNOTIFICATIONCHANGESTATUS",
-                            "NEWSSUBSCRIBER", "PHONE", "PASSWORD", "TIMESTAMP"},
+                            "NEWSSUBSCRIBER", "PHONE", "PASSWORD", "TIMESTAMP",},
                     null, null, null, null, null);
 
 
