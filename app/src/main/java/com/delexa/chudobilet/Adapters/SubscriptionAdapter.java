@@ -1,13 +1,17 @@
 package com.delexa.chudobilet.Adapters;
 
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +26,7 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
 
     private LayoutInflater inflater;
     List<Subscription> data = Collections.emptyList();
-    Context context;
+    View view;
 
 
     public SubscriptionAdapter(Context context, List<Subscription> data) {
@@ -35,7 +39,7 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
     @Override
     public SubscriptionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.subscription_item, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.subscription_item, parent, false);
         SubscriptionViewHolder holder = new SubscriptionViewHolder(view);
 
         return holder;
@@ -98,13 +102,43 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
         @Override
         public void onClick(View v) {
 
-//            int id = data.get(getAdapterPosition()).getId();
+            final int id = data.get(getAdapterPosition()).getId();
 
-//            Activity activity = (Activity) v.getContext();
-//            Intent intent = new Intent(activity, SubscriptionActivity.class);
-//
-//            intent.putExtra("_id", Integer.valueOf(id));
-//            v.getContext().startActivity(intent);
+            SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(view.getContext());
+            SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
+            int amountSeats = ChudobiletDatabaseHelper.getSubscriptionById(db, id).getAmountSeats();
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
+
+            alert.setTitle("Сколько мест необходимо?");
+            alert.setMessage("Введите количество мест");
+
+            // Set an EditText view to get user input
+            final EditText input = new EditText(v.getContext());
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setText(Integer.toString(amountSeats));
+            alert.setView(input);
+
+
+            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+
+                    SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(view.getContext());
+                    SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
+                    ChudobiletDatabaseHelper.setAmountSeats(db, id, Integer.parseInt(input.getText().toString()));
+                }
+            });
+
+            alert.setNegativeButton("Удалить", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+
+                    SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(view.getContext());
+                    SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
+                    ChudobiletDatabaseHelper.removeSubscriptionById(db, id);
+                }
+            });
+
+            alert.show();
 
         }
 

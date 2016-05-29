@@ -592,6 +592,26 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    // set
+
+    public static void setGenresAndRoles(SQLiteDatabase db, String genre, String roles) {
+
+        ContentValues newValues = new ContentValues();
+        newValues.put("INTERESTGENRE", genre);
+        newValues.put("INTERESTROLES", roles);
+
+        db.update("USER", newValues, "_id = 1", null);
+    }
+
+    public static void setAmountSeats(SQLiteDatabase db, int id, int amount) {
+
+        ContentValues newValues = new ContentValues();
+        newValues.put("AMOUNTSEATS", amount);
+
+        db.update("SUBSCRIPTION", newValues, "_id = " + id, null);
+    }
+
+
     // get
 
     public static List<Event> getEvents(SQLiteDatabase db, String eventType) {
@@ -807,6 +827,30 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public static Subscription getSubscriptionById(SQLiteDatabase db, int id) {
+
+        List<Subscription> data = new ArrayList<>();
+
+        try {
+
+            Cursor newCursor = db.rawQuery("SELECT SUBSCRIPTION._id, SUBSCRIPTION.AMOUNTSEATS, SUBSCRIPTION.ISNOTIFIED,\n" +
+                    "EVENT.NAME AS EVENTNAME, EVENT.COUNTRY, EVENT.GENRE, EVENT.YEAR, EVENT.AMOUNTTIME, EVENT.FORAGE, EVENT.ROLES, EVENT.ABOUT, EVENT.COVER, EVENT.VIDEOLINK, EVENT.LINK,\n" +
+                    "ESTABLISHMENT.ADDRESS, ESTABLISHMENT.NAME AS ESTABLISHMENTNAME\n" +
+                    "FROM EVENT, ESTABLISHMENT, SUBSCRIPTION \n" +
+                    "WHERE  (EVENT._id = SUBSCRIPTION._EVENTID AND ESTABLISHMENT._ID = EVENT._ESTABLISHMENTID)\n" +
+                    "GROUP BY SUBSCRIPTION._id", null);
+
+            data = cursorToListSubscription(newCursor);
+
+            db.close();
+
+        } catch (SQLiteException e) {
+        }
+
+        return data.get(0);
+
+    }
+
     public static int getAmountOfFreeSeats(SQLiteDatabase db, int id) {
 
         int amount = 0;
@@ -944,9 +988,8 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
             Cursor newCursor = db.query("USER",
                     new String[]{"NAME", "FAMILY", "PATRONYMIC", "EMAIL", "DATE", "SEX", "NOTIFICATIONTOPAY", "EMAILNOTIFICATIONCHANGESTATUS",
-                            "NEWSSUBSCRIBER", "PHONE", "PASSWORD", "PHOTO", "TIMESTAMP"},
+                            "NEWSSUBSCRIBER", "PHONE", "PASSWORD", "PHOTO", "INTERESTGENRE", "INTERESTROLES", "TIMESTAMP"},
                     null, null, null, null, null);
-
 
             if (newCursor.moveToFirst()) {
 
@@ -962,7 +1005,9 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                 user.setPhone(newCursor.getString(9));
                 user.setPassword(newCursor.getString(10));
                 user.setImage(newCursor.getString(11));
-                user.setTimeStamp(getDateTime(newCursor.getString(12), LONG_DATE));
+                user.setInterestGenre(newCursor.getString(12));
+                user.setInterestRoles(newCursor.getString(13));
+                user.setTimeStamp(getDateTime(newCursor.getString(14), LONG_DATE));
             }
 
 
@@ -1087,6 +1132,18 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
 
     }
+
+    public static void removeSubscriptionById(SQLiteDatabase db, int id) {
+
+        try {
+
+            db.delete("SUBSCRIPTION", "_id = " + id, null);
+            db.close();
+
+        } catch (SQLiteException e) {
+        }
+    }
+
 
     //  converters from cursor
 

@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,10 +16,12 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.MainClasses.User;
 import com.delexa.chudobilet.R;
 import com.delexa.chudobilet.SubMenu.EditSubscriptionInterestActivity;
 
@@ -31,6 +32,7 @@ import java.util.List;
  */
 public class SubscriptionInterestFragment extends Fragment {
 
+    View v;
 
     public SubscriptionInterestFragment() {
         // Required empty public constructor
@@ -43,7 +45,7 @@ public class SubscriptionInterestFragment extends Fragment {
         // Inflate the layout for this fragment
 
         setHasOptionsMenu(true);
-        View v = inflater.inflate(R.layout.fragment_subscription_interest, container, false);
+        v = inflater.inflate(R.layout.fragment_subscription_interest, container, false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         final ListView listView = (ListView) v.findViewById(R.id.listViewEstablishments);
@@ -75,7 +77,13 @@ public class SubscriptionInterestFragment extends Fragment {
                 }
         );
 
+        EditText genre = (EditText) v.findViewById(R.id.editTextGenre);
+        EditText roles = (EditText) v.findViewById(R.id.editTextRoles);
+        db = chudobiletDatabaseHelper.getReadableDatabase();
+        User user = ChudobiletDatabaseHelper.getUser(db);
 
+        genre.setText(user.getInterestGenre());
+        roles.setText(user.getInterestRoles());
         return v;
 
     }
@@ -90,7 +98,15 @@ public class SubscriptionInterestFragment extends Fragment {
         int id = item.getItemId();
         switch (id) {
             case R.id.toSave:
-                // do stuff
+
+                EditText genre = (EditText) v.findViewById(R.id.editTextGenre);
+                EditText roles = (EditText) v.findViewById(R.id.editTextRoles);
+
+                SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getContext());
+                SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
+                ChudobiletDatabaseHelper.setGenresAndRoles(db,genre.getText().toString(),roles.getText().toString());
+
+
                 return true;
 
         }
