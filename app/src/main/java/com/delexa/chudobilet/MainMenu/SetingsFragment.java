@@ -6,7 +6,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -59,7 +61,6 @@ public class SetingsFragment extends Fragment {
 
         }
 
-
         setHasOptionsMenu(true);
 
         db = chudobiletDatabaseHelper.getReadableDatabase();
@@ -97,6 +98,14 @@ public class SetingsFragment extends Fragment {
         if (user.getNewsSubscriber().charAt(1) == '1')
             checkBoxNotificationAboutNewEventsSMS.setChecked(true);
 
+
+        editTextBirthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         return view;
     }
 
@@ -125,5 +134,12 @@ public class SetingsFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        ActionBar actionBar = activity.getSupportActionBar();
+        actionBar.setTitle("Настройки");
+    }
 
 }

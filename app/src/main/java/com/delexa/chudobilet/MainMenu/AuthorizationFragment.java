@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +53,18 @@ public class AuthorizationFragment extends Fragment {
                 startActivity(browserIntent);
             }
         });
+
+
+        SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(getContext());
+        SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
+        if (ChudobiletDatabaseHelper.isAuthorized(db)) {
+            getActivity().setTitle("Настройки");
+            Fragment fragment = new SetingsFragment();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
+
+        }
 
 
         enter.setOnClickListener(new View.OnClickListener() {
@@ -105,5 +119,14 @@ public class AuthorizationFragment extends Fragment {
 
         return v;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        ActionBar actionBar = activity.getSupportActionBar();
+        actionBar.setTitle("Авторизация");
+    }
+
 
 }
