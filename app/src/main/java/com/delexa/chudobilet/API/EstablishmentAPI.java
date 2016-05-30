@@ -1,32 +1,24 @@
 package com.delexa.chudobilet.API;
 
+import com.delexa.chudobilet.MainClasses.Establishment;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class EstablishmentAPI {
 
-    private int id;
     private String name;
     private String address;
-    private Date timeStamp;
-    private String favouriteSeats;
+    private String timeStamp;
 
     public EstablishmentAPI() {
     }
 
-
-    public EstablishmentAPI(String name, String address, Date timeStamp, String favouriteSeats) {
+    public EstablishmentAPI(String name, String address, String timeStamp) {
         this.name = name;
         this.address = address;
         this.timeStamp = timeStamp;
-        this.favouriteSeats = favouriteSeats;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -45,19 +37,32 @@ public class EstablishmentAPI {
         this.address = address;
     }
 
-    public Date getTimeStamp() {
+    public String getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(Date timeStamp) {
+    public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
 
-    public String getFavouriteSeats() {
-        return favouriteSeats;
+    public Establishment getEstablishment() {
+        Establishment establishment = new Establishment();
+
+        establishment.setName(name);
+        establishment.setAddress(address);
+
+        SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+
+            Date curTimesStamp = formatter2.parse(timeStamp);
+            establishment.setTimeStamp(curTimesStamp);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return establishment;
     }
 
-    public void setFavouriteSeats(String favouriteSeats) {
-        this.favouriteSeats = favouriteSeats;
-    }
 }

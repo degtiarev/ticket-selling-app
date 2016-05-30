@@ -178,4 +178,8 @@ public class NewsFragment extends Fragment implements Callback<List<NewsAPI>>, S
         return filteredModelList;
     }
 
+
+
+
+
 }

@@ -1,6 +1,8 @@
 package com.delexa.chudobilet.MainMenu;
 
 
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,12 +15,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.delexa.chudobilet.API.EstablishmentAPI;
+import com.delexa.chudobilet.API.Link;
+import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TabFragment extends Fragment {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class TabFragment extends Fragment implements Callback<List<EstablishmentAPI>> {
 
     final static String place = "place";
     final static String event = "event";
@@ -32,6 +43,10 @@ public class TabFragment extends Fragment {
     private String type1;
     private String type2;
     private String item;
+
+    public Retrofit retrofit;
+    public Link service;
+
 
     public String getType1() {
         return type1;
@@ -58,8 +73,6 @@ public class TabFragment extends Fragment {
     }
 
 
-    //   public static int int_items = 3;
-
     public TabFragment() {
         // Required empty public constructor
     }
@@ -70,8 +83,6 @@ public class TabFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-
-    // private FragmentTabHost tabHost;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -111,6 +122,33 @@ public class TabFragment extends Fragment {
     }
 
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("http://pastebin.com/raw/")
+                .build();
+        service = retrofit.create(Link.class);
+        Call<List<EstablishmentAPI>> chudobilet = service.getEstablishmentAPI();
+        chudobilet.enqueue(this);
+    }
+
+    //region Работа с API
+    @Override
+    public void onResponse(Call<List<EstablishmentAPI>> call, Response<List<EstablishmentAPI>> response) {
+        SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getActivity());
+        SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
+        ChudobiletDatabaseHelper.insertEstablishmentAPI(db, response);
+    }
+
+    @Override
+    public void onFailure(Call<List<EstablishmentAPI>> call, Throwable t) {
+        System.out.println("CallListMovie " + t.getLocalizedMessage());
+    }
+    //endregion
+
+
     class TabAdapter extends FragmentPagerAdapter {
 
         private List<EstablishmentFragment> fragments = new ArrayList<>();
@@ -136,6 +174,7 @@ public class TabFragment extends Fragment {
         public void addFragment(EstablishmentFragment fragment) {
             fragments.add(fragment);
         }
+
     }
 
     @Override
@@ -145,5 +184,4 @@ public class TabFragment extends Fragment {
         ActionBar actionBar = activity.getSupportActionBar();
         actionBar.setTitle(item);
     }
-
 }

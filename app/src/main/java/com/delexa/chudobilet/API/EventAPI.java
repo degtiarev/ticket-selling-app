@@ -1,13 +1,8 @@
 package com.delexa.chudobilet.API;
 
-import java.util.Date;
-
-
 public class EventAPI {
 
-    private int id;
     private String name;
-    private EstablishmentAPI establishmentAPI;
     private String country;
     private String genre;
     private int year;
@@ -17,15 +12,18 @@ public class EventAPI {
     private String about;
     private String cover;
     private String videoLink;
-    private int isNotified;
     private String link;
-    private Date timeStamp;
+    private String establishmentName;
+    private String eventType;
 
-    public EventAPI(String name, EstablishmentAPI establishmentAPI, String country, String genre, int year, String amountTime,
-                    String forAge, String roles, String about, String cover, String videoLink, String link, Date timeStamp) {
-        this.id = 0;
+    public EventAPI() {
+    }
+
+    public EventAPI(String cover, String name, String country, String genre, int year, String amountTime,
+                    String forAge, String roles, String about, String videoLink, String link,
+                    String establishmentName, String eventType) {
+        this.cover = cover;
         this.name = name;
-        this.establishmentAPI = establishmentAPI;
         this.country = country;
         this.genre = genre;
         this.year = year;
@@ -33,23 +31,19 @@ public class EventAPI {
         this.forAge = forAge;
         this.roles = roles;
         this.about = about;
-        this.cover = cover;
         this.videoLink = videoLink;
         this.link = link;
-        isNotified = 0;
-        this.timeStamp = timeStamp;
+        this.establishmentName = establishmentName;
+        this.eventType = eventType;
     }
 
-    public EventAPI() {
 
+    public String getAbout() {
+        return about;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setAbout(String about) {
+        this.about = about;
     }
 
     public String getName() {
@@ -58,14 +52,6 @@ public class EventAPI {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public EstablishmentAPI getEstablishmentAPI() {
-        return establishmentAPI;
-    }
-
-    public void setEstablishmentAPI(EstablishmentAPI establishmentAPI) {
-        this.establishmentAPI = establishmentAPI;
     }
 
     public String getCountry() {
@@ -116,14 +102,6 @@ public class EventAPI {
         this.roles = roles;
     }
 
-    public String getAbout() {
-        return about;
-    }
-
-    public void setAbout(String about) {
-        this.about = about;
-    }
-
     public String getCover() {
         return cover;
     }
@@ -148,19 +126,21 @@ public class EventAPI {
         this.link = link;
     }
 
-    public int getIsNotified() {
-        return isNotified;
+    public String getEstablishmentName() {
+        return establishmentName;
     }
 
-    public void setIsNotified(int isNotified) {
-        this.isNotified = isNotified;
+    public void setEstablishmentName(String establishmentName) {
+        this.establishmentName = establishmentName;
     }
 
-    public Date getTimeStamp() {
-        return timeStamp;
+    public String getEventType() {
+        return eventType;
     }
 
-    public void setTimeStamp(Date timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
     }
+
+
 }

@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.delexa.chudobilet.API.EstablishmentAPI;
+import com.delexa.chudobilet.API.EventAPI;
 import com.delexa.chudobilet.API.NewsAPI;
 import com.delexa.chudobilet.MainClasses.Establishment;
 import com.delexa.chudobilet.MainClasses.Event;
@@ -83,12 +85,14 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     "захватывающее путешествие. На пути мальчика ждут удивительные открытия и запоминающиеся встречи с пантерой Багирой, медведем Балу, питоном Каа и " +
                     "другими обитателями дремучих джунглей.", "http://new.chudobilet.ru/media/images/events/c05f81e44660d05b3c20bcf76cc76973.jpg", "https://www.youtube.com/watch?v=TwNXOE2yxPU",
                     "http://new.chudobilet.ru/event/992/", new Date());
+            cinemaEvent1.setIsNotified(1);
             Event cinemaEvent2 = new Event("Белоснежка и Охотник 2", cinemaEstablishment, "США", "фэнтези, боевик, драма, приключения, ...", 2016, "1 час 55 минут", "6+",
                     "Крис Хемсворт, Сэм Клафлин, Эмили Блант, Джессика Честейн, Шарлиз Терон, Софи Куксон, Ник Фрост, Колин Морган, Ралф Айнесон, Шеридан Смит, ...",
                     "Когда любовь уходит, сердце прекрасной девы обращается в лед. И даже сотни королевств не смогут сдержать поступь ее несметного воинства. Лишь Охотник не ведает страха." +
                             " Сквозь проклятый лес он идет навстречу своей судьбе.", "http://new.chudobilet.ru/media/images/events/dd0d82740c770242d151223691a2b2df.jpg",
                     "https://www.youtube.com/watch?v=TwNXOE2yxPU",
                     "http://new.chudobilet.ru/event/1008/", new Date());
+            cinemaEvent2.setIsNotified(1);
             Event concertEvent1 = new Event("Балет Лебединое озерo", concertEstablishment, null, null, 0, "2 часа", "6+", null,
                     "«Лебединое озеро» - шедевр мирового балетного искусства. Спектакль Астраханского театра оперы и балета, бессмертное произведение " +
                             "бессмертного композитора Петра Ильича Чайковского с аншлагами проходил во многих городах Европы. Не обошла его своим вниманием" +
@@ -101,7 +105,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                             "сцене. А исполняемое солистами астраханского балета па-де-труа из «Лебединого озера» вызовет бурю оваций.",
                     "http://new.chudobilet.ru/media/images/events/503fb582ae571c8fd8c359330e0eb79c.jpg",
                     null, "http://new.chudobilet.ru/event/404", new Date());
-
+            concertEvent1.setIsNotified(1);
             Event theaterEvent1 = new Event("Жил-был Геракл", theaterEstablishment1, null, null, 0, "1 час 40 минут", "6+", "С. Мартемьянов, Е. Ревкова, С. Журавлёв, " +
                     "К. Хахлев, Д. Юницкий, В. Яхтина, ...", "Жил-был Геракл… Тот самый? Тот самый. И хоть родился он героем – и рост, и сила при нём – вынужден был " +
                     "служить рабом у царя Эврисфея. Так случается - бог Зевс повелел, что уж тут поделаешь? Но, что-то делать надо... Чтобы стать свободным, " +
@@ -109,6 +113,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     "ведь впереди его ожидает заветная награда - СВОБОДА!",
                     "http://new.chudobilet.ru/media/images/events/d8ed4896e6507faca33a5199ab59003c.jpg",
                     null, "http://new.chudobilet.ru/event/669/", new Date());
+            theaterEvent1.setIsNotified(1);
             Event theaterEvent2 = new Event("Приключения в стране непослушания", theaterEstablishment1, null, null, 0, "40 минут", "6+", "Е. Ревкова, Е. Перова, Л. Альмяшева, О." +
                     " Перова, А. Казакова, Е. Егорова, А. Еремицкая, В. Сельнинова", "Невероятная история, придуманная студентами театрального отделения Астраханской консерватории. " +
                     " Эта добрая, весёлая, очень музыкально-танцевальная история учит правильно оценивать добро и зло, различать плохое и хорошее, учит любви и ответственности.  Её" +
@@ -116,6 +121,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     "очень молоды. Их юношеский задор заражает зрителей неподдельной искренностью.",
                     "http://new.chudobilet.ru/media/images/events/6029be218a6c189b4cd6bf6f64243760.jpg",
                     null, "http://new.chudobilet.ru/event/1067/", new Date());
+            theaterEvent2.setIsNotified(1);
 
             News news1 = new News("В Астрахань приедет с гастролями Липецкий театр драмы", "10,11 и 12 июня Липецкий государственный академический театр драмы им. Л. Толстого на сцене Астраханского Драматического театра покажет спектакли «Квадратура Круга» В. Катаева, «Ужасные родители - С Ума сойти!» Ж. Кокто и сказку для детей «Дюймовочка» Г. Андерсена, Н. Эрдмана. \n" +
                     "\n" +
@@ -547,6 +553,19 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         db.insert("NEWS", null, newsValues);
     }
 
+    public static void insertSubscriptionbyEventid(SQLiteDatabase db, int id, int amountSeats) {
+
+        ContentValues subscriptionValues = new ContentValues();
+
+        subscriptionValues.put("_EVENTID", id);
+        subscriptionValues.put("AMOUNTSEATS", amountSeats);
+        subscriptionValues.put("ISNOTIFIED", 0);
+        subscriptionValues.put("TIMESTAMP", getDateTime(new Date(), LONG_DATE));
+
+        db.insert("SUBSCRIPTION", null, subscriptionValues);
+
+    }
+
     public static void insertNewsAPI(SQLiteDatabase db, Response<List<NewsAPI>> response) {
 
         //db.execSQL("delete from " + "NEWS");
@@ -578,16 +597,116 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public static void InsertSubscriptionbyEventid(SQLiteDatabase db, int id, int amountSeats) {
+    public static void insertEstablishmentAPI(SQLiteDatabase db, Response<List<EstablishmentAPI>> response) {
 
-        ContentValues subscriptionValues = new ContentValues();
+        //db.execSQL("delete from " + "NEWS");
+        for (EstablishmentAPI establishmentAPI : response.body()) {
 
-        subscriptionValues.put("_EVENTID", id);
-        subscriptionValues.put("AMOUNTSEATS", amountSeats);
-        subscriptionValues.put("ISNOTIFIED", 0);
-        subscriptionValues.put("TIMESTAMP", getDateTime(new Date(), LONG_DATE));
+            Establishment establishment = establishmentAPI.getEstablishment();
 
-        db.insert("SUBSCRIPTION", null, subscriptionValues);
+            Cursor newCursor = db.rawQuery("SELECT ESTABLISHMENT.NAME FROM ESTABLISHMENT" +
+                    " WHERE ESTABLISHMENT.NAME  = '" + establishment.getName() + "' " +
+                    "GROUP BY ESTABLISHMENT._id", null);
+
+            if (newCursor.getCount() == 0) {
+
+                ContentValues contentValues = new ContentValues();
+
+                contentValues.put("NAME", establishment.getName());
+                contentValues.put("ADDRESS", establishment.getAddress());
+                contentValues.put("FAVOURITESEATS", establishment.getFavouriteSeats());
+                contentValues.put("TIMESTAMP", getDateTime(establishment.getTimeStamp(), LONG_DATE));
+
+                db.insert("ESTABLISHMENT", null, contentValues);
+            }
+        }
+
+        db.close();
+
+    }
+
+    public static void insertEventAPI(SQLiteDatabase db, Response<List<EventAPI>> response) {
+
+
+        for (EventAPI eventAPI : response.body()) {
+
+            Event event = new Event();
+            event.setName(eventAPI.getName());
+            event.setCountry(eventAPI.getCountry());
+            event.setGenre(eventAPI.getGenre());
+            event.setYear(eventAPI.getYear());
+            event.setAmountTime(eventAPI.getAmountTime());
+            event.setForAge(eventAPI.getForAge());
+            event.setRoles(eventAPI.getRoles());
+            event.setAbout(eventAPI.getAbout());
+            event.setCover(eventAPI.getCover());
+            event.setLink(eventAPI.getLink());
+            event.setVideoLink(eventAPI.getVideoLink());
+
+            String establishmentName = eventAPI.getEstablishmentName();
+            String eventType = eventAPI.getEventType();
+
+            int establishment_id = Integer.MAX_VALUE;
+
+            Cursor newCursor1 = db.rawQuery("SELECT ESTABLISHMENT._id FROM ESTABLISHMENT" +
+                    " WHERE ESTABLISHMENT.NAME  = '" + establishmentName + "' " +
+                    "GROUP BY ESTABLISHMENT._id", null);
+
+            while (newCursor1.moveToNext()) {
+
+                establishment_id = (newCursor1.getInt(newCursor1.getColumnIndex("_id")));
+            }
+
+            Cursor newCursor = db.rawQuery("SELECT EVENT.NAME FROM EVENT" +
+                    " WHERE EVENT.NAME  = '" + event.getName() + "' " +
+                    "GROUP BY EVENT._id", null);
+
+
+            if (newCursor.getCount() == 0) {
+
+                ContentValues eventValues = new ContentValues();
+
+                eventValues.put("_ESTABLISHMENTID", establishment_id);
+                eventValues.put("NAME", event.getName());
+                eventValues.put("COUNTRY", event.getCountry());
+                eventValues.put("GENRE", event.getGenre());
+                eventValues.put("YEAR", event.getYear());
+                eventValues.put("AMOUNTTIME", event.getAmountTime());
+                eventValues.put("FORAGE", event.getForAge());
+                eventValues.put("ROLES", event.getRoles());
+                eventValues.put("ABOUT", event.getAbout());
+                eventValues.put("COVER", event.getCover());
+                eventValues.put("VIDEOLINK", event.getVideoLink());
+                eventValues.put("LINK", event.getLink());
+                eventValues.put("TIMESTAMP", getDateTime(new Date(), LONG_DATE));
+                eventValues.put("ISNOTIFIED", event.getIsNotified());
+
+                db.insert("EVENT", null, eventValues);
+
+
+                int event_id = 0;
+
+                Cursor newCursor2 = db.rawQuery("SELECT EVENT._id FROM EVENT" +
+                        " WHERE EVENT.NAME  = '" + event.getName() + "' " +
+                        "GROUP BY EVENT._id", null);
+
+                while (newCursor2.moveToNext()) {
+
+                    event_id = (newCursor2.getInt(newCursor2.getColumnIndex("_id")));
+                }
+
+                ContentValues eventTypeValues1 = new ContentValues();
+
+                eventTypeValues1.put("_EVENTID", event_id);
+                eventTypeValues1.put("TYPE", eventType);
+                eventTypeValues1.put("TIMESTAMP", getDateTime(new Date(), LONG_DATE));
+
+                db.insert("EVENTTYPE", null, eventTypeValues1);
+
+            }
+        }
+
+        db.close();
 
     }
 
@@ -1305,5 +1424,65 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         }
         return date;
     }
+
+
+    // checkers
+    public static String becameNewEventsByGenre(SQLiteDatabase db) {
+
+//        String result = "";
+//        String intersests = "";
+//
+//        try {
+//            Cursor newCursor = db.rawQuery("SELECT USER.INTERESTGENRE " +
+//                    " FROM USER", null);
+//
+//            while (newCursor.moveToNext()) {
+//                intersests = newCursor.getString(newCursor.getColumnIndex("INTERESTGENRE"));
+//            }
+//
+//            if (intersests.equals("") || intersests.equals(null))
+//                return result;
+//
+//
+//            Cursor newCursor1 = db.rawQuery("SELECT EVENT.NAME, EVENT.GENRE FROM EVENT WHERE ISNOTIFIED = 0", null);
+//            List<Event> events = new ArrayList<>();
+//            while (newCursor1.moveToNext()) {
+//                Event event = new Event();
+//                event.setName(newCursor1.getString(newCursor1.getColumnIndex("NAME")));
+//                event.setGenre(newCursor1.getString(newCursor1.getColumnIndex("GENRE")));
+//                events.add(event);
+//            }
+//
+//            intersests += ",";
+//            List<String> interestList = Arrays.asList(intersests.split(","));
+//
+//            for (Event event : events) {
+//                for (String interest : interestList)
+//
+//                {
+//                    if (event.getGenre().toLowerCase().contains(interest.toLowerCase()))
+//                        result = event.getName() + ", ";
+//
+//                }
+//
+//            }
+//
+//            if (!result.equals(""))
+//                result = result.substring(0, result.length() - 2);
+//
+//
+//            db.close();
+//
+//
+//        } catch (SQLiteException e) {
+//        }
+//
+//        if (result.equals("")) return result;
+//        else
+//            return "Новые события по Вашим интересам: " + result;
+
+        return "";
+    }
+
 
 }

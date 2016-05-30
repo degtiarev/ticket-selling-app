@@ -117,7 +117,7 @@ public class EventActivity extends AppCompatActivity {
 
                             SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(EventActivity.this);
                             SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
-                            ChudobiletDatabaseHelper.InsertSubscriptionbyEventid(db, _id, Integer.parseInt(input.getText().toString()));
+                            ChudobiletDatabaseHelper.insertSubscriptionbyEventid(db, _id, Integer.parseInt(input.getText().toString()));
 
                         }
                     });

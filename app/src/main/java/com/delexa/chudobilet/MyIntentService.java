@@ -7,8 +7,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.support.v4.app.TaskStackBuilder;
+
+import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
 
 
 public class MyIntentService extends IntentService {
@@ -18,20 +22,39 @@ public class MyIntentService extends IntentService {
     public static final int NOTIFICATION_ID = 5453;
 
     public MyIntentService() {
-        super("DelayedMessageService");
+        super("MyIntentService");
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
         synchronized (this) {
-            try {
-                wait(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+//            try {
+//                wait(3000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+
+            while (true) {
+
+                try {
+                    wait(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(this);
+                SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
+                if (!ChudobiletDatabaseHelper.becameNewEventsByGenre(db).equals("")) {
+                    //  String text = intent.getStringExtra(EXTRA_MESSAGE);
+
+                    showText(ChudobiletDatabaseHelper.becameNewEventsByGenre(db));
+                }
+
+
             }
+
         }
-        String text = intent.getStringExtra(EXTRA_MESSAGE);
-        showText(text);
+
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)

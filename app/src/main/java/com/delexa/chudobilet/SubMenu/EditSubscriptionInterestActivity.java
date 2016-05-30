@@ -83,10 +83,6 @@ public class EditSubscriptionInterestActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-
-
-
-
     }
 
     public List<SeatName> getSeatNames() {

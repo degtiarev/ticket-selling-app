@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.delexa.chudobilet.API.EventAPI;
 import com.delexa.chudobilet.API.Link;
 import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.Adapters.EstablishmentAdapter;
@@ -31,9 +32,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class EstablishmentFragment extends Fragment implements Callback<List<Event>>, SearchView.OnQueryTextListener {
+public class EstablishmentFragment extends Fragment implements Callback<List<EventAPI>>, SearchView.OnQueryTextListener {
 
     final static String place = "place";
     final static String event = "event";
@@ -87,11 +89,8 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
-
         v = inflater.inflate(R.layout.fragment_event_tab, container, false);
         recyclerView = (RecyclerView) v.findViewById(R.id.EventList);
-
 
         return v;
     }
@@ -101,13 +100,21 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("http://pastebin.com/raw/")
+                .build();
+        service = retrofit.create(Link.class);
+        Call<List<EventAPI>> chudobilet = service.getEventAPI();
+        chudobilet.enqueue(this);
+
 
         if (typeInfo == place) {
+            setHasOptionsMenu(false);
             establishmentAdapter = new EstablishmentAdapter(getActivity(), getCinemas());
             recyclerView.setAdapter(establishmentAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-            setHasOptionsMenu(false);
         } else if (typeInfo == event)
 
         {
@@ -116,13 +123,11 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
             eventAdapter = new EventAdapter(getActivity(), events);
             recyclerView.setAdapter(eventAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         }
-
 
     }
 
-
+    //region  Получение данных из БД
     public List<Event> getEvents() {
 
         SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getContext());
@@ -132,7 +137,6 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
         return data;
     }
 
-
     public List<Establishment> getCinemas() {
 
         SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getContext());
@@ -141,19 +145,27 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
         return data;
 
     }
+//endregion
 
+    //region Работа с API
 
     @Override
-    public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
+    public void onResponse(Call<List<EventAPI>> call, Response<List<EventAPI>> response) {
+        SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getActivity());
+        SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
+        ChudobiletDatabaseHelper.insertEventAPI(db, response);
 
     }
 
     @Override
-    public void onFailure(Call<List<Event>> call, Throwable t) {
+    public void onFailure(Call<List<EventAPI>> call, Throwable t) {
         System.out.println("CallListMovie " + t.getLocalizedMessage());
     }
 
+    //endregion
 
+
+    // region работа с меню и поиском
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main, menu);
@@ -177,7 +189,6 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
         recyclerView.scrollToPosition(0);
         return true;
     }
-
 
     private List<Event> filter(List<Event> models, String query) {
         query = query.toLowerCase();
@@ -204,4 +215,6 @@ public class EstablishmentFragment extends Fragment implements Callback<List<Eve
                 return super.onOptionsItemSelected(item);
         }
     }
+    // endregion
+
 }

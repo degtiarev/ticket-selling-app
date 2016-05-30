@@ -1,8 +1,6 @@
 package com.delexa.chudobilet.API;
 
 
-import com.delexa.chudobilet.MainClasses.News;
-
 import java.util.List;
 
 import retrofit2.Call;
@@ -13,7 +11,11 @@ public interface Link {
     @GET("4TLZGzNE")
     Call<List<NewsAPI>> getNewsAPI();
 
+    @GET("iJ5aKtm6")
+    Call<List<EstablishmentAPI>> getEstablishmentAPI();
 
+    @GET("009hMdqG")
+    Call<List<EventAPI>> getEventAPI();
 
 
 }
