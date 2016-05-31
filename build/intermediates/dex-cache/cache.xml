@@ -1,2 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/delexa/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.2.0/f7873a2ebde246a45c2a8d6f3247108b4c88a879/okhttp-3.2.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="f7873a2ebde246a45c2a8d6f3247108b4c88a879">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.2.0_9b79c0787634272d2aa5475418cff8bad04446e7/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/Desktop/chudobilet/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_23bfa5508b9a0bf95b163289d0dfba7cfcd20668/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.6.1/b9d63507329a7178e026fc334f87587ee5070ac5/gson-2.6.1.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="b9d63507329a7178e026fc334f87587ee5070ac5">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.6.1_5e77dd23661dcae1888b54813d16436f73cf37a2/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/Desktop/chudobilet/app/libs/picasso-2.5.2.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/2/picasso-2.5.2_9bc2466a428219d98bcc46174fb2eb0e0c8b6980/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/Desktop/chudobilet/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="d9ecde39b460470e655de6e47c05573d2d5a8bfb">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-cardview-v7-23.4.0_4a41e7e9928ac811ee1b779ebf49f20763cb9c76/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/Desktop/chudobilet/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-23.4.0_0da535dedb117817ae33101010897ac2e08ed299/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.6.0_7b431713ab25915679b408f477d4e91f7e84d04d/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/Desktop/chudobilet/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_78605a42294047606b20f39518952975ee9c9325/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/Desktop/chudobilet/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="c6b53c52dc9c55bc27646e042d00b7c6685cb1fc">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_06974b3c60ee01529f432971ecafff8d2b06325a/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.0.2/f8d87f15b94b8d74e7ccf61d7eedb558811cdb30/converter-gson-2.0.2.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="f8d87f15b94b8d74e7ccf61d7eedb558811cdb30">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/converter-gson-2.0.2_04e0e57331a9896410bfc5d5515f5cd826971663/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.0.2/43eeae0b9fb087bb3194ba59ab63a38a32fbf3e/retrofit-2.0.2.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="043eeae0b9fb087bb3194ba59ab63a38a32fbf3e">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/retrofit-2.0.2_e93f463449a59f19352f507d71d4e3fb9b3b4fad/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/Desktop/chudobilet/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="dc15dd38e8677dd7a638e520b5467b2f5470f359">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_5522f9fac35a118a6abc9568f8c99380088143ab/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_f0e46b74afb7a70bf4f4578f882d5aaa4a818ff7/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/Desktop/chudobilet/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_4aa93b4a86f29e8257aff3b4d0a6d2e4f9d8e2a4/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/Desktop/chudobilet/app/libs/Zxing.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="2287494d4f5f9f3a9a2bb6980e3f32053721b315">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/2/Zxing_6d3eda50e4a7acd0689ddf1f7a7d599d9e783061/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/Desktop/chudobilet/app/build/intermediates/exploded-aar/com.android.support/design/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-23.4.0_ddad8c04f067ca78d218bd42b3ad287eae20fdd9/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/Desktop/chudobilet/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_4a89dc50373add5229cd08e9a2ac4582d68ff65a/classes.dex" />
+    </item>
+    <item
+        jar="/Users/delexa/Desktop/chudobilet/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.2"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/Users/delexa/Desktop/chudobilet/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_04e4e5da486295c5728dcdbd6f4f08cf2e55818f/classes.dex" />
+    </item>
+
+</items>

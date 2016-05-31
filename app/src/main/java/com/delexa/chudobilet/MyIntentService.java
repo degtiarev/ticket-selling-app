@@ -37,17 +37,18 @@ public class MyIntentService extends IntentService {
             while (true) {
 
                 try {
-                    wait(3000);
+                    wait(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
                 SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(this);
                 SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
-                if (!ChudobiletDatabaseHelper.becameNewEventsByGenre(db).equals("")) {
+                String result = ChudobiletDatabaseHelper.becameNewEventsByGenre(db);
+                if (!result.equals("")) {
                     //  String text = intent.getStringExtra(EXTRA_MESSAGE);
 
-                    showText(ChudobiletDatabaseHelper.becameNewEventsByGenre(db));
+                    showText(result);
                 }
 
 

@@ -85,7 +85,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     "захватывающее путешествие. На пути мальчика ждут удивительные открытия и запоминающиеся встречи с пантерой Багирой, медведем Балу, питоном Каа и " +
                     "другими обитателями дремучих джунглей.", "http://new.chudobilet.ru/media/images/events/c05f81e44660d05b3c20bcf76cc76973.jpg", "https://www.youtube.com/watch?v=TwNXOE2yxPU",
                     "http://new.chudobilet.ru/event/992/", new Date());
-            cinemaEvent1.setIsNotified(1);
+              cinemaEvent1.setIsNotified(1);
             Event cinemaEvent2 = new Event("Белоснежка и Охотник 2", cinemaEstablishment, "США", "фэнтези, боевик, драма, приключения, ...", 2016, "1 час 55 минут", "6+",
                     "Крис Хемсворт, Сэм Клафлин, Эмили Блант, Джессика Честейн, Шарлиз Терон, Софи Куксон, Ник Фрост, Колин Морган, Ралф Айнесон, Шеридан Смит, ...",
                     "Когда любовь уходит, сердце прекрасной девы обращается в лед. И даже сотни королевств не смогут сдержать поступь ее несметного воинства. Лишь Охотник не ведает страха." +
@@ -1429,60 +1429,58 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
     // checkers
     public static String becameNewEventsByGenre(SQLiteDatabase db) {
 
-//        String result = "";
-//        String intersests = "";
-//
-//        try {
-//            Cursor newCursor = db.rawQuery("SELECT USER.INTERESTGENRE " +
-//                    " FROM USER", null);
-//
-//            while (newCursor.moveToNext()) {
-//                intersests = newCursor.getString(newCursor.getColumnIndex("INTERESTGENRE"));
-//            }
-//
-//            if (intersests.equals("") || intersests.equals(null))
-//                return result;
-//
-//
-//            Cursor newCursor1 = db.rawQuery("SELECT EVENT.NAME, EVENT.GENRE FROM EVENT WHERE ISNOTIFIED = 0", null);
-//            List<Event> events = new ArrayList<>();
-//            while (newCursor1.moveToNext()) {
-//                Event event = new Event();
-//                event.setName(newCursor1.getString(newCursor1.getColumnIndex("NAME")));
-//                event.setGenre(newCursor1.getString(newCursor1.getColumnIndex("GENRE")));
-//                events.add(event);
-//            }
-//
-//            intersests += ",";
-//            List<String> interestList = Arrays.asList(intersests.split(","));
-//
-//            for (Event event : events) {
-//                for (String interest : interestList)
-//
-//                {
-//                    if (event.getGenre().toLowerCase().contains(interest.toLowerCase()))
-//                        result = event.getName() + ", ";
-//
-//                }
-//
-//            }
-//
-//            if (!result.equals(""))
-//                result = result.substring(0, result.length() - 2);
-//
-//
-//            db.close();
-//
-//
-//        } catch (SQLiteException e) {
-//        }
-//
-//        if (result.equals("")) return result;
-//        else
-//            return "Новые события по Вашим интересам: " + result;
+        String result = "";
+        String intersests = "";
 
-        return "";
+        try {
+            Cursor newCursor = db.rawQuery("SELECT USER.INTERESTGENRE " +
+                    " FROM USER", null);
+
+            while (newCursor.moveToNext()) {
+                intersests = newCursor.getString(newCursor.getColumnIndex("INTERESTGENRE"));
+            }
+
+            if (intersests.equals("") || intersests.equals(null))
+                return result;
+
+            Cursor newCursor1 = db.rawQuery("SELECT EVENT.NAME, EVENT.GENRE FROM EVENT WHERE ISNOTIFIED = 0", null);
+            List<Event> events = new ArrayList<>();
+            while (newCursor1.moveToNext()) {
+                Event event = new Event();
+                event.setName(newCursor1.getString(newCursor1.getColumnIndex("NAME")));
+                event.setGenre(newCursor1.getString(newCursor1.getColumnIndex("GENRE")));
+                events.add(event);
+            }
+
+            intersests += ",";
+            List<String> interestList = Arrays.asList(intersests.split(","));
+            List<String> namesToMark = new ArrayList<>();
+
+            for (Event event : events) {
+                for (String interest : interestList) {
+                    if (event.getGenre().toLowerCase().contains(interest.toLowerCase())) {
+                        result = event.getName() + ", ";
+                        namesToMark.add(event.getName());
+                    }
+                }
+            }
+            if (!result.equals(""))
+                result = result.substring(0, result.length() - 2);
+
+            for (String nameToMark : namesToMark) {
+                ContentValues newValues12 = new ContentValues();
+                newValues12.put("ISNOTIFIED", "1");
+                db.update("EVENT", newValues12, "NAME = '" + nameToMark + "'", null);
+            }
+
+            db.close();
+
+        } catch (SQLiteException e) {
+        }
+
+        if (result.equals("")) return result;
+        else
+            return "Новые события по Вашим интересам: " + result;
     }
-
 
 }

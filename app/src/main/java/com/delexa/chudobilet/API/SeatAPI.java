@@ -4,43 +4,33 @@ import java.util.Date;
 
 public class SeatAPI {
 
-    private int id;
-    private EventAPI eventAPI;
+    private String eventName;
     private String name;
-    private Date timeDate;
+    private String timeDate;
     private double price;
     private double servicePrice;
     private int isFree;
-    private Date timeStamp;
+    private String timeStamp;
 
-    public SeatAPI(EventAPI eventAPI, String name, Date timeDate, double price, double servicePrice, Date timeStamp) {
-        this.id = 0;
-        this.eventAPI = eventAPI;
+    public SeatAPI() {
+    }
+
+    public SeatAPI(double servicePrice, String eventName, String name, String timeDate, double price, int isFree, String timeStamp) {
+        this.servicePrice = servicePrice;
+        this.eventName = eventName;
         this.name = name;
         this.timeDate = timeDate;
         this.price = price;
-        this.servicePrice = servicePrice;
-        this.isFree=0;
+        this.isFree = isFree;
         this.timeStamp = timeStamp;
     }
 
-    public SeatAPI()
-    {}
-
-    public int getId() {
-        return id;
+    public String getEventName() {
+        return eventName;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public EventAPI getEventAPI() {
-        return eventAPI;
-    }
-
-    public void setEventAPI(EventAPI eventAPI) {
-        this.eventAPI = eventAPI;
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public String getName() {
@@ -51,11 +41,11 @@ public class SeatAPI {
         this.name = name;
     }
 
-    public Date getTimeDate() {
+    public String getTimeDate() {
         return timeDate;
     }
 
-    public void setTimeDate(Date timeDate) {
+    public void setTimeDate(String timeDate) {
         this.timeDate = timeDate;
     }
 
@@ -83,11 +73,11 @@ public class SeatAPI {
         this.isFree = isFree;
     }
 
-    public Date getTimeStamp() {
+    public String getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(Date timeStamp) {
+    public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
 }
