@@ -11,26 +11,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.delexa.chudobilet.MainClasses.Event;
-import com.delexa.chudobilet.MainClasses.News;
+import com.delexa.chudobilet.R;
 import com.delexa.chudobilet.SubMenu.EventActivity;
 import com.squareup.picasso.Picasso;
 
-import com.delexa.chudobilet.R;
-
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
     private LayoutInflater inflater;
-    List<Event> data = Collections.emptyList();
-    Context context;
+    List<Event> data = new ArrayList<>();
 
 
     public EventAdapter(Context context, List<Event> data) {
 
         inflater = LayoutInflater.from(context);
-        this.data = data;
+        this.data.addAll(data);
 
     }
 

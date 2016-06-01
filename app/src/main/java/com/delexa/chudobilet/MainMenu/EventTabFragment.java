@@ -35,6 +35,13 @@ public class EventTabFragment extends Fragment implements SwipeRefreshLayout.OnR
     final static String place = "place";
     final static String event = "event";
 
+    public final static String today = "today";
+    public final static String tomorrow = "tomorow";
+    public final static String onWeek = "onWeek";
+    public final static String onNextWeek = "onNextWeek";
+    public final static String onMonth = "Month";
+    public final static String onNextMonth = "onNextMonth";
+    public final static String then = "then";
 
     private RecyclerView recyclerView;
     private EventAdapter eventAdapter;
@@ -123,6 +130,11 @@ public class EventTabFragment extends Fragment implements SwipeRefreshLayout.OnR
 
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        setHasOptionsMenu(false);
+    }
 
     @Override
     public void onRefresh() {
@@ -159,13 +171,21 @@ public class EventTabFragment extends Fragment implements SwipeRefreshLayout.OnR
         }, 3000);
     }
 
-
     //region  Получение данных из БД
     public List<Event> getEvents() {
 
         SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getContext());
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
         List<Event> data = ChudobiletDatabaseHelper.getEvents(db, item);
+
+        return data;
+    }
+
+    public List<Event> getEventsByDate(String date) {
+
+        SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getContext());
+        SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
+        List<Event> data = ChudobiletDatabaseHelper.getEventsByDate(db, item, date);
 
         return data;
     }
@@ -180,12 +200,12 @@ public class EventTabFragment extends Fragment implements SwipeRefreshLayout.OnR
     }
 //endregion
 
-    // region Работа с меню и поиском
+    // region Работа поиском
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main, menu);
-//        super.onCreateOptionsMenu(menu, inflater);
-//
+        super.onCreateOptionsMenu(menu, inflater);
+
         final MenuItem item = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
         searchView.setQueryHint("Поиск");
@@ -217,19 +237,52 @@ public class EventTabFragment extends Fragment implements SwipeRefreshLayout.OnR
         }
         return filteredModelList;
     }
+    // endregion
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
+
         switch (item.getItemId()) {
-            case R.id.main:
-                //newGame();
-                return true;
+            case R.id.today:
+                events = getEventsByDate(today);
+                break;
+
+            case R.id.tomorrow:
+                events = getEventsByDate(tomorrow);
+                break;
+
+            case R.id.onWeek:
+                events = getEventsByDate(onWeek);
+                break;
+
+            case R.id.onNextWeek:
+                events = getEventsByDate(onNextWeek);
+                break;
+
+            case R.id.onMonth:
+                events = getEventsByDate(onMonth);
+                break;
+
+            case R.id.onNextMonth:
+                events = getEventsByDate(onNextMonth);
+                break;
+
+            case R.id.then:
+                events = getEventsByDate(then);
+                break;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+
+        if (events != null) {
+            eventAdapter = new EventAdapter(getActivity(), events);
+            recyclerView.setAdapter(eventAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        }
+
+        return true;
     }
-    // endregion
+
 
 }

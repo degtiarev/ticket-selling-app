@@ -20,6 +20,7 @@ import com.delexa.chudobilet.MainClasses.SeatName;
 import com.delexa.chudobilet.MainClasses.Subscription;
 import com.delexa.chudobilet.MainClasses.TicketOrder;
 import com.delexa.chudobilet.MainClasses.User;
+import com.delexa.chudobilet.MainMenu.EventTabFragment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -85,7 +86,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     "захватывающее путешествие. На пути мальчика ждут удивительные открытия и запоминающиеся встречи с пантерой Багирой, медведем Балу, питоном Каа и " +
                     "другими обитателями дремучих джунглей.", "http://new.chudobilet.ru/media/images/events/c05f81e44660d05b3c20bcf76cc76973.jpg", "https://www.youtube.com/watch?v=TwNXOE2yxPU",
                     "http://new.chudobilet.ru/event/992/", new Date());
-              cinemaEvent1.setIsNotified(1);
+            cinemaEvent1.setIsNotified(1);
             Event cinemaEvent2 = new Event("Белоснежка и Охотник 2", cinemaEstablishment, "США", "фэнтези, боевик, драма, приключения, ...", 2016, "1 час 55 минут", "6+",
                     "Крис Хемсворт, Сэм Клафлин, Эмили Блант, Джессика Честейн, Шарлиз Терон, Софи Куксон, Ник Фрост, Колин Морган, Ралф Айнесон, Шеридан Смит, ...",
                     "Когда любовь уходит, сердце прекрасной девы обращается в лед. И даже сотни королевств не смогут сдержать поступь ее несметного воинства. Лишь Охотник не ведает страха." +
@@ -756,6 +757,43 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         return data;
 
     }
+
+    public static List<Event> getEventsByDate(SQLiteDatabase db, String eventType, String date) {
+
+        String additionCondition = "";
+
+        if (date.equals(EventTabFragment.today)) {
+
+            additionCondition = "EVENT.NAME = 'Книга джунглей'";
+        }
+        else if (date.equals(EventTabFragment.tomorrow)) additionCondition = "";
+        else if (date.equals(EventTabFragment.onWeek)) additionCondition = "EVENT._ESTABLISHMENTID = 1";
+        else if (date.equals(EventTabFragment.onNextWeek)) additionCondition = "";
+        else if (date.equals(EventTabFragment.onMonth)) additionCondition = "";
+        else if (date.equals(EventTabFragment.onNextMonth)) additionCondition = "";
+        else if (date.equals(EventTabFragment.then)) additionCondition = "";
+
+        List<Event> data = new ArrayList<>();
+
+        try {
+
+            Cursor newCursor = db.rawQuery("SELECT EVENT._id, EVENT.NAME, EVENT.COUNTRY, EVENT.GENRE, EVENT.YEAR, EVENT.AMOUNTTIME, EVENT._ESTABLISHMENTID, " +
+                    "EVENT.FORAGE, EVENT.ROLES, EVENT.ABOUT, EVENT.COVER, EVENT.VIDEOLINK, EVENT.LINK, EVENT.ISNOTIFIED, EVENT.TIMESTAMP" +
+                    " FROM EVENT, EVENTTYPE " +
+                    "WHERE  (EVENT._id = EVENTTYPE._EVENTID AND EVENTTYPE.TYPE = '" + eventType + "' AND " + additionCondition + " ) " +
+                    "GROUP BY EVENT._id", null);
+            data = cursorToListEvent(newCursor);
+
+            db.close();
+
+        } catch (SQLiteException e) {
+        }
+
+
+        return data;
+
+    }
+
 
     public static Event getEvent(SQLiteDatabase db, int id) {
 

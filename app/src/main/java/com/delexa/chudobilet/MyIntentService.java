@@ -12,8 +12,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.support.v4.app.TaskStackBuilder;
 
-import com.delexa.chudobilet.API.EstablishmmentAPIUpdater;
-import com.delexa.chudobilet.API.EventAPIUpdater;
 import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
 
 
@@ -38,11 +36,10 @@ public class MyIntentService extends IntentService {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-                EstablishmmentAPIUpdater establishmmentAPIUpdater = new EstablishmmentAPIUpdater(this);
-                establishmmentAPIUpdater.update();
-                EventAPIUpdater eventAPIUpdater = new EventAPIUpdater(this);
-                eventAPIUpdater.update();
+//                EstablishmmentAPIUpdater establishmmentAPIUpdater = new EstablishmmentAPIUpdater(this);
+//                establishmmentAPIUpdater.update();
+//                EventAPIUpdater eventAPIUpdater = new EventAPIUpdater(this);
+//                eventAPIUpdater.update();
 
                 SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(this);
                 SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();

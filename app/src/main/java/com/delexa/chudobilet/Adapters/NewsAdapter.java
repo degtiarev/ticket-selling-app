@@ -17,20 +17,21 @@ import com.squareup.picasso.Picasso;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
     private LayoutInflater inflater;
-    List<News> data = Collections.emptyList();
+    List<News> data = new ArrayList<>();
     Context context;
 
 
     public NewsAdapter(Context context, List<News> data) {
 
         inflater = LayoutInflater.from(context);
-        this.data = data;
+        this.data.addAll(data);
 
     }
 

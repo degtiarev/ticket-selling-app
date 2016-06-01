@@ -89,6 +89,10 @@ public class FavouriteSeatAdapter extends RecyclerView.Adapter<FavouriteSeatAdap
                 SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
                 ChudobiletDatabaseHelper.deleteSeatBySeatNamendEstablishmentName(db, establishmentName, seatName);
 
+                db = chudobiletDatabaseHelper.getReadableDatabase();
+                data = ChudobiletDatabaseHelper.getEstablishmentFavouriteSeatsbyEstablishmentid(db, establishmentName);
+                notifyDataSetChanged();
+
             }
 
         }

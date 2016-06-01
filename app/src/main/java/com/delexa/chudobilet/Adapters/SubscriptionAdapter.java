@@ -123,18 +123,25 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
             alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
 
-                    SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(view.getContext());
+                    SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(view.getContext());
                     SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
                     ChudobiletDatabaseHelper.setAmountSeats(db, id, Integer.parseInt(input.getText().toString()));
+                    db = chudobiletDatabaseHelper.getReadableDatabase();
+                    data = ChudobiletDatabaseHelper.getSubscription(db);
+                    notifyDataSetChanged();
+
                 }
             });
 
             alert.setNegativeButton("Удалить", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
 
-                    SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(view.getContext());
+                    SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(view.getContext());
                     SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
                     ChudobiletDatabaseHelper.removeSubscriptionById(db, id);
+                    db = chudobiletDatabaseHelper.getReadableDatabase();
+                    data = ChudobiletDatabaseHelper.getSubscription(db);
+                    notifyDataSetChanged();
                 }
             });
 

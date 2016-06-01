@@ -5,6 +5,11 @@
       <config />
     </shared>
     <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
@@ -18,6 +23,7 @@
     </layouts>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="CHUDOBILET" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
@@ -41,78 +47,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="EventAPIUpdater.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java">
+      <file leaf-file-name="SubscriptionAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/SubscriptionAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#618#619#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NewsFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/NewsFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="122" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="122" />
+              <caret line="141" column="13" selection-start-line="141" selection-start-column="13" selection-end-line="143" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EventTabFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/EventTabFragment.java">
+      <file leaf-file-name="FavouriteSeatAdapter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/FavouriteSeatAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="49" column="24" selection-start-line="49" selection-start-column="24" selection-end-line="49" selection-end-column="24" />
-              <folding>
-                <element signature="method#EventTabFragment#0;class#EventTabFragment#0" expanded="false" />
-                <element signature="method#onRefresh#0;class#EventTabFragment#0" expanded="false" />
-                <element signature="e#4036#5080#0" expanded="true" />
-                <element signature="e#5079#5080#0" expanded="true" />
-                <element signature="e#5101#5133#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MyIntentService.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MyIntentService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26493108">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-              <folding>
-                <element signature="method#showText#0;class#MyIntentService#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_event_tab.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_event_tab.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.8301888">
-              <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragment_news.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_news.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.54717">
-              <caret line="9" column="29" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.2682927">
+              <caret line="76" column="44" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -1762,9 +1711,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainClasses/User.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_subscription_interest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/seat_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/FavouriteSeatAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/EventAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_authorization.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/EventSubscriptionFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/SubscriberFragment.java" />
@@ -1774,14 +1720,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/AuthorizationFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_subscription_interest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/SubscriptionInterestFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/SubscriptionAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EstablishmentAPI.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/Link.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPI.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/SubMenu/EditSubscriptionInterestActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/SeatAPI.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/ChudobiletDatabaseHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/NewsALIGetter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIGetter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/NewsAPIGetter.java" />
@@ -1789,18 +1732,26 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EstablishmmentAPIGetter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/MyOrdersFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/EstablishmentFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/NewsFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_event_tab.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_news.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/EventTabFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MyIntentService.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/ChudobiletDatabaseHelper.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/NewsAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/EventTabFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/NewsFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/SubscriptionAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/EventAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/FavouriteSeatAdapter.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
-    <option name="height" value="797" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -2410,7 +2361,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="797" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2420,7 +2371,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34061137" sideWeight="0.49356222" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36563876" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32017544" sideWeight="0.49713877" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23462088" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28487518" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2435,7 +2386,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33920705" sideWeight="0.5064378" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3377193" sideWeight="0.5064378" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2496,124 +2447,14 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java</url>
-          <line>40</line>
-          <properties />
-          <option name="timeStamp" value="142" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java</url>
-          <line>41</line>
-          <properties />
-          <option name="timeStamp" value="143" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java</url>
-          <line>42</line>
-          <properties />
-          <option name="timeStamp" value="144" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java</url>
-          <line>47</line>
-          <properties />
-          <option name="timeStamp" value="145" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java</url>
-          <line>48</line>
-          <properties />
-          <option name="timeStamp" value="146" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java</url>
-          <line>49</line>
-          <properties />
-          <option name="timeStamp" value="148" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java</url>
-          <line>30</line>
-          <properties />
-          <option name="timeStamp" value="149" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java</url>
-          <line>31</line>
-          <properties />
-          <option name="timeStamp" value="150" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java</url>
-          <line>32</line>
-          <properties />
-          <option name="timeStamp" value="151" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java</url>
-          <line>34</line>
-          <properties />
-          <option name="timeStamp" value="152" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java</url>
-          <line>29</line>
-          <properties />
-          <option name="timeStamp" value="153" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java</url>
-          <line>25</line>
-          <properties />
-          <option name="timeStamp" value="154" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java</url>
-          <line>26</line>
-          <properties />
-          <option name="timeStamp" value="156" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java</url>
-          <line>24</line>
-          <properties class="com.delexa.chudobilet.API.EventAPIUpdater" method="&lt;init&gt;" />
-          <option name="timeStamp" value="155" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="157" />
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="175" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_authorization.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37194127">
-          <caret line="63" column="53" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/AuthorizationFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9099099">
-          <caret line="127" column="39" selection-start-line="127" selection-start-column="39" selection-end-line="127" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_subscriber.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3425775">
-          <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_subscription_interest.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -2624,31 +2465,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/SubscriberFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.46396396">
-          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/SmallCardAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.8468468">
           <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/EventAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.418919">
-          <caret line="83" column="5" selection-start-line="83" selection-start-column="5" selection-end-line="83" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/FavouriteSeatAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6171171">
-          <caret line="87" column="111" selection-start-line="87" selection-start-column="97" selection-end-line="87" selection-end-column="111" />
         </state>
       </provider>
     </entry>
@@ -2659,13 +2479,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/SubscriptionAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4159159">
-          <caret line="128" column="17" selection-start-line="128" selection-start-column="17" selection-end-line="128" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_my_orders.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -2673,20 +2486,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/EstablishmentAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.7117117">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainClasses/News.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.022522522">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -2793,72 +2592,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/ChudobiletDatabaseHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.02276176">
-          <caret line="166" column="0" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#getInstance#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#insertUser#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#insertEstablishment#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#insertEventType#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#insertSeat#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#insertTicketOrder#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#insertNews#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#insertSubscriptionbyEventid#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#insertEstablishmentAPI#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#insertEventAPI#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#setAmountSeats#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#getEvents#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#getEventsByEstablishment#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#getEstablishments#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#getTicketOrders#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#getTicketOrder#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#getEstablishmentListNames#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#getSubscription#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#getSubscriptionById#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#getAmountOfFreeSeats#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#getEstablishmentFavouriteSeatsbyEstablishmentid#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#getNews#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#getNews#1;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#getUser#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#authorize#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#isAuthorized#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#deleteSeatBySeatNamendEstablishmentName#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#removeSubscriptionById#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#cursorToListTicketOrder#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#cursorToListSubscription#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#cursorToListEvent#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#cursorToListEstablishment#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#getDateTime#0;class#ChudobiletDatabaseHelper#0" expanded="false" />
-            <element signature="method#getDateTime#1;class#ChudobiletDatabaseHelper#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/SeatAPI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22610015">
           <caret line="27" column="32" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.02276176">
-          <caret line="39" column="47" selection-start-line="39" selection-start-column="47" selection-end-line="39" selection-end-column="47" />
-          <folding>
-            <element signature="e#6373#6416#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainClasses/Event.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.69831544">
-          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2902,22 +2639,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.366003">
           <caret line="129" column="28" selection-start-line="129" selection-start-column="28" selection-end-line="129" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/SubscriptionInterestFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3093415">
-          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/EventSubscriptionFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31699848">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2968,13 +2689,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.0.2/2e1d97eec8a4c7517486234666d8b8245f63ae89/retrofit-2.0.2-sources.jar!/retrofit2/Callback.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5283308">
+          <caret line="37" column="7" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3322785">
+          <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+          <folding>
+            <element signature="e#274#288#0" expanded="true" />
+            <element signature="e#367#381#0" expanded="true" />
+            <element signature="e#463#479#0" expanded="true" />
+            <element signature="e#562#580#0" expanded="true" />
+            <element signature="e#663#681#0" expanded="true" />
+            <element signature="e#768#790#0" expanded="true" />
+            <element signature="e#877#898#0" expanded="true" />
+            <element signature="e#979#994#0" expanded="true" />
+            <element signature="e#1187#1206#0" expanded="true" />
+            <element signature="e#1298#1324#0" expanded="true" />
+            <element signature="e#1517#1537#0" expanded="true" />
+            <element signature="e#1617#1632#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24542683">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_event_tab.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.8301888">
-          <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.42288557">
+          <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -2984,60 +2742,145 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.54717">
+        <state vertical-scroll-proportion="0.2238806">
           <caret line="9" column="29" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MyIntentService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26981708">
+          <caret line="37" column="17" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
+          <folding>
+            <element signature="method#showText#0;class#MyIntentService#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36585367">
+          <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14240506">
+          <caret line="6" column="30" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainClasses/News.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.022970904">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/SubscriptionInterestFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9542683">
+          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/SubscriberFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.43445122">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/ChudobiletDatabaseHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.022865854">
+          <caret line="717" column="0" selection-start-line="717" selection-start-column="0" selection-end-line="717" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainClasses/Event.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6996951">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/EventSubscriptionFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7484756">
+          <caret line="55" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/NewsFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="122" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="122" />
+        <state vertical-scroll-proportion="0.3887195">
+          <caret line="113" column="7" selection-start-line="113" selection-start-column="7" selection-end-line="113" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MainMenu/EventTabFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="24" selection-start-line="49" selection-start-column="24" selection-end-line="49" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.15396342">
+          <caret line="135" column="31" selection-start-line="135" selection-start-column="31" selection-end-line="135" selection-end-column="31" />
           <folding>
             <element signature="method#EventTabFragment#0;class#EventTabFragment#0" expanded="false" />
             <element signature="method#onRefresh#0;class#EventTabFragment#0" expanded="false" />
-            <element signature="e#4036#5080#0" expanded="true" />
-            <element signature="e#5079#5080#0" expanded="true" />
-            <element signature="e#5101#5133#0" expanded="false" />
+            <element signature="e#5570#5602#0" expanded="false" />
+            <element signature="e#7156#7157#0" expanded="true" />
+            <element signature="e#7184#7185#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.0.2/2e1d97eec8a4c7517486234666d8b8245f63ae89/retrofit-2.0.2-sources.jar!/retrofit2/Callback.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/EventAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5283308">
-          <caret line="37" column="7" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.20579268">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/API/EventAPIUpdater.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/NewsAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#618#619#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.47408536">
+          <caret line="147" column="0" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/MyIntentService.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/EstablishmentAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26493108">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding>
-            <element signature="method#showText#0;class#MyIntentService#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.022865854">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/SubscriptionAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="141" column="13" selection-start-line="141" selection-start-column="13" selection-end-line="143" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/delexa/chudobilet/Adapters/FavouriteSeatAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2682927">
+          <caret line="76" column="44" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>

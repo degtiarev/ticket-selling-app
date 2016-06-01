@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Intent intent = new Intent(this, MyIntentService.class);
+       // Intent intent = new Intent(this, MyIntentService.class);
        // intent.putExtra(MyIntentService.EXTRA_MESSAGE, "Новое событие по вашим подпискам!");
-        startService(intent);
+      //  startService(intent);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -157,9 +157,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.today) {
-            return true;
-        }
+//        if (id == R.id.today) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
