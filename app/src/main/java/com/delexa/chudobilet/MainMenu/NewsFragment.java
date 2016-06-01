@@ -16,10 +16,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.delexa.chudobilet.API.Link;
-import com.delexa.chudobilet.API.NewsAPI;
+import com.delexa.chudobilet.API.NewsAPIUpdater;
 import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.Adapters.NewsAdapter;
 import com.delexa.chudobilet.MainClasses.News;
@@ -28,16 +26,8 @@ import com.delexa.chudobilet.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class NewsFragment extends Fragment implements Callback<List<NewsAPI>>, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
+public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
 
     private RecyclerView recyclerView;
     private NewsAdapter newsAdapter;
@@ -46,25 +36,18 @@ public class NewsFragment extends Fragment implements Callback<List<NewsAPI>>, S
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
-    public Retrofit retrofit;
-    public Link service;
-
     public NewsFragment() {
-        // Required empty public constructor
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_news, container, false);
         recyclerView = (RecyclerView) v.findViewById(R.id.NewsList);
 
-
-        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.refresh);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.refreshNews);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-
 
         return v;
     }
@@ -80,15 +63,8 @@ public class NewsFragment extends Fragment implements Callback<List<NewsAPI>>, S
         recyclerView.setAdapter(newsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
-        retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://pastebin.com/raw/")
-                .build();
-        service = retrofit.create(Link.class);
-        Call<List<NewsAPI>> chudobilet = service.getNewsAPI();
-        chudobilet.enqueue(this);
-
+        NewsAPIUpdater newsAPIUpdater = new NewsAPIUpdater(getContext());
+        newsAPIUpdater.update();
     }
 
     public List<News> getNews() {
@@ -98,27 +74,6 @@ public class NewsFragment extends Fragment implements Callback<List<NewsAPI>>, S
         List<News> data = ChudobiletDatabaseHelper.getNews(db);
 
         return data;
-    }
-
-    @Override
-    public void onResponse(Call<List<NewsAPI>> call, Response<List<NewsAPI>> response) {
-
-        SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getActivity());
-        SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
-        ChudobiletDatabaseHelper.insertNewsAPI(db, response);
-
-        newsAdapter = new NewsAdapter(getActivity(), getNews());
-        recyclerView.setAdapter(newsAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-    }
-
-    @Override
-    public void onFailure(Call<List<NewsAPI>> call, Throwable t) {
-
-        Toast toast = Toast.makeText(getContext(), "Не удается соединиться с сервером! Приложение работает" +
-                " в оффлайн режиме! Проверьте подключение!", Toast.LENGTH_SHORT);
-        toast.show();
     }
 
     @Override
@@ -177,9 +132,6 @@ public class NewsFragment extends Fragment implements Callback<List<NewsAPI>>, S
         }
         return filteredModelList;
     }
-
-
-
 
 
 }

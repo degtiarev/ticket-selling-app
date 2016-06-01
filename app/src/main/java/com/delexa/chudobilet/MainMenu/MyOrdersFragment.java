@@ -33,7 +33,6 @@ public class MyOrdersFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,14 +50,11 @@ public class MyOrdersFragment extends Fragment {
             ft.commit();
         }
 
-
         recyclerView = (RecyclerView) v.findViewById(R.id.OrderList);
-
 
         ticketOrderAdapter = new TicketOrderAdapter(getActivity(), getTicketOrders());
         recyclerView.setAdapter(ticketOrderAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
         return v;
     }
