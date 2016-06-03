@@ -88,14 +88,17 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 mSwipeRefreshLayout.setRefreshing(false);
                 // говорим о том, что собираемся закончить
 
-                NewsAPIUpdater newsAPIUpdater = new NewsAPIUpdater(getContext());
-                newsAPIUpdater.update();
                 newsAdapter = new NewsAdapter(getActivity(), getNews());
                 recyclerView.setAdapter(newsAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
 //                Toast.makeText(getContext(), "заканчиваем", Toast.LENGTH_SHORT).show();
             }
         }, 3000);
+
+        NewsAPIUpdater newsAPIUpdater = new NewsAPIUpdater(getContext());
+        newsAPIUpdater.update();
     }
 
     @Override

@@ -11,13 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.delexa.chudobilet.MainClasses.Event;
 import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.MainClasses.Event;
 import com.delexa.chudobilet.R;
 import com.squareup.picasso.Picasso;
 
@@ -35,7 +34,7 @@ public class EventActivity extends AppCompatActivity {
         final int _id = intent.getIntExtra("_id", Integer.MAX_VALUE);
 
 
-        SQLiteOpenHelper chudobiletDatabaseHelper =  ChudobiletDatabaseHelper.getInstance(this);
+        SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(this);
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
         int amountFreeSeats = ChudobiletDatabaseHelper.getAmountOfFreeSeats(db, _id);
         db = chudobiletDatabaseHelper.getReadableDatabase();
@@ -50,9 +49,9 @@ public class EventActivity extends AppCompatActivity {
         TextView roles = (TextView) findViewById(R.id.textViewEventsRoles);
         TextView rolesConst = (TextView) findViewById(R.id.textViewEventsRolesConst);
         TextView about = (TextView) findViewById(R.id.textViewEventAbout);
-        ImageView videoLink = (ImageView) findViewById(R.id.imageViewEventVideoLink);
-        Button link = (Button) findViewById(R.id.ButtonEventLink);
-        Button button = (Button) findViewById(R.id.Subscribe);
+        TextView videoLink = (TextView) findViewById(R.id.imageViewEventVideoLink);
+        TextView link = (TextView) findViewById(R.id.ButtonEventLink);
+        TextView button = (TextView) findViewById(R.id.Subscribe);
 
         if (event.getVideoLink() != null) {
             videoLink.setOnClickListener(new View.OnClickListener() {

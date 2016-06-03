@@ -6,55 +6,71 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/main"
+            android:icon="@drawable/main"
             android:title="@string/main" />
         <item
             android:id="@+id/news"
+            android:icon="@drawable/news"
             android:title="@string/news" />
-
-        <item
-            android:id="@+id/cinema"
-            android:title="@string/cinema" />
-        <item
-            android:id="@+id/concerts"
-            android:title="@string/concerts" />
-        <item
-            android:id="@+id/theaters"
-            android:title="@string/theaters" />
-        <item
-            android:id="@+id/for_children"
-            android:title="@string/for_children" />
-
-        <item
-            android:id="@+id/masterclass"
-            android:title="@string/masterclass" />
-
-        <item
-            android:id="@+id/other"
-            android:title="@string/other" />
     </group>
-
 
     <group
         android:id="@+id/second_group"
         android:checkableBehavior="single">
-        <item
-            android:id="@+id/my_orders"
-            android:title="@string/my_orders" />
 
         <item
-            android:id="@+id/my_subscriptions"
-            android:title="@string/my_subscriptions" />
+            android:id="@+id/cinema"
+            android:icon="@drawable/cinema"
+            android:title="@string/cinema" />
+        <item
+            android:id="@+id/concerts"
+            android:icon="@drawable/concert"
+            android:title="@string/concerts" />
+        <item
+            android:id="@+id/theaters"
+            android:icon="@drawable/establishment"
+            android:title="@string/theaters" />
+        <item
+            android:id="@+id/for_children"
+            android:icon="@drawable/for_children"
+            android:title="@string/for_children" />
+
+        <item
+            android:id="@+id/masterclass"
+            android:icon="@drawable/masterclass"
+            android:title="@string/masterclass" />
+
+        <item
+            android:id="@+id/other"
+            android:icon="@drawable/other"
+            android:title="@string/other" />
     </group>
 
     <group
         android:id="@+id/third_group"
         android:checkableBehavior="single">
+        <item
+            android:id="@+id/my_orders"
+            android:icon="@drawable/order"
+            android:title="@string/my_orders" />
+
+        <item
+            android:id="@+id/my_subscriptions"
+            android:icon="@drawable/favourite"
+            android:title="@string/my_subscriptions" />
+    </group>
+
+    <group
+        android:id="@+id/fouth_group"
+        android:checkableBehavior="single">
 
         <item
             android:id="@+id/other_apps"
+            android:icon="@drawable/other_apps"
             android:title="@string/other_apps" />
         <item
             android:id="@+id/about"
+            android:icon="@drawable/about"
             android:title="@string/about" />
     </group>
 

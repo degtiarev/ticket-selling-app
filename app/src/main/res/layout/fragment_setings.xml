@@ -267,7 +267,7 @@
 
                     <CheckBox
                         android:id="@+id/checkBoxNotificationAboutNewEventsSMS"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="По SMS" />
 
@@ -276,7 +276,7 @@
 
             <ListView
                 android:id="@+id/listViewExitFromProfile"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 

@@ -149,26 +149,34 @@ public class EventTabFragment extends Fragment implements SwipeRefreshLayout.OnR
                 mSwipeRefreshLayout.setRefreshing(false);
                 // говорим о том, что собираемся закончить
 
-                if (typeInfo == place) {
-                    setHasOptionsMenu(false);
-                    establishmentAdapter = new EstablishmentAdapter(getActivity(), getCinemas());
-                    recyclerView.setAdapter(establishmentAdapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
-                } else if (typeInfo == event)
-
-                {
-                    setHasOptionsMenu(true);
-                    events = getEvents();
-                    eventAdapter = new EventAdapter(getActivity(), events);
-                    recyclerView.setAdapter(eventAdapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-                }
 //                Toast.makeText(getContext(), "заканчиваем", Toast.LENGTH_SHORT).show();
             }
         }, 3000);
+
+        if (typeInfo == place) {
+            setHasOptionsMenu(false);
+            establishmentAdapter = new EstablishmentAdapter(getActivity(), getCinemas());
+            recyclerView.setAdapter(establishmentAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+            EstablishmmentAPIUpdater establishmmentAPIUpdater = new EstablishmmentAPIUpdater(getContext());
+            establishmmentAPIUpdater.update();
+
+
+        } else if (typeInfo == event)
+
+        {
+            setHasOptionsMenu(true);
+            events = getEvents();
+            eventAdapter = new EventAdapter(getActivity(), events);
+            recyclerView.setAdapter(eventAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+            EventAPIUpdater eventAPIUpdater = new EventAPIUpdater(getContext());
+            eventAPIUpdater.update();
+
+        }
+
     }
 
     //region  Получение данных из БД

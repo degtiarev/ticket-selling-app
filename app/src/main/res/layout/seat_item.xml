@@ -22,7 +22,7 @@
                 android:gravity="center"
                 android:paddingTop="10dp"
                 android:text="Сектор"
-                android:textColor="@android:color/background_dark"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="15dp" />
 
             <TextView
@@ -32,7 +32,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Ряд"
-                android:textColor="@android:color/background_dark"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="15dp" />
 
 
@@ -43,16 +43,17 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Место"
-                android:textColor="@android:color/background_dark"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="15dp" />
 
 
             <ImageView
                 android:id="@+id/delete_img"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_weight="0"
-                android:src="@drawable/icon_cross" />
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/delete" />
 
 
         </LinearLayout>

@@ -95,26 +95,42 @@
 
             </LinearLayout>
 
-            <ImageView
+            <View
+                android:id="@+id/viewSeparator4"
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
                 android:id="@+id/imageViewEventVideoLink"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:padding="20dp"
-                android:src="@drawable/youtube_logo" />
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="15dp"
+                android:text="ПОСМОТРЕТЬ ТРЕЙЛЕР"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
 
-            <Button
+
+            <TextView
                 android:id="@+id/ButtonEventLink"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Купить на Чудобилет" />
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="15dp"
+                android:text="КУПИТЬ НА ЧУДОБИЛЕТ"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
 
-            <Button
+            <TextView
                 android:id="@+id/Subscribe"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="         Подписаться        " />
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="15dp"
+                android:text="ПОДПИСАТЬСЯ"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
 
 
         </LinearLayout>
