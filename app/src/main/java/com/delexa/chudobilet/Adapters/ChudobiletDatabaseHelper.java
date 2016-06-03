@@ -765,9 +765,9 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         if (date.equals(EventTabFragment.today)) {
 
             additionCondition = "EVENT.NAME = 'Книга джунглей'";
-        }
-        else if (date.equals(EventTabFragment.tomorrow)) additionCondition = "";
-        else if (date.equals(EventTabFragment.onWeek)) additionCondition = "EVENT._ESTABLISHMENTID = 1";
+        } else if (date.equals(EventTabFragment.tomorrow)) additionCondition = "";
+        else if (date.equals(EventTabFragment.onWeek))
+            additionCondition = "EVENT._ESTABLISHMENTID = 1";
         else if (date.equals(EventTabFragment.onNextWeek)) additionCondition = "";
         else if (date.equals(EventTabFragment.onMonth)) additionCondition = "";
         else if (date.equals(EventTabFragment.onNextMonth)) additionCondition = "";
@@ -1215,6 +1215,47 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             db.update("USER", newValues, "EMAIL = '" + email + "'", null);
 
         }
+
+
+    }
+
+    // выход из профиля (пока через локальную БД)
+
+    public static void quitFromProfile(SQLiteDatabase db) {
+
+        User user = new User();
+        try {
+
+            Cursor newCursor = db.query("USER",
+                    new String[]{"NAME", "FAMILY", "PATRONYMIC", "EMAIL", "DATE", "SEX", "NOTIFICATIONTOPAY", "EMAILNOTIFICATIONCHANGESTATUS",
+                            "NEWSSUBSCRIBER", "PHONE", "PASSWORD", "TIMESTAMP",},
+                    null, null, null, null, null);
+
+
+            if (newCursor.moveToFirst()) {
+
+                user.setName(newCursor.getString(0));
+                user.setFamily(newCursor.getString(1));
+                user.setPatronymic(newCursor.getString(2));
+                user.setEmail(newCursor.getString(3));
+                user.setDate(getDateTime(newCursor.getString(4), SHORT_DATE));
+                user.setSex(newCursor.getString(5));
+                user.setNotificationToPay(newCursor.getString(6));
+                user.setEmailNotificationChangeStatus(newCursor.getString(7));
+                user.setNewsSubscriber(newCursor.getString(8));
+                user.setPhone(newCursor.getString(9));
+                user.setPassword(newCursor.getString(10));
+                user.setTimeStamp(getDateTime(newCursor.getString(11), LONG_DATE));
+            }
+
+
+        } catch (SQLiteException e) {
+        }
+
+
+        ContentValues newValues = new ContentValues();
+        newValues.put("PASSWORD", "123456789");
+        db.update("USER", newValues, null, null);
 
 
     }

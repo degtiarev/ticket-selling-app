@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,9 +42,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       // Intent intent = new Intent(this, MyIntentService.class);
-       // intent.putExtra(MyIntentService.EXTRA_MESSAGE, "Новое событие по вашим подпискам!");
-      //  startService(intent);
+        // Intent intent = new Intent(this, MyIntentService.class);
+        // intent.putExtra(MyIntentService.EXTRA_MESSAGE, "Новое событие по вашим подпискам!");
+        //  startService(intent);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        ImageView imgProfile = (ImageView) hView.findViewById(R.id.imageViewPhoto);
+        LinearLayout imgProfile = (LinearLayout) hView.findViewById(R.id.enter);
         imgProfile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Fragment fragment = new AuthorizationFragment();
@@ -93,9 +94,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         View header = navigationView.getHeaderView(0);
-        TextView myName = (TextView) header.findViewById(R.id.textViewName);
-        TextView myEmail = (TextView) header.findViewById(R.id.textViewEmail);
+        TextView myName = (TextView) header.findViewById(R.id.textViewNameUP);
+        TextView myEmail = (TextView) header.findViewById(R.id.textViewEmailUP);
         ImageView myPhoto = (ImageView) header.findViewById(R.id.imageViewPhoto);
+        TextView enter = (TextView) header.findViewById(R.id.imageViewAuthorise);
 
         ChudobiletDatabaseHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(this);
         SQLiteDatabase db = chudobiletDatabaseHelper.getWritableDatabase();
@@ -108,15 +110,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .load(user.getImage())
                     .placeholder(R.drawable.no_photo)
                     .error(R.drawable.ic_menu_camera)
+                    .transform(new CircleTransform())
                     .into(myPhoto); //ссылка на ImageView
+
 
             myName.setText(user.getName());
             myEmail.setText(user.getEmail());
+            enter.setVisibility(View.INVISIBLE);
+
         } else {
 
-            myPhoto.setImageResource(R.drawable.no_photo);
-            myName.setText("Для авторизации");
-            myEmail.setText("нажмите на картинку");
+
+            myPhoto.setImageResource(R.drawable.rounded_avatar);
+            myName.setText("");
+            myEmail.setText("");
 
         }
 

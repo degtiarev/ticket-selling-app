@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
+import com.delexa.chudobilet.CircleTransform;
 import com.delexa.chudobilet.MainClasses.User;
 import com.delexa.chudobilet.R;
 import com.squareup.picasso.Picasso;
@@ -41,7 +42,7 @@ public class AuthorizationFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_authorization, container, false);
 
-        Button registration = (Button) v.findViewById(R.id.buttonRegistration);
+        TextView registration = (TextView) v.findViewById(R.id.textViewRegistration);
         Button enter = (Button) v.findViewById(R.id.buttonEnter);
         final EditText email = (EditText) v.findViewById(R.id.editTextAuthEmail);
         final EditText password = (EditText) v.findViewById(R.id.editTextAuthPassword);
@@ -85,9 +86,10 @@ public class AuthorizationFragment extends Fragment {
 
                     NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
                     View header = navigationView.getHeaderView(0);
-                    TextView myName = (TextView) header.findViewById(R.id.textViewName);
-                    TextView myEmail = (TextView) header.findViewById(R.id.textViewEmail);
+                    TextView myName = (TextView) header.findViewById(R.id.textViewNameUP);
+                    TextView myEmail = (TextView) header.findViewById(R.id.textViewEmailUP);
                     ImageView myPhoto = (ImageView) header.findViewById(R.id.imageViewPhoto);
+                    TextView enter = (TextView) header.findViewById(R.id.imageViewAuthorise);
                     db = chudobiletDatabaseHelper.getWritableDatabase();
                     User user = ChudobiletDatabaseHelper.getUser(db);
 
@@ -95,10 +97,12 @@ public class AuthorizationFragment extends Fragment {
                             .load(user.getImage())
                             .placeholder(R.drawable.no_photo)
                             .error(R.drawable.ic_menu_camera)
+                            .transform(new CircleTransform())
                             .into(myPhoto); //ссылка на ImageView
 
                     myName.setText(user.getName());
                     myEmail.setText(user.getEmail());
+                    enter.setVisibility(View.INVISIBLE);
 
 
                     Fragment fragment = new SetingsFragment();

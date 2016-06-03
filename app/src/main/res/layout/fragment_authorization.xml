@@ -18,82 +18,44 @@
             android:src="@drawable/logo" />
 
 
-        <LinearLayout
-            android:id="@+id/first"
+        <EditText
+            android:id="@+id/editTextAuthEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="30dp">
-
-            <TextView
-                android:id="@+id/textViewAuthEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Email:      "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/editTextAuthEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="email"
-                android:inputType="textPersonName" />
-
-        </LinearLayout>
+            android:ems="10"
+            android:hint="Электронная почта"
+            android:inputType="textPersonName"
+            android:paddingTop="20dp" />
 
 
-        <LinearLayout
-            android:id="@+id/second"
+        <EditText
+            android:id="@+id/editTextAuthPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:ems="10"
+            android:hint="Пароль"
+            android:inputType="textPassword" />
 
-            <TextView
-                android:id="@+id/textViewAuthPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Пароль: "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/editTextAuthPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="пароль"
-                android:inputType="textPassword" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
+        <Button
+            android:id="@+id/buttonEnter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="30dp">
+            android:background="@color/colorPrimary"
+            android:text="Войти"
+            android:textColor="@android:color/white" />
 
-            <Button
-                android:id="@+id/buttonRegistration"
-                android:layout_width="124dp"
-                android:layout_height="wrap_content"
-                android:text="Регистрация" />
-
-            <Button
-                android:id="@+id/buttonEnter"
-                android:layout_width="124dp"
-                android:layout_height="wrap_content"
-                android:text="Войти" />
-
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/textViewRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="10dp"
+            android:text="РЕГИСТРАЦИЯ"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
 
 
     </LinearLayout>
-
 
 </FrameLayout>

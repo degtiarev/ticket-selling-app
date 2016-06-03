@@ -17,34 +17,53 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
+        android:background="?android:attr/selectableItemBackground"
         android:paddingBottom="25dp"
         android:paddingLeft="25dp"
-        android:src="@drawable/options" />
+        android:src="@drawable/options"
+        android:state_pressed="true" />
 
-    <ImageView
-        android:id="@+id/imageViewPhoto"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:paddingTop="7dp"
-        android:src="@drawable/no_photo" />
-
-    <TextView
-        android:id="@+id/textViewName"
+    <LinearLayout
+        android:id="@+id/enter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imageViewPhoto"
-        android:paddingTop="7dp"
-        android:text="Для авторизации"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@android:color/background_dark" />
+        android:background="?android:attr/selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/imageViewPhoto"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingTop="7dp"
+            android:src="@drawable/rounded_avatar" />
+
+        <TextView
+            android:id="@+id/imageViewAuthorise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imageViewPhoto"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:text="Войти"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/textViewEmail"
+        android:id="@+id/textViewNameUP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewName"
-        android:text="нажмите на картинку выше"
-        android:textColor="@android:color/background_dark" />
+        android:layout_below="@id/enter"
+        android:paddingTop="7dp"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textViewEmailUP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewNameUP"
+        android:textColor="#FFFFE0" />
     />
 
 

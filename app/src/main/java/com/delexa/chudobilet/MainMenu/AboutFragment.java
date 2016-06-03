@@ -69,24 +69,6 @@ public class AboutFragment extends Fragment {
             }
         });
 
-//
-//
-//
-//        Button buttonSendReport = (Button) mRelativeLayout.findViewById(R.id.buttonError);
-//        buttonSendReport.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//
-//
-//            }
-//        });
-//
-//
-//        Button buttonSetRating = (Button) mRelativeLayout.findViewById(R.id.buttonSetRating);
-//        buttonSetRating.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//
-//            }
-//        });
 
 
         return mRelativeLayout;

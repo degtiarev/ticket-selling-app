@@ -10,7 +10,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -64,8 +63,7 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         recyclerView.setAdapter(newsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-//        NewsAPIUpdater newsAPIUpdater = new NewsAPIUpdater(getContext());
-//        newsAPIUpdater.update();
+
     }
 
     public List<News> getNews() {
@@ -90,6 +88,8 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 mSwipeRefreshLayout.setRefreshing(false);
                 // говорим о том, что собираемся закончить
 
+                NewsAPIUpdater newsAPIUpdater = new NewsAPIUpdater(getContext());
+                newsAPIUpdater.update();
                 newsAdapter = new NewsAdapter(getActivity(), getNews());
                 recyclerView.setAdapter(newsAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -111,7 +111,7 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public boolean onQueryTextChange(String query) {
         final List<News> filteredModelList = filter(news, query);
-       // Log.d("CHUDOBILET", String.valueOf(news.size()) + "-" + String.valueOf(filteredModelList.size()));
+        // Log.d("CHUDOBILET", String.valueOf(news.size()) + "-" + String.valueOf(filteredModelList.size()));
         newsAdapter.animateTo(filteredModelList);
         recyclerView.scrollToPosition(0);
         newsAdapter.notifyDataSetChanged();

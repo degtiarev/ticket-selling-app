@@ -7,21 +7,23 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
-import com.delexa.chudobilet.MainActivity;
 import com.delexa.chudobilet.MainClasses.User;
 import com.delexa.chudobilet.R;
 
@@ -106,6 +108,41 @@ public class SetingsFragment extends Fragment {
             }
         });
 
+
+        String[] names = {"Выйти из профиля"};
+        ListView exit = (ListView) view.findViewById(R.id.listViewExitFromProfile);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, names);
+        exit.setAdapter(adapter);
+        exit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (l == 0) {
+                    SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getContext());
+                    SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
+                    ChudobiletDatabaseHelper.quitFromProfile(db);
+
+                    TextView myName = (TextView) getActivity().findViewById(R.id.textViewNameUP);
+                    TextView myEmail = (TextView) getActivity().findViewById(R.id.textViewEmailUP);
+                    ImageView myPhoto = (ImageView) getActivity().findViewById(R.id.imageViewPhoto);
+                    TextView enter = (TextView) getActivity().findViewById(R.id.imageViewAuthorise);
+
+                    myPhoto.setImageResource(R.drawable.rounded_avatar);
+                    myName.setText(" ");
+                    myEmail.setText(" ");
+                    enter.setVisibility(View.VISIBLE);
+
+
+                    Fragment fragment = new AuthorizationFragment();
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    ft.replace(R.id.content_frame, fragment);
+                    ft.commit();
+
+
+                }
+            }
+        });
+
+
         return view;
     }
 
@@ -127,7 +164,10 @@ public class SetingsFragment extends Fragment {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.toSave:
-                //newGame();
+                try {
+                } catch (Exception e) {
+                }
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

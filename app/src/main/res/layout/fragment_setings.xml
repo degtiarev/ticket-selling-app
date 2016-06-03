@@ -11,299 +11,274 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="6dp"
-            android:paddingRight="6dp"
-            android:paddingTop="@dimen/activity_vertical_margin">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-
-            <TextView
-                android:id="@+id/textViewFamily"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/editTextFamily"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:text="Фамилия:   "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/editTextFamily"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/textViewFamily"
-                android:layout_toRightOf="@+id/textViewFamily"
-                android:ems="10"
-                android:hint="фамилия"
-                android:inputType="textPersonName" />
+                android:layout_height="wrap_content">
 
-
-            <TextView
-                android:id="@+id/textViewName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/editTextName"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/editTextFamily"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:text="Имя:   "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/editTextName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewFamily"
-                android:layout_toEndOf="@+id/textViewName"
-                android:layout_toRightOf="@+id/textViewFamily"
-                android:ems="10"
-                android:hint="имя"
-                android:inputType="textPersonName" />
-
-
-            <TextView
-                android:id="@+id/textViewPatronimic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/editTextPatronimic"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/editTextName"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:text="Отчество:   "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/editTextPatronimic"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewName"
-                android:layout_toEndOf="@+id/textViewPatronimic"
-                android:layout_toRightOf="@+id/textViewName"
-                android:ems="10"
-                android:hint="отчество"
-                android:inputType="textPersonName" />
-
-            <TextView
-                android:id="@+id/textViewEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/editTextEmail"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/editTextPatronimic"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:text="Email:   "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/editTextEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewPatronimic"
-                android:layout_toEndOf="@+id/textViewEmail"
-                android:layout_toRightOf="@+id/textViewEmail"
-                android:ems="10"
-                android:hint="email"
-                android:inputType="textEmailAddress" />
-
-
-            <TextView
-                android:id="@+id/textViewBirthday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/editTextBirthday"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/editTextEmail"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:text="Дата рождения: "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/editTextBirthday"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewEmail"
-                android:layout_toEndOf="@+id/textViewBirthday"
-                android:layout_toRightOf="@+id/textViewBirthday"
-                android:ems="10"
-                android:inputType="date" />
-
-            <TextView
-                android:id="@+id/textViewSex"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/radio_groupSex"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/editTextBirthday"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:text="Пол: "
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-
-            <RadioGroup
-                android:id="@+id/radio_groupSex"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewBirthday"
-                android:layout_toEndOf="@+id/textViewSex"
-                android:layout_toRightOf="@+id/textViewSex"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radio_M"
+                <TextView
+                    android:id="@+id/textViewFamily"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="мужской" />
+                    android:text="Фамилия:   "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <RadioButton
-                    android:id="@+id/radio_F"
+                <EditText
+                    android:id="@+id/editTextFamily"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="фамилия"
+                    android:inputType="textPersonName" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textViewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="женский" />
-            </RadioGroup>
+                    android:text="Имя:   "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/editTextName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="имя"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textViewPatronimic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Отчество:   "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/editTextPatronimic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="отчество"
+                    android:inputType="textPersonName" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textViewEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email:   "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/editTextEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="email"
+                    android:inputType="textEmailAddress" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/textViewBirthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Дата рождения: "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/editTextBirthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textViewSex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Пол: "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+                <RadioGroup
+                    android:id="@+id/radio_groupSex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radio_M"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="мужской" />
+
+                    <RadioButton
+                        android:id="@+id/radio_F"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="женский" />
+                </RadioGroup>
+
+            </LinearLayout>
+
 
             <View
                 android:id="@+id/viewSeparator1"
                 android:layout_width="fill_parent"
                 android:layout_height="1dip"
-                android:layout_below="@id/textViewSex"
-                android:layout_centerVertical="true"
                 android:background="@android:color/darker_gray" />
 
-            <TextView
-                android:id="@+id/textViewNotificationForPay"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textViewSex"
-                android:layout_gravity="center"
-                android:gravity="left"
-                android:maxLines="3"
-                android:minLines="3"
-                android:paddingLeft="5dp"
-                android:singleLine="false"
-                android:text="Напоминать о необходимости оплатить заказ:"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <CheckBox
-                android:id="@+id/checkBoxNotificationForPayEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/radio_groupSex"
-                android:layout_toEndOf="@+id/textViewNotificationForPay"
-                android:layout_toRightOf="@+id/textViewNotificationForPay"
-                android:text=" по email" />
+                <TextView
+                    android:id="@+id/textViewNotificationForPay"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:maxLines="3"
+                    android:minLines="3"
+                    android:singleLine="false"
+                    android:text="Напоминать о необходимости оплатить заказ:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <CheckBox
-                android:id="@+id/checkBoxNotificationForPaySMS"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/checkBoxNotificationForPayEmail"
-                android:layout_toEndOf="@+id/textViewNotificationForPay"
-                android:layout_toRightOf="@+id/textViewNotificationForPay"
-                android:text="По SMS" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <CheckBox
+                        android:id="@+id/checkBoxNotificationForPayEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/radio_groupSex"
+                        android:layout_toEndOf="@+id/textViewNotificationForPay"
+                        android:layout_toRightOf="@+id/textViewNotificationForPay"
+                        android:text=" по email" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxNotificationForPaySMS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/checkBoxNotificationForPayEmail"
+                        android:layout_toEndOf="@+id/textViewNotificationForPay"
+                        android:layout_toRightOf="@+id/textViewNotificationForPay"
+                        android:text="По SMS" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <View
                 android:id="@+id/viewSeparator2"
                 android:layout_width="fill_parent"
                 android:layout_height="1dip"
-                android:layout_below="@id/checkBoxNotificationForPaySMS"
-                android:layout_centerVertical="true"
                 android:background="@android:color/darker_gray" />
 
-            <TextView
-                android:id="@+id/textViewNotificationAboutStatus"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textViewNotificationForPay"
-                android:layout_gravity="center"
-                android:gravity="left"
-                android:maxLines="2"
-                android:minLines="2"
-                android:paddingLeft="5dp"
-                android:paddingTop="8dp"
-                android:singleLine="false"
-                android:text="Уведомлять о статусе заказа:"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <CheckBox
-                android:id="@+id/checkBoxNotificationAboutStatusEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/checkBoxNotificationForPaySMS"
-                android:layout_toEndOf="@+id/textViewNotificationAboutStatus"
-                android:layout_toRightOf="@+id/textViewNotificationAboutStatus"
-                android:text=" по email" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textViewNotificationAboutStatus"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:minLines="2"
+                    android:singleLine="false"
+                    android:text="Уведомлять о статусе заказа:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxNotificationAboutStatusEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" по email" />
+
+            </LinearLayout>
 
             <View
                 android:id="@+id/viewSeparator3"
                 android:layout_width="fill_parent"
                 android:layout_height="1dip"
-                android:layout_below="@id/textViewNotificationAboutStatus"
-                android:layout_centerVertical="true"
                 android:background="@android:color/darker_gray" />
 
-            <TextView
-                android:id="@+id/textViewNotificationAboutNewEvents"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textViewNotificationAboutStatus"
-                android:layout_gravity="center"
-                android:gravity="left"
-                android:maxLines="2"
-                android:minLines="2"
-                android:paddingLeft="5dp"
-                android:paddingTop="8dp"
-                android:singleLine="false"
-                android:text="Узнавать о новых интересных мероприятиях:"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <CheckBox
-                android:id="@+id/checkBoxNotificationAboutNewEventsEmail"
+
+                <TextView
+                    android:id="@+id/textViewNotificationAboutNewEvents"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:maxLines="2"
+                    android:minLines="2"
+                    android:singleLine="false"
+                    android:text="Узнавать о новых интересных мероприятиях:"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxNotificationAboutNewEventsEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" по email" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxNotificationAboutNewEventsSMS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="По SMS" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/listViewExitFromProfile"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textViewNotificationAboutStatus"
-                android:layout_toEndOf="@+id/textViewNotificationAboutNewEvents"
-                android:layout_toRightOf="@+id/textViewNotificationAboutNewEvents"
-                android:text=" по email" />
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/checkBoxNotificationAboutNewEventsSMS"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/checkBoxNotificationAboutNewEventsEmail"
-                android:layout_toEndOf="@+id/textViewNotificationForPay"
-                android:layout_toRightOf="@+id/textViewNotificationForPay"
-                android:text="По SMS" />
-
-
-        </RelativeLayout>
     </ScrollView>
 </FrameLayout>
