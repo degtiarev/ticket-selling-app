@@ -74,11 +74,11 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
 
             Establishment concertEstablishment = new Establishment("Театр Оперы и Балета", "ул. Максаковой, 2, " +
-                    "Астрахань, Астраханская обл., 414024", new Date(), "1 3 4, 3 5 8,");
+                    "Астрахань, Астраханская обл., 414024", new Date(), "1 3 4, 3 5 8, ");
             Establishment theaterEstablishment1 = new Establishment("Астраханский ТЮЗ", "414000 г. Астрахань, ул. Мусы Джалиля, 4",
-                    new Date(), "1 3 4, 3 4 5,");
+                    new Date(), "1 3 4, 3 4 5, ");
             Establishment theaterEstablishment2 = new Establishment("Астраханский театр кукол", "г. Астрахань, ул. Розы Люксембург, 7",
-                    new Date(), "5 6 3, 4 5 6, 2 1 1,");
+                    new Date(), "5 6 3, 4 5 6, 2 1 1, ");
 
             Event cinemaEvent1 = new Event("Книга джунглей", cinemaEstablishment, "США", "фэнтези, драма, приключения, семейный, ...", 2016, " 1 час 50 минут", "6+",
                     "Скарлетт Йоханссон, Идрис Эльба, Билл Мюррей, Лупита Нионго, Кристофер Уокен, Джанкарло Эспозито, Нил Сетхи, Бен Кингсли, Ралф Айнесон, " +
@@ -721,6 +721,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         newValues.put("INTERESTROLES", roles);
 
         db.update("USER", newValues, "_id = 1", null);
+        db.close();
     }
 
     public static void setAmountSeats(SQLiteDatabase db, int id, int amount) {
@@ -729,6 +730,36 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
         newValues.put("AMOUNTSEATS", amount);
 
         db.update("SUBSCRIPTION", newValues, "_id = " + id, null);
+        db.close();
+    }
+
+    public static void setUserInfo(SQLiteDatabase db, User user) {
+
+        ContentValues userValues = new ContentValues();
+
+
+        userValues.put("NAME", user.getName());
+        userValues.put("FAMILY", user.getFamily());
+        userValues.put("PATRONYMIC", user.getPatronymic());
+        userValues.put("EMAIL", user.getEmail());
+        userValues.put("DATE", getDateTime(user.getDate(), SHORT_DATE));
+        userValues.put("SEX", user.getSex());
+        userValues.put("NOTIFICATIONTOPAY", user.getNotificationToPay());
+        userValues.put("EMAILNOTIFICATIONCHANGESTATUS", user.getEmailNotificationChangeStatus());
+        userValues.put("NEWSSUBSCRIBER", user.getNewsSubscriber());
+
+
+        db.update("USER", userValues, "_id = 1", null);
+        db.close();
+    }
+
+    public static void changeFavouriteSeats(SQLiteDatabase db, String establishmentName, String seats) {
+
+        ContentValues newValues = new ContentValues();
+        newValues.put("FAVOURITESEATS", seats);
+
+        db.update("ESTABLISHMENT", newValues, "NAME = '" + establishmentName + "'", null);
+        db.close();
     }
 
 

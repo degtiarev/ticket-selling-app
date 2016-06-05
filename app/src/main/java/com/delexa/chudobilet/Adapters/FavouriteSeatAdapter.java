@@ -2,14 +2,19 @@ package com.delexa.chudobilet.Adapters;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.delexa.chudobilet.MainClasses.SeatName;
 import com.delexa.chudobilet.R;
@@ -26,7 +31,6 @@ public class FavouriteSeatAdapter extends RecyclerView.Adapter<FavouriteSeatAdap
 
         this.data = data;
         this.establishmentName = establishmentName;
-
     }
 
     @Override
@@ -56,9 +60,9 @@ public class FavouriteSeatAdapter extends RecyclerView.Adapter<FavouriteSeatAdap
 
     class EstablishmentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        EditText sector;
-        EditText row;
-        EditText seat;
+        TextView sector;
+        TextView row;
+        TextView seat;
         ImageView delete;
 
 
@@ -69,9 +73,9 @@ public class FavouriteSeatAdapter extends RecyclerView.Adapter<FavouriteSeatAdap
             itemView.setClickable(true);
             itemView.setOnClickListener(this);
 
-            sector = (EditText) itemView.findViewById(R.id.editTextSector);
-            row = (EditText) itemView.findViewById(R.id.editTextRow);
-            seat = (EditText) itemView.findViewById(R.id.editTextSeat);
+            sector = (TextView) itemView.findViewById(R.id.editTextSector);
+            row = (TextView) itemView.findViewById(R.id.editTextRow);
+            seat = (TextView) itemView.findViewById(R.id.editTextSeat);
 
             delete = (ImageView) itemView.findViewById(R.id.delete_img);
             delete.setOnClickListener(this);
@@ -79,8 +83,8 @@ public class FavouriteSeatAdapter extends RecyclerView.Adapter<FavouriteSeatAdap
         }
 
         @Override
-        public void onClick(View v) {
-            SeatName seatName = data.get(getAdapterPosition());
+        public void onClick(final View v) {
+            final SeatName seatName = data.get(getAdapterPosition());
 
 
             if (v.getId() == R.id.delete_img) {
@@ -93,10 +97,95 @@ public class FavouriteSeatAdapter extends RecyclerView.Adapter<FavouriteSeatAdap
                 data = ChudobiletDatabaseHelper.getEstablishmentFavouriteSeatsbyEstablishmentid(db, establishmentName);
                 notifyDataSetChanged();
 
+            } else {
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(v.getContext());
+
+                alert.setTitle("Редактирование места");
+                alert.setMessage("Введите расположение необходимого места");
+
+                Context context = v.getContext();
+                LinearLayout layout = new LinearLayout(context);
+                layout.setOrientation(LinearLayout.VERTICAL);
+
+                final EditText sector = new EditText(context);
+                sector.setHint("Сектор");
+                sector.setInputType(InputType.TYPE_CLASS_NUMBER);
+                layout.addView(sector);
+                final EditText row = new EditText(context);
+                row.setHint("Ряд");
+                row.setInputType(InputType.TYPE_CLASS_NUMBER);
+                layout.addView(row);
+                final EditText seat = new EditText(context);
+                seat.setHint("Место");
+                seat.setInputType(InputType.TYPE_CLASS_NUMBER);
+                layout.addView(seat);
+
+                alert.setView(layout);
+
+                sector.setText(seatName.getSector());
+                row.setText(seatName.getRow());
+                seat.setText(seatName.getSeat());
+
+
+                alert.setPositiveButton("Ок", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        // нужно старое место и заменить на новое
+
+                        SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(v.getContext());
+                        SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
+                        List<SeatName> seatNames = ChudobiletDatabaseHelper.getEstablishmentFavouriteSeatsbyEstablishmentid(db, establishmentName);
+
+                        String newseats = "";
+
+
+//                        Log.v("Проверка мест", "Сектор начальное= " + seatName.getSector());
+//                        Log.v("Проверка мест", "Сектор конечное= " + sector.getText().toString());
+
+
+                        for (SeatName seatName1 : seatNames) {
+
+                            if (seatName.getRow().equals(seatName1.getRow()) &&
+                                    seatName.getSector().equals(seatName1.getSector()) &&
+                                    seatName.getSeat().equals(seatName1.getSeat())) {
+
+                                newseats += sector.getText().toString() + " ";
+                                newseats += row.getText().toString() + " ";
+                                newseats += seat.getText().toString() + ", ";
+
+
+                            } else {
+                                newseats += seatName1.getSector() + " ";
+                                newseats += seatName1.getRow() + " ";
+                                newseats += seatName1.getSeat() + ", ";
+                            }
+                        }
+
+                        chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(v.getContext());
+                        db = chudobiletDatabaseHelper.getWritableDatabase();
+                        ChudobiletDatabaseHelper.changeFavouriteSeats(db, establishmentName, newseats);
+
+                        chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(v.getContext());
+                        db = chudobiletDatabaseHelper.getReadableDatabase();
+                        data = ChudobiletDatabaseHelper.getEstablishmentFavouriteSeatsbyEstablishmentid(db, establishmentName);
+                        notifyDataSetChanged();
+
+                    }
+                });
+
+                alert.setNegativeButton("Отменить", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                    }
+
+                });
+
+                alert.show();
+
             }
-
         }
+
+
     }
-
-
 }

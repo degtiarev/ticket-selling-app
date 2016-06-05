@@ -276,6 +276,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.other_apps:
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("market://search?q=pub:CHUDOBILET"));
+                title = "Чудобилет";
                 try {
                     startActivity(intent);
                 } catch (ActivityNotFoundException e) {
@@ -305,5 +306,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 }

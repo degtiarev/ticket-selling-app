@@ -111,10 +111,13 @@
                     android:text="Дата рождения: "
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <EditText
+                <TextView
                     android:id="@+id/editTextBirthday"
                     android:layout_width="match_parent"
+                    android:paddingBottom="12dp"
+                    android:paddingLeft="40dp"
                     android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
                     android:inputType="date" />
 
             </LinearLayout>

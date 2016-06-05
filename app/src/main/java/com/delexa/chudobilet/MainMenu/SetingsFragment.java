@@ -1,6 +1,7 @@
 package com.delexa.chudobilet.MainMenu;
 
 
+import android.app.DatePickerDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -17,9 +18,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -27,7 +30,9 @@ import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
 import com.delexa.chudobilet.MainClasses.User;
 import com.delexa.chudobilet.R;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -39,6 +44,22 @@ public class SetingsFragment extends Fragment {
 
     View view;
 
+    Calendar c = Calendar.getInstance();
+    int cday, cmonth, cyear;
+    Date currentBirthdayDate;
+
+    EditText editTextName;
+    EditText editTextFamily;
+    EditText editTextPatronimic;
+    EditText editTextEmail;
+    RadioGroup radio_groupSex;
+    CheckBox checkBoxNotificationForPayEmail;
+    CheckBox checkBoxNotificationForPaySMS;
+    CheckBox checkBoxNotificationAboutStatusEmail;
+    CheckBox checkBoxNotificationAboutNewEventsEmail;
+    CheckBox checkBoxNotificationAboutNewEventsSMS;
+
+    TextView textViewBirthday;
 
     public SetingsFragment() {
         // Required empty public constructor
@@ -53,6 +74,7 @@ public class SetingsFragment extends Fragment {
 
         SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getContext());
         SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
+
         if (ChudobiletDatabaseHelper.isAuthorized(db) == false) {
 
             Fragment fragment = new AuthorizationFragment();
@@ -68,23 +90,26 @@ public class SetingsFragment extends Fragment {
         db = chudobiletDatabaseHelper.getReadableDatabase();
         User user = ChudobiletDatabaseHelper.getUser(db);
 
-        EditText editTextName = (EditText) view.findViewById(R.id.editTextName);
-        EditText editTextFamily = (EditText) view.findViewById(R.id.editTextFamily);
-        EditText editTextPatronimic = (EditText) view.findViewById(R.id.editTextPatronimic);
-        EditText editTextEmail = (EditText) view.findViewById(R.id.editTextEmail);
-        EditText editTextBirthday = (EditText) view.findViewById(R.id.editTextBirthday);
-        RadioGroup radio_groupSex = (RadioGroup) view.findViewById(R.id.radio_groupSex);
-        CheckBox checkBoxNotificationForPayEmail = (CheckBox) view.findViewById(R.id.checkBoxNotificationForPayEmail);
-        CheckBox checkBoxNotificationForPaySMS = (CheckBox) view.findViewById(R.id.checkBoxNotificationForPaySMS);
-        CheckBox checkBoxNotificationAboutStatusEmail = (CheckBox) view.findViewById(R.id.checkBoxNotificationAboutStatusEmail);
-        CheckBox checkBoxNotificationAboutNewEventsEmail = (CheckBox) view.findViewById(R.id.checkBoxNotificationAboutNewEventsEmail);
-        CheckBox checkBoxNotificationAboutNewEventsSMS = (CheckBox) view.findViewById(R.id.checkBoxNotificationAboutNewEventsSMS);
+        currentBirthdayDate = user.getDate();
+
+        editTextName = (EditText) view.findViewById(R.id.editTextName);
+        editTextFamily = (EditText) view.findViewById(R.id.editTextFamily);
+        editTextPatronimic = (EditText) view.findViewById(R.id.editTextPatronimic);
+        editTextEmail = (EditText) view.findViewById(R.id.editTextEmail);
+        textViewBirthday = (TextView) view.findViewById(R.id.editTextBirthday);
+        radio_groupSex = (RadioGroup) view.findViewById(R.id.radio_groupSex);
+        checkBoxNotificationForPayEmail = (CheckBox) view.findViewById(R.id.checkBoxNotificationForPayEmail);
+        checkBoxNotificationForPaySMS = (CheckBox) view.findViewById(R.id.checkBoxNotificationForPaySMS);
+        checkBoxNotificationAboutStatusEmail = (CheckBox) view.findViewById(R.id.checkBoxNotificationAboutStatusEmail);
+        checkBoxNotificationAboutNewEventsEmail = (CheckBox) view.findViewById(R.id.checkBoxNotificationAboutNewEventsEmail);
+        checkBoxNotificationAboutNewEventsSMS = (CheckBox) view.findViewById(R.id.checkBoxNotificationAboutNewEventsSMS);
 
         editTextName.setText(user.getName());
         editTextFamily.setText(user.getFamily());
         editTextPatronimic.setText(user.getPatronymic());
         editTextEmail.setText(user.getEmail());
-        editTextBirthday.setText(getDateTime(user.getDate()));
+        textViewBirthday.setText(getDateTime(user.getDate()));
+
 
         if (user.getSex().equals("M")) radio_groupSex.check(R.id.radio_M);
         else radio_groupSex.check(R.id.radio_F);
@@ -101,7 +126,7 @@ public class SetingsFragment extends Fragment {
             checkBoxNotificationAboutNewEventsSMS.setChecked(true);
 
 
-        editTextBirthday.setOnClickListener(new View.OnClickListener() {
+        textViewBirthday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -143,15 +168,41 @@ public class SetingsFragment extends Fragment {
         });
 
 
+        textViewBirthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                c.setTime(currentBirthdayDate);
+
+                new DatePickerDialog(getContext(), d,
+                        c.get(Calendar.YEAR), c.get(Calendar.MONTH), c
+                        .get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+
         return view;
     }
 
+    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
 
-    private static String getDateTime(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy-MM-dd", Locale.getDefault());
-        return dateFormat.format(date);
-    }
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+
+            cday = dayOfMonth;
+            cmonth = monthOfYear + 1;
+            cyear = year;
+
+            String day = Integer.toString(cday);
+            if (day.length() == 1) day = "0" + day;
+
+            String month = Integer.toString(cmonth);
+            if (month.length() == 1) month = "0" + month;
+
+            textViewBirthday.setText(cyear + "-" + month + "-" + day);
+        }
+    };
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -165,6 +216,42 @@ public class SetingsFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.toSave:
                 try {
+
+                    RadioButton M = (RadioButton) radio_groupSex.getChildAt(0);
+                    RadioButton F = (RadioButton) radio_groupSex.getChildAt(1);
+
+                    User user = new User();
+                    user.setFamily(editTextFamily.getText().toString());
+                    user.setName(editTextName.getText().toString());
+                    user.setPatronymic(editTextPatronimic.getText().toString());
+                    user.setEmail(editTextEmail.getText().toString());
+                    user.setDate(getDateTime(textViewBirthday.getText().toString()));
+
+                    if (M.isChecked()) user.setSex("M");
+                    else user.setSex("F");
+
+                    String notificationToPay = "";
+                    if (checkBoxNotificationForPayEmail.isChecked()) notificationToPay += "1";
+                    else notificationToPay += "0";
+                    if (checkBoxNotificationForPaySMS.isChecked()) notificationToPay += "1";
+                    else notificationToPay += "0";
+                    user.setNotificationToPay(notificationToPay);
+
+                    if (checkBoxNotificationAboutStatusEmail.isChecked())
+                        user.setEmailNotificationChangeStatus("1");
+                    else user.setEmailNotificationChangeStatus("0");
+
+                    String newsSubscriber = "";
+                    if (checkBoxNotificationAboutNewEventsEmail.isChecked()) newsSubscriber += 1;
+                    else newsSubscriber += 0;
+                    if (checkBoxNotificationAboutNewEventsSMS.isChecked()) newsSubscriber += 1;
+                    else newsSubscriber += 0;
+                    user.setNewsSubscriber(newsSubscriber);
+
+                    SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(getContext());
+                    SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
+                    ChudobiletDatabaseHelper.setUserInfo(db,user);
+
                 } catch (Exception e) {
                 }
 
@@ -180,6 +267,25 @@ public class SetingsFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         ActionBar actionBar = activity.getSupportActionBar();
         actionBar.setTitle("Настройки");
+    }
+
+
+    private static String getDateTime(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd", Locale.getDefault());
+        return dateFormat.format(date);
+    }
+
+    private static Date getDateTime(String myDate) {
+
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            date = format.parse(myDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 
 }
