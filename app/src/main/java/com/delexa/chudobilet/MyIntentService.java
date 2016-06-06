@@ -7,19 +7,16 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.support.v4.app.TaskStackBuilder;
-
-import com.delexa.chudobilet.Adapters.ChudobiletDatabaseHelper;
 
 
 public class MyIntentService extends IntentService {
 
 
     public static final String EXTRA_MESSAGE = "Чудобилет";
-    public static final int NOTIFICATION_ID = 5453;
 
     public MyIntentService() {
         super("MyIntentService");
@@ -29,26 +26,32 @@ public class MyIntentService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         synchronized (this) {
 
-            while (true) {
+
+            while (!isNetworkAvailable()) {
 
                 try {
-                    wait(5000);
+                    wait(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-//                EstablishmmentAPIUpdater establishmmentAPIUpdater = new EstablishmmentAPIUpdater(this);
-//                establishmmentAPIUpdater.update();
-//                EventAPIUpdater eventAPIUpdater = new EventAPIUpdater(this);
-//                eventAPIUpdater.update();
+//            EstablishmmentAPIUpdater establishmmentAPIUpdater = new EstablishmmentAPIUpdater(this);
+//            establishmmentAPIUpdater.update();
+//            EventAPIUpdater eventAPIUpdater = new EventAPIUpdater(this);
+//            eventAPIUpdater.update();
+//
+//            SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(this);
+//            SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
+//            String result = ChudobiletDatabaseHelper.becameNewEventsByGenre(db);
+//            if (!result.equals("")) {
+//                //  String text = intent.getStringExtra(EXTRA_MESSAGE);
+//                showText(result, 1);
+//            }
+                if (isNetworkAvailable()) {
+                    showText("Освободились Ваши любимые места на событие \"Белоснежка и Охотник 2\"", 1);
+                    showText("Новое событие по интересам: Варкравт", 2);
+                    showText("Новое событие по интересам: Книга Джунглей", 3);
 
-                SQLiteOpenHelper chudobiletDatabaseHelper = ChudobiletDatabaseHelper.getInstance(this);
-                SQLiteDatabase db = chudobiletDatabaseHelper.getReadableDatabase();
-                String result = ChudobiletDatabaseHelper.becameNewEventsByGenre(db);
-                if (!result.equals("")) {
-                    //  String text = intent.getStringExtra(EXTRA_MESSAGE);
-                    showText(result);
                 }
-
 
             }
 
@@ -57,7 +60,7 @@ public class MyIntentService extends IntentService {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private void showText(final String text) {
+    private void showText(final String text, int notificationID) {
         Intent intent = new Intent(this, MainActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(MainActivity.class);
@@ -73,8 +76,16 @@ public class MyIntentService extends IntentService {
                 .build();
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(NOTIFICATION_ID, notification);
+        notificationManager.notify(notificationID, notification);
 
+    }
+
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 

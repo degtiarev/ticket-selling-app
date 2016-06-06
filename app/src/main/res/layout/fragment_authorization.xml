@@ -25,7 +25,8 @@
             android:ems="10"
             android:hint="Электронная почта"
             android:inputType="textPersonName"
-            android:paddingTop="20dp" />
+            android:paddingTop="20dp"
+            android:text="delexa0@gmail.com" />
 
 
         <EditText
@@ -34,7 +35,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Пароль"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="123456789" />
 
         <Button
             android:id="@+id/buttonEnter"

@@ -111,7 +111,7 @@ public class EventActivity extends AppCompatActivity {
                     input.setInputType(InputType.TYPE_CLASS_NUMBER);
                     alert.setView(input);
 
-                    alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    alert.setPositiveButton("ОК", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
 
                             SQLiteOpenHelper chudobiletDatabaseHelper = new ChudobiletDatabaseHelper(EventActivity.this);
@@ -121,7 +121,7 @@ public class EventActivity extends AppCompatActivity {
                         }
                     });
 
-                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    alert.setNegativeButton("Отменить", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             // Canceled.
                         }

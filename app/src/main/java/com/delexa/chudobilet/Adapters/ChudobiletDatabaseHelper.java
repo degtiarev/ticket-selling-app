@@ -79,6 +79,10 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     new Date(), "1 3 4, 3 4 5, ");
             Establishment theaterEstablishment2 = new Establishment("Астраханский театр кукол", "г. Астрахань, ул. Розы Люксембург, 7",
                     new Date(), "5 6 3, 4 5 6, 2 1 1, ");
+            Establishment masterclassEstablishment = new Establishment("Культовый бар", "г. Астрахань, ул. Фиолетова, 8",
+                    new Date(), "5 6 3, 4 5 6, 2 1 1, ");
+            Establishment otherEstablishment = new Establishment("Филармония", "г. Астрахань, ул. Молодой Гвардии, 3",
+                    new Date(), "5 6 3, 4 5 6, 2 1 1, ");
 
             Event cinemaEvent1 = new Event("Книга джунглей", cinemaEstablishment, "США", "фэнтези, драма, приключения, семейный, ...", 2016, " 1 час 50 минут", "6+",
                     "Скарлетт Йоханссон, Идрис Эльба, Билл Мюррей, Лупита Нионго, Кристофер Уокен, Джанкарло Эспозито, Нил Сетхи, Бен Кингсли, Ралф Айнесон, " +
@@ -123,6 +127,23 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     "http://new.chudobilet.ru/media/images/events/6029be218a6c189b4cd6bf6f64243760.jpg",
                     null, "http://new.chudobilet.ru/event/1067/", new Date());
             theaterEvent2.setIsNotified(1);
+            Event masterclassEvent = new Event("Александр Демидов и группа \"ДЕМИДОВAND\". Летний концерт", masterclassEstablishment, null, null, 0, "1 час 50 минут", "18+", null, "Александр" +
+                    " Демидов и группа ДЕМИДОВAND снова в Астрахани с летним концертом, в программе - новые песни и традиционные монологи из покоривших столицу спектаклей театра \"КВАРТЕТ И\", " +
+                    "живой звук и автограф-сессия и все это на летней площадке Культового Бара, ждем Вас, хорошее настроение гарантировано, вливайтесь !!!!",
+                    "http://new.chudobilet.ru/media/images/events/46a3d0452360f462ca3bb020d964c7d5.jpg",
+                    null, "http://new.chudobilet.ru/event/961/", new Date());
+            masterclassEvent.setIsNotified(1);
+            Event otherEvent = new Event("Концерт \"Танго, вальсы и фокстрот\"", otherEstablishment, null, null, 0, "1 час 10 минут", "12+", null, "В арт-кафе «Мелодия встреч» " +
+                    "открывается летняя танцевальная площадка - «Назначь мне свидание».   Это свидание друзей с танцем. Встречи с «лёгкой» музыкой " +
+                    "привнесут в июньские вечера нотки интриги и юношеского задора, будут наполнены исключительно положительными эмоциями. К тому же, " +
+                    "за Вас уже всё продумали – и время и место, так что они – неизменны. Следите за датами:   8 июня – программа «Танго, вальсы и " +
+                    "фокстрот». 15 июня - «Хочу танцевать». 29 июня - «Русские узоры».   Знаменитые танцевальные композиции и шлягеры XX века прозвучат в исполнении" +
+                    " ансамбля русских народных инструментов «Отрада» (руководитель Руслан Грачёв), дипломанта международного конкурса Ольги Бочкарёвой, лауреатов " +
+                    "всероссийских конкурсов Татьяны Важоровой (сопрано), Елены Евтушенко (сопрано), Ольги Войновой (меццо-сопрано), Александра Маркова (баритон)," +
+                    " Анны Забелиной (народный голос), Леонида Бутакова (балалайка), Анастасии Васильевой (фортепиано).  Ведущая вечера – Ирина Ибрагимова.",
+                    "http://new.chudobilet.ru/media/images/events/14b3c8bfc8a5aab656473d8d0609bf48.jpg",
+                    null, "http://new.chudobilet.ru/event/1069/", new Date());
+            otherEvent.setIsNotified(1);
 
             News news1 = new News("В Астрахань приедет с гастролями Липецкий театр драмы", "10,11 и 12 июня Липецкий государственный академический театр драмы им. Л. Толстого на сцене Астраханского Драматического театра покажет спектакли «Квадратура Круга» В. Катаева, «Ужасные родители - С Ума сойти!» Ж. Кокто и сказку для детей «Дюймовочка» Г. Андерсена, Н. Эрдмана. \n" +
                     "\n" +
@@ -159,6 +180,10 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             EventType eventTypeTheater1 = new EventType(theaterEvent1, "Театры", new Date());
             EventType eventTypeTheater2 = new EventType(theaterEvent2, "Театры", new Date());
             EventType eventTypeForChildren1 = new EventType(theaterEvent2, "Детям", new Date());
+            EventType eventTypeMasterClass = new EventType(masterclassEvent, "Мастер-класс", new Date());
+            EventType eventTypeMasterClass1 = new EventType(masterclassEvent, "Другое", new Date());
+            EventType eventTypeOther = new EventType(otherEvent, "Другое", new Date());
+            EventType eventTypeConcert = new EventType(otherEvent, "Концерты", new Date());
 
             insertUser(db, user);
 
@@ -170,12 +195,17 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             insertEstablishment(db, concertEstablishment);
             insertEstablishment(db, theaterEstablishment1);
             insertEstablishment(db, theaterEstablishment2);
+            insertEstablishment(db, masterclassEstablishment);
+            insertEstablishment(db, otherEstablishment);
 
             insertEvent(db, cinemaEvent1);
             insertEvent(db, cinemaEvent2);
             insertEvent(db, concertEvent1);
             insertEvent(db, theaterEvent1);
             insertEvent(db, theaterEvent2);
+            insertEvent(db, masterclassEvent);
+            insertEvent(db, otherEvent);
+
 
             insertEventType(db, eventTypeCinema1);
             insertEventType(db, eventTypeCinema2);
@@ -183,6 +213,10 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
             insertEventType(db, eventTypeTheater1);
             insertEventType(db, eventTypeTheater2);
             insertEventType(db, eventTypeForChildren1);
+            insertEventType(db, eventTypeMasterClass);
+            insertEventType(db, eventTypeMasterClass1);
+            insertEventType(db, eventTypeOther);
+            insertEventType(db, eventTypeConcert);
 
             TicketOrder ticketOrder1;
             TicketOrder ticketOrder2;

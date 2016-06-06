@@ -161,7 +161,7 @@ public class MainFragment extends Fragment {
                 TabFragment fragment = new TabFragment();
                 fragment.setType1("События");
                 fragment.setType2("Места");
-                fragment.setItem("Мастерклассы");
+                fragment.setItem("Мастер-классы");
 
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_frame, fragment);

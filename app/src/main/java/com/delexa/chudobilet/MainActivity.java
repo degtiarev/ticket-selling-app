@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Intent intent = new Intent(this, MyIntentService.class);
-        // intent.putExtra(MyIntentService.EXTRA_MESSAGE, "Новое событие по вашим подпискам!");
-        //  startService(intent);
+        Intent intent = new Intent(this, MyIntentService.class);
+        intent.putExtra(MyIntentService.EXTRA_MESSAGE, "Новое событие:");
+        startService(intent);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fr = (TabFragment) fragment;
                 fr.setType1("События");
                 fr.setType2("Места");
-                fr.setItem("Мастерклассы");
+                fr.setItem("Мастер-класс");
                 fragment = fr;
 
                 break;
