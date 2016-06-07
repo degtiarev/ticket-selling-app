@@ -70,9 +70,7 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
                     "M", "11", "0", "11", "89608519623", "123456789", "http://kotvokoshke.by/sites/default/files/field/image/image_cat.jpg",
                     "фэнтези", null, new Date());
             Establishment cinemaEstablishment = new Establishment("Большое Кино", "ТРК Alimpic, ул. Боевая, 25, " +
-                    "Астрахань, Астраханская обл., 414024", new Date(), "1 3 4, 3 4 8,");
-
-
+                    "Астрахань, Астраханская обл., 414024", new Date(), "1 3 4, 3 4 8, ");
             Establishment concertEstablishment = new Establishment("Театр Оперы и Балета", "ул. Максаковой, 2, " +
                     "Астрахань, Астраханская обл., 414024", new Date(), "1 3 4, 3 5 8, ");
             Establishment theaterEstablishment1 = new Establishment("Астраханский ТЮЗ", "414000 г. Астрахань, ул. Мусы Джалиля, 4",
@@ -827,14 +825,16 @@ public class ChudobiletDatabaseHelper extends SQLiteOpenHelper {
 
         String additionCondition = "";
 
-        if (date.equals(EventTabFragment.today)) {
-
-            additionCondition = "EVENT.NAME = 'Книга джунглей'";
-        } else if (date.equals(EventTabFragment.tomorrow)) additionCondition = "";
+        if (date.equals(EventTabFragment.today))
+            additionCondition = "(EVENT._id = 1 OR EVENT._id = 2 OR EVENT._id = 5 OR EVENT._id = 6)";
+        else if (date.equals(EventTabFragment.tomorrow))
+            additionCondition = "(EVENT._id = 2 OR EVENT._id = 3 OR EVENT._id = 8 OR EVENT._id = 9)";
         else if (date.equals(EventTabFragment.onWeek))
-            additionCondition = "EVENT._ESTABLISHMENTID = 1";
-        else if (date.equals(EventTabFragment.onNextWeek)) additionCondition = "";
-        else if (date.equals(EventTabFragment.onMonth)) additionCondition = "";
+            additionCondition = "(EVENT._id = 3 OR EVENT._id = 4 OR EVENT._id = 5 OR EVENT._id = 6)";
+        else if (date.equals(EventTabFragment.onNextWeek))
+            additionCondition = "(EVENT._id = 3 OR EVENT._id = 4 OR EVENT._id = 8 OR EVENT._id = 9)";
+        else if (date.equals(EventTabFragment.onMonth))
+            additionCondition = "(EVENT._id = 3 OR EVENT._id = 4 OR EVENT._id = 8 OR EVENT._id = 9)";
         else if (date.equals(EventTabFragment.onNextMonth)) additionCondition = "";
         else if (date.equals(EventTabFragment.then)) additionCondition = "";
 
